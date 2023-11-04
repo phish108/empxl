@@ -17,7 +17,7 @@
 
 ### Distribution helpers
 
-- RANDOM.NORM    - Generates n normaly distributed random values 
+- RANDOM.NORM    - Generates n normaly distributed random values using the [Box-Muller-transformation](https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform)
 - RANDOM.NORM.MS  - Generates n normaly distributed random values with a given mean and standard deviation
 
 ### Other helper functions
@@ -28,6 +28,7 @@
 - VREPEAT(value, n_times) - repeats a value n-times as a column vector
 - HREPEAT(value, n_times) - repeats a value n-times as a line vector
 
-- MTRIAGONAL(size) - creates a triangonal matrix of size
+- MTRIAG(size) - creates a triangonal matrix of size with diagnoal values
+- MTRIAG.FLEX(size, lower, strict) - creates lower and upper triangle matrices. If strict is TRUE, then the diagonal values are 0.
 
 - STAT.SIGN(value) - implements the sign function that returns -1, 0, or 1 for a given value
