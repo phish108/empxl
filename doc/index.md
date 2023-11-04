@@ -15,14 +15,14 @@
 
 ### Effect Size
 
-### Power Analysis
+### Power Analysis
 
 ### Distribution helpers
 
 - RANDOM.NORM    - Generates n normaly distributed random values using the [Box-Muller-transformation](https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform)
 - RANDOM.NORM.MS  - Generates n normaly distributed random values with a given mean and standard deviation
 
-### Other helper functions
+### Other helper functions
 
 - COLSUM(matrix) - calculates the sum of each column in a matrix
 - ROWSUM(matrix) - computes the sum of each row in a matrix
