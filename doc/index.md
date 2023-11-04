@@ -11,6 +11,8 @@
 
 ### Comparisons
 
+- WILCOXON.TEST(values, groups) - Wilcoxon-Mann Rank-Sum test
+
 ### Effect Size
 
 ### Power Analysis
@@ -32,3 +34,16 @@
 - MTRIAG.FLEX(size, lower, strict) - creates lower and upper triangle matrices. If strict is TRUE, then the diagonal values are 0.
 
 - STAT.SIGN(value) - implements the sign function that returns -1, 0, or 1 for a given value
+
+### Internal helper functions
+
+#### Group Functions
+
+Group functions are needed because the *FUNCTION*IFS() functions do not work inside LAMBDA and LET functions.
+
+- EMPXL.GROUP.SUM(values, groups)
+- EMPXL.GROUP.MEAN(values, groups)
+- EMPXL.GROUP.MEDIAN(values, groups)
+- EMPXL.GROUP.MIN(values, groups)
+- EMPXL.GROUP.MAX(values, groups)
+- EMPXL.GROUP.STDEV(values, groups)
