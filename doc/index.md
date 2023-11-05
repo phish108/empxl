@@ -11,7 +11,7 @@
 
 ### Comparisons
 
-- WILCOXON.TEST(values, groups) - Wilcoxon-Mann Rank-Sum test
+- WILCOXON.TEST(values, groups) - Wilcoxon-Mann Rank-Sum test (with ties)
 
 ### Effect Size
 
@@ -20,7 +20,6 @@
 ### Distribution helpers
 
 - RANDOM.NORM    - Generates n normaly distributed random values using the [Box-Muller-transformation](https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform)
-- RANDOM.NORM.MS  - Generates n normaly distributed random values with a given mean and standard deviation
 
 ### Other helper functions
 
@@ -30,20 +29,25 @@
 - VREPEAT(value, n_times) - repeats a value n-times as a column vector
 - HREPEAT(value, n_times) - repeats a value n-times as a line vector
 
-- MTRIAG(size) - creates a triangonal matrix of size with diagnoal values
-- MTRIAG.FLEX(size, lower, strict) - creates lower and upper triangle matrices. If strict is TRUE, then the diagonal values are 0.
+- MTRIAG(size, lower, strict) - creates lower and upper triangle matrices. If strict is TRUE, then the diagonal values are 0.
+- MTRACE(matrix) - compute the trace of a matrix
 
 - STAT.SIGN(value) - implements the sign function that returns -1, 0, or 1 for a given value
+
+
+- STAT.CORRECT.PVALUE.NORM(p_value, alternative) - Adjusts a P-Value to the given alternative
+
 
 ### Internal helper functions
 
 #### Group Functions
 
-Group functions are needed because the *FUNCTION*IFS() functions do not work inside LAMBDA and LET functions.
+Group functions are needed only because the *FUNCTION*IFS() functions do not work inside LAMBDA and LET functions.
 
 - EMPXL.GROUP.SUM(values, groups)
 - EMPXL.GROUP.MEAN(values, groups)
 - EMPXL.GROUP.MEDIAN(values, groups)
 - EMPXL.GROUP.MIN(values, groups)
 - EMPXL.GROUP.MAX(values, groups)
+- EMPXL.GROUP.COUNT(groups)
 - EMPXL.GROUP.STDEV(values, groups)
