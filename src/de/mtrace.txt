@@ -1,0 +1,11 @@
+= LAMBDA(
+    matrix; 
+    WENN(
+        ZEILEN(matrix) = SPALTEN(matrix); 
+        LET(
+            index; SEQUENZ(ZEILEN(matrix)); 
+            SUMME(INDEX(matrix; index; index))
+        ); 
+        #WERT!
+    )
+)

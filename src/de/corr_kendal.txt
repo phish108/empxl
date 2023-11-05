@@ -1,0 +1,15 @@
+= LAMBDA(
+    x_i; y_i;
+    LET(
+        s_n; ANZAHL(x_i);
+        s_idx; SEQUENZ(1;s_n);
+        m_triag; MTRIAG.FLEX(s_n; WAHR; WAHR);
+        x_j; INDEX(x_i; s_idx);
+        y_j; INDEX(y_i; s_idx);
+        WENN(
+            s_n = ANZAHL(y_i); 
+            SUMME(STAT.SIGN(x_i - x_j) * STAT.SIGN(y_i - y_j) * m_triag)/ KOMBINATIONEN(s_n; 2); 
+            #WERT!
+        )
+    )
+)

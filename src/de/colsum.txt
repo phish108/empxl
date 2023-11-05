@@ -1,0 +1,7 @@
+=LAMBDA(
+    matrix; 
+    MMULT(
+        HREPEAT(1; ZEILEN(matrix)); 
+        matrix
+    )
+)

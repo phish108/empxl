@@ -1,0 +1,10 @@
+=LAMBDA(
+    values; groups;
+    MAP( 
+        EINDEUTIG(groups); 
+        LAMBDA(
+            name;
+            MIN(FILTER(values; groups = name))
+        )
+    )
+)

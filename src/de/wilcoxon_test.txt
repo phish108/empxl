@@ -1,0 +1,26 @@
+=LAMBDA(
+    values; groups;         
+    LET(
+        rank; RANG.MITTELW(values; values);
+        ab_names; EINDEUTIG(groups);
+        ab_n; ANZAHL2(ab_names);
+        WENN(
+            ab_n = 2; 
+            LET(
+                sum_ab; stat.grpsum(rank; groups);
+                n_ab; ZÄHLENWENNS(groups; ab_names);
+                prod_ab; PRODUKT(n_ab);
+                shsq_ab; n_ab * (n_ab +1 )/2;
+                MEAN_ab; shsq_ab/2;
+                SD_ab; WURZEL(n_ab*(2*MEAN_ab+1)/6);                 
+                stat_ab; prod_ab + shsq_ab - sum_ab;
+                statistic; MIN(stat_ab);
+                z_value; (statistic - XVERWEIS(statistic; stat_ab; MEAN_ab))/XVERWEIS(statistic; stat_ab; SD_ab);
+                p_value; NORM.S.VERT(z_value; WAHR);
+                effect; z_value/WURZEL(ANZAHL(values));
+                HSTAPELN(statistic; z_value; p_value; effect)
+            );
+            #WERT!
+        )     
+    )
+)

@@ -1,0 +1,10 @@
+=LAMBDA(
+    groups;
+    MAP( 
+        EINDEUTIG(groups); 
+        LAMBDA(
+            name;
+            ANZAHL2(FILTER(groups; groups = name))
+        )
+    )
+)
