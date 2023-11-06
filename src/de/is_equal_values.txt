@@ -1,0 +1,8 @@
+# Helper function verify that all values in a vector are the equal
+
+= LAMBDA(
+    vector;
+    UND(
+        vector = index(vector; 1; 1)
+    )
+)

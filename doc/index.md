@@ -37,6 +37,7 @@
 
 - STAT.CORRECT.PVALUE.NORM(p_value, alternative) - Adjusts a P-Value to the given alternative
 
+- IS.EQUAL.VALUES(vector_or_matrix) - returns TRUE if all values are equal
 
 ### Internal helper functions
 
