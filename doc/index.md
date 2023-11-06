@@ -33,8 +33,7 @@
 - MTRACE(matrix) - compute the trace of a matrix
 
 - STAT.SIGN(value) - implements the sign function that returns -1, 0, or 1 for a given value
-- STAT.TABLE(vector, heading) - counts each unique value
-- STAT.XTABLE(vector_a, vector_b, heading) - computes a contingency table/cooccurance matrix for two variables
+- STAT.TABLE(vectorA, vectorB_or_heading; heading) - creates contingency tables for one or two vectors. Optional with headings.
 
 - IS.EQUAL.VALUES(vector_or_matrix) - returns TRUE if all values are equal
 

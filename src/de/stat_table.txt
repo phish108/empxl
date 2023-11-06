@@ -1,15 +1,52 @@
 = LAMBDA(
-    values; [heading];
+    aval; [bval_or_heading]; [heading];
     LET(
-        idvals; EINDEUTIG(values);
-        covals; 1*(idvals = MTRANS(values));
-        results; COLSUM(
-            MMULT(covals; MTRANS(covals)) * MTRIANGLE(ANZAHL2(idvals); WAHR)
-        ); 
+        mdim_a; Zeilen(aval) - Spalten(aval);
+        aval; wenn(mdim_a > 0; zuspalte(aval); zuzeile(aval));
+
+        n_aval; ANZAHL2(aval);
+        id_aval; EINDEUTIG(aval);
+
+        b_p1; WENNS(
+            WURDEAUSGELASSEN(bval_or_heading); 0; 
+            ANZAHL2(bval_or_heading) = 1; 1;
+            ANZAHL2(bval_or_heading) = n_aval; 2;
+            WAHR; 0
+        );
+        heading; WENNS(
+            b_p1 = 1; n(bval_or_heading);
+            WURDEAUSGELASSEN(heading); 0;
+            WAHR; n(heading)
+        ) <> 0;
+
+        bval; bval_or_heading; 
+
         WENN(
-            ODER(WURDEAUSGELASSEN(heading); NICHT(heading));
-            results;
-            VSTAPELN(MTRANS(idvals); results)
+            b_p1 = 2; 
+            LET(
+                bval; wenn(mdim_a > 0; zuspalte(bval); zuzeile(bval));
+                id_bval; MTRANS(EINDEUTIG(bval));
+                results; MMULT(
+                    1*(id_aval = MTRANS(aval));
+                    1*(id_bval = bval)
+                );
+                WENN(
+                    heading; 
+                    VSTAPELN(
+                        HSTAPELN(""; id_bval); 
+                        HSTAPELN(id_aval; results)
+                    ); 
+                    results
+                )
+            );
+            LET(
+                results; MAP(id_aval; LAMBDA(n; ANZAHL2(filter(aval; aval = n)))); 
+                WENNS(
+                    UND(heading; mdim_a > 0); HSTAPELN(id_aval; results);
+                    heading; VSTAPELN(id_aval; results);
+                    WAHR; results
+                )
+            )
         )
     )
 )
