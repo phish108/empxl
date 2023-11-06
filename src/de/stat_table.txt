@@ -4,7 +4,7 @@
         idvals; EINDEUTIG(values);
         covals; 1*(idvals = MTRANS(values));
         results; COLSUM(
-            MMULT(covals; MTRANS(covals)) * MTRIAG(ANZAHL2(idvals); WAHR)
+            MMULT(covals; MTRANS(covals)) * MTRIANGLE(ANZAHL2(idvals); WAHR)
         ); 
         WENN(
             ODER(WURDEAUSGELASSEN(heading); NICHT(heading));

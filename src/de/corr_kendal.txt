@@ -3,7 +3,7 @@
     LET(
         s_n; ANZAHL(x_i);
         s_idx; SEQUENZ(1;s_n);
-        m_triag; MTRIAG.FLEX(s_n; WAHR; WAHR);
+        m_triag; MTRIANGLE(s_n; WAHR; WAHR);
         x_j; INDEX(x_i; s_idx);
         y_j; INDEX(y_i; s_idx);
         WENN(

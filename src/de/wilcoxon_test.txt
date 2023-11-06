@@ -53,7 +53,7 @@
                 z_value; STATISTIC - prod_ab/2;
                 vranks; EINDEUTIG(rank);
                 coranks; 1*(vranks = MTRANS(rank));
-                NTIES; ROWSUM(MMULT(coranks; MTRANS(coranks)) * MTRIAG(ANZAHL(vranks); WAHR));
+                NTIES; ROWSUM(MMULT(coranks; MTRANS(coranks)) * MTRIANLE(ANZAHL(vranks); WAHR));
                 SIGMA; WURZEL(
                     (prod_ab/12) * ((sum_ab + 1) - SUMME(NTIES^3 - NTIES)/(sum_ab *(sum_ab - 1)))
                 );
