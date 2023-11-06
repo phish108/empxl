@@ -24,3 +24,95 @@
         )     
     )
 )
+
+# NEW R-Style Implementation
+# This is the model version of wilcox.test, where groups holds the group names
+
+= LAMBDA(
+    values; groups; [alternative]; [paired]; [exact]; [correct]; 
+    LET(
+        t_alt; wenn(WURDEAUSGELASSEN(alternative); "t"; EMPXL.PREP.ALTERNATIVE(alternative));
+        t_paired; wenn(WURDEAUSGELASSEN(paired); FALSCH; paired);
+        t_exact; wenn(WURDEAUSGELASSEN(exact); FALSCH; exact);
+        t_correct; wenn(WURDEAUSGELASSEN(correct); WAHR; correct);
+
+        ab_names; EINDEUTIG(groups);
+        ab_n; ANZAHL2(ab_names);
+
+        TIES; ANZAHL(values) <> ANZAHL(EINDEUTIG(values));
+
+        n_ab; EMPXL.GROUP.COUNT(groups);
+
+        wenn(
+            UND(ab_n = 2; n_ab > 1;   ODER(NICHT(t_paired); IS.EQUAL.VALUES(n_ab)));
+            LET(
+                rank; RANG.MITTELW(values; values);
+                STATISTIC; MIN(EMPXL.GROUP.SUM(rank; groups) - n_ab *(n_ab + 1)/2);
+                prod_ab; PRODUKT(n_ab);
+                sum_ab; SUMME(n_ab);
+                z_value; STATISTIC - prod_ab/2;
+                vranks; EINDEUTIG(rank);
+                coranks; 1*(vranks = MTRANS(rank));
+                NTIES; ROWSUM(MMULT(coranks; MTRANS(coranks)) * MTRIAG(ANZAHL(vranks); WAHR));
+                SIGMA; WURZEL(
+                    (prod_ab/12) * ((sum_ab + 1) - SUMME(NTIES^3 - NTIES)/(sum_ab *(sum_ab - 1)))
+                );
+                correction_value; t_correct *  
+                    ERSTERWERT(
+                        t_alt; 
+                        "t"; STAT.SIGN(z_value) * 0.5;
+                        "l"; -0.5; 
+                        "g"; 0.5;
+                    );
+                ZVAL; (z_value - correction_value)/SIGMA;
+                PVAL; STAT.CORRECT.PVALUE.NORM(NORM.VERT(ZVAL; 0; 1; WAHR);t_alt);
+                HSTAPELN(STATISTIC; ZVAL; PVAL)
+            );
+            #WERT!
+        )
+    )
+)
+
+# NEW EXCEL Implementation
+# TODO: NO TIES Implementation
+
+= LAMBDA( 
+    p_values; p_groups; [alternative]; [paired]; [correct]; 
+    LET( 
+        t_alt; wenn(WURDEAUSGELASSEN(alternative); "t"; EMPXL.PREP.ALTERNATIVE(alternative));
+        t_correct; wenn(WURDEAUSGELASSEN(correct); WAHR; correct);
+        t_paired; WENN(WURDEAUSGELASSEN(paired); FALSCH; paired);
+
+        ab_names; EINDEUTIG(p_groups);
+        ab_n; ANZAHL2(ab_names);
+        n_ab; EMPXL.GROUP.COUNT(p_groups);
+        wenn(
+            UND(ab_n = 2; n_ab > 1; ODER(NICHT(t_paired); IS.EQUAL.VALUES(n_ab))); 
+            LET(
+                rank; RANG.MITTELW(p_values; p_values);
+                STATISTIC; MIN(EMPXL.GROUP.SUM(rank; p_groups) - n_ab * (n_ab + 1)/2);
+                prod_ab; PRODUKT(n_ab);
+                sum_ab; SUMME(n_ab);
+                z_value; STATISTIC - prod_ab/2;
+
+                SIGMA; LET( 
+                    NTIES; STAT.TABLE(rank);
+                    WURZEL(
+                        (prod_ab/12) * ((sum_ab + 1) - SUMME(NTIES^3 - NTIES)/(sum_ab *(sum_ab - 1)))
+                    );
+                );
+
+                correction_value; t_correct * ERSTERWERT(
+                        t_alt; 
+                        "t"; STAT.SIGN(z_value) * 0.5;
+                        "l"; -0.5; 
+                        "g"; 0.5;
+                    );
+                ZVAL; (z_value - correction_value)/SIGMA;
+                PVAL; STAT.CORRECT.PVALUE.NORM(NORM.VERT(ZVAL; 0; 1; WAHR));
+                HSTAPELN(STATISTIC; ZVAL; PVAL; SIGMA; t_alt)
+            ); 
+            -1
+        )
+    )
+)
