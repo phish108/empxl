@@ -1,10 +1,15 @@
 = LAMBDA(
-    values;
+    values; [heading];
     LET(
         idvals; EINDEUTIG(values);
         covals; 1*(idvals = MTRANS(values));
-        COLSUM(
-            MMULT(covals; MTRANS(covals)) * MTRIAG(ANZAHL(idvals); WAHR)
+        results; COLSUM(
+            MMULT(covals; MTRANS(covals)) * MTRIAG(ANZAHL2(idvals); WAHR)
+        ); 
+        WENN(
+            ODER(WURDEAUSGELASSEN(heading); NICHT(heading));
+            results;
+            VSTAPELN(MTRANS(idvals); results)
         )
     )
 )
