@@ -112,7 +112,7 @@
                 PVAL; STAT.CORRECT.PVALUE.NORM(NORM.VERT(ZVAL; 0; 1; WAHR));
                 HSTAPELN(STATISTIC; ZVAL; PVAL; SIGMA; t_alt)
             ); 
-            -1
+            #WERT!
         )
     )
 )
