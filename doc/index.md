@@ -29,17 +29,18 @@
 - VREPEAT(value, n_times) - repeats a value n-times as a column vector
 - HREPEAT(value, n_times) - repeats a value n-times as a line vector
 
-- MTRIAG(size, lower, strict) - creates lower and upper triangle matrices. If strict is TRUE, then the diagonal values are 0.
+- MTRIANGLE(size, lower, strict) - creates lower and upper triangle matrices. If strict is TRUE, then the diagonal values are 0.
 - MTRACE(matrix) - compute the trace of a matrix
 
 - STAT.SIGN(value) - implements the sign function that returns -1, 0, or 1 for a given value
-
-
-- STAT.CORRECT.PVALUE.NORM(p_value, alternative) - Adjusts a P-Value to the given alternative
+- STAT.TABLE(vector, heading) - counts each unique value
+- STAT.XTABLE(vector_a, vector_b, heading) - computes a contingency table/cooccurance matrix for two variables
 
 - IS.EQUAL.VALUES(vector_or_matrix) - returns TRUE if all values are equal
 
 ### Internal helper functions
+
+- STAT.CORRECT.PVALUE(p_value, alternative) - Adjusts a P-Value to the given alternative
 
 #### Group Functions
 
