@@ -13,20 +13,23 @@
             UND(ab_n = 2; n_ab > 1; ODER(NICHT(t_paired); IS.EQUAL.VALUES(n_ab))); 
             LET(
                 rank; RANG.MITTELW(p_values; p_values);
+                
                 STATISTIC; MIN(EMPXL.GROUP.SUM(rank; p_groups) - n_ab * (n_ab + 1)/2);
+                
                 prod_ab; PRODUKT(n_ab);
                 sum_ab; SUMME(n_ab);
                 z_value; STATISTIC - prod_ab/2;
 
-                tiecorrection; WENN(
-                    ANZAHL(EINDEUTIG(rank)) = ANZAHL(rank);
-                    0;
+                correctTies; WENN(
+                    ANZAHL(EINDEUTIG(rank)) < ANZAHL(rank);
                     LET( 
                         NTIES; STAT.TABLE(rank);
                         SUMME(NTIES^3 - NTIES)/(sum_ab *(sum_ab - 1))
-                    )
+                    );
+                    0
                 );
-                SIGMA; WURZEL((prod_ab/12) * ((sum_ab + 1) - tiecorrection));
+
+                SIGMA; WURZEL((prod_ab * ((sum_ab + 1) - correctTies))/12);
 
                 correction_value; t_correct * ERSTERWERT(
                         t_alt; 
