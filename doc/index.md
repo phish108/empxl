@@ -4,6 +4,8 @@
 
 ### Descriptive Statistics
 
+- STAT.MAD - Mean deviation from the Median (MEDIAN variant of SD)
+
 ### Correlations
 
 - CORR.SPEARMAN - correlation coefficient for ordinal values (Spearman's rho)
@@ -43,7 +45,7 @@
 
 #### Group Functions
 
-Group functions are needed only because the *FUNCTION*IFS() functions do not work inside LAMBDA and LET functions.
+Group functions are needed only because the *FUNCTION*IFS() functions do not work inside LAMBDA and LET functions. This allows us to add a few more (slow) grouping functions.
 
 - EMPXL.GROUP.SUM(values, groups)
 - EMPXL.GROUP.MEAN(values, groups)
@@ -52,3 +54,5 @@ Group functions are needed only because the *FUNCTION*IFS() functions do not wor
 - EMPXL.GROUP.MAX(values, groups)
 - EMPXL.GROUP.COUNT(groups)
 - EMPXL.GROUP.STDEV(values, groups)
+- EMPXL.GROUP.IQR(values, groups)
+- EMPXL.GROUP.MAD(values, groups)
