@@ -1,17 +1,17 @@
 =LAMBDA(
-    p_size; [p_lower]; [p_strict];
+    size; [p_lower]; [p_strict];
     LET(
-        t_lower; WENN(WURDEAUSGELASSEN(p_lower); TRUE; p_lower);
-        t_strict; WENN(WURDEAUSGELASSEN(p_strict); FALSE; p_strict);
+        b_lower; WENN(WURDEAUSGELASSEN(p_lower); WAHR; p_lower);
+        b_strict; WENN(WURDEAUSGELASSEN(p_strict); FALSE; p_strict);
         WENN(
-            UND(ANZAHL(p_size) = 1; ANZAHL2(t_lower) = 1; ANZAHL2(t_strict) = 1); 
+            UND(ANZAHL(size) = 1; ANZAHL2(b_lower) = 1; ANZAHL2(b_strict) = 1); 
             LET(
                 vector; SEQUENZ(size); 
                 tvector; MTRANS(vector); 
                 1 * WENNS(
-                    UND(lower; strict); vector > tvector; 
-                    lower; vector >= tvector; 
-                    strict; vector < tvector; 
+                    UND(b_lower; b_strict); vector > tvector; 
+                    b_lower; vector >= tvector; 
+                    b_strict; vector < tvector; 
                     WAHR; vector <= tvector
                 )
             );
