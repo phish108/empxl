@@ -4,12 +4,12 @@
         alt; WENN(WURDEAUSGELASSEN(alternative); "t"; alternative);
         WENNFEHLER(
             ERSTERWERT(
-                EMPXL.PREP.ALT(alt);
+                alt;
                 "l"; p_value;
                 "g"; 1 - p_value;
-                "t"; 2 * ((p_value <=0.5) * p_value + (p_value > 0.5) * (1 - p_value));
+                "t"; 2 * MIN(p_value; 1 - p_value);
             ); 
             #WERT!
-        );
+        )
     ) 
 )
