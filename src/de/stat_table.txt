@@ -1,9 +1,8 @@
-
-=LAMBDA(
+= LAMBDA(
     values;
     LET(
         idvals; EINDEUTIG(values);
-        covals; 1*(itvals = MTRANS(values));
+        covals; 1*(idvals = MTRANS(values));
         COLSUM(
             MMULT(covals; MTRANS(covals)) * MTRIAG(ANZAHL(idvals); WAHR)
         )

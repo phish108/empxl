@@ -95,11 +95,17 @@
                 sum_ab; SUMME(n_ab);
                 z_value; STATISTIC - prod_ab/2;
 
-                SIGMA; LET( 
-                    NTIES; STAT.TABLE(rank);
+                SIGMA; WENN(
+                    ANZAHL(EINDEUTIG(rank)) = ANZAHL(rank);
                     WURZEL(
-                        (prod_ab/12) * ((sum_ab + 1) - SUMME(NTIES^3 - NTIES)/(sum_ab *(sum_ab - 1)))
+                            (prod_ab/12) * (sum_ab + 1)
                     );
+                    LET( 
+                        NTIES; STAT.TABLE(rank);
+                        WURZEL(
+                            (prod_ab/12) * ((sum_ab + 1) - SUMME(NTIES^3 - NTIES)/(sum_ab *(sum_ab - 1)))
+                        );
+                    )
                 );
 
                 correction_value; t_correct * ERSTERWERT(
