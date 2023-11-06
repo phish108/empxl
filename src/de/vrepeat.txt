@@ -4,7 +4,7 @@
         UND(ANZAHL2(value) = 1; ANZAHL(n_times) = 1; n_times > 0);
         WENN(
             ISTZAHL(value) + ISTLOG(value); 
-            SEQUENZ(n_times;; value; 0); 
+            SEQUENZ(n_times; 1; value; 0); 
             WENN(SEQUENZ(n_times); value)
         ); 
         #WERT!
