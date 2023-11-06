@@ -3,7 +3,7 @@
 =LAMBDA(values;
     idvals; EINDEUTIG(values);
     covals; 1*(itvals = MTRANS(values));
-    ROWSUM(
+    COLSUM(
         MMULT(covals; MTRANS(covals)) * MTRIAG(ANZAHL(idvals); WAHR)
     )
 )
