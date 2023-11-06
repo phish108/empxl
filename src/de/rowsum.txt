@@ -2,6 +2,6 @@
     matrix; 
     MMULT(
         matrix; 
-        VREPEAT(1; ZEILEN(matrix))
+        VREPEAT(1; SPALTEN(matrix))
     )
 )
