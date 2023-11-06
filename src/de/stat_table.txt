@@ -1,0 +1,9 @@
+# create a contingency table for one variable
+
+=LAMBDA(values;
+    idvals; EINDEUTIG(values);
+    covals; 1*(itvals = MTRANS(values));
+    ROWSUM(
+        MMULT(covals; MTRANS(covals)) * MTRIAG(ANZAHL(idvals); WAHR)
+    )
+)
