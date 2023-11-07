@@ -1,20 +1,20 @@
 = LAMBDA( 
     p_values; p_groups; [alternative]; [paired]; [correct]; 
     LET( 
-        t_alt; wenn(WURDEAUSGELASSEN(alternative); "t"; EMPXL.PREP.ALTERNATIVE(alternative));
-        t_correct; wenn(WURDEAUSGELASSEN(correct); WAHR; correct);
-        t_paired; WENN(WURDEAUSGELASSEN(paired); FALSCH; paired);
+        alternative; wenn(WURDEAUSGELASSEN(alternative); "t"; PREP.ALTERNATIVE(alternative));
+        correct; wenn(WURDEAUSGELASSEN(correct); WAHR; correct);
+        paired; WENN(WURDEAUSGELASSEN(paired); FALSCH; paired);
 
         ab_names; EINDEUTIG(p_groups);
         ab_n; ANZAHL2(ab_names);
-        n_ab; EMPXL.GROUP.COUNT(p_groups);
+        n_ab; GROUP.COUNT(p_groups);
 
         wenn(
-            UND(ab_n = 2; n_ab > 1; ODER(NICHT(t_paired); IS.EQUAL.VALUES(n_ab))); 
+            UND(ab_n = 2; n_ab > 1; ODER(NICHT(paired); IS.EQUAL.VALUES(n_ab))); 
             LET(
                 rank; RANG.MITTELW(p_values; p_values);
                 
-                STATISTIC; MIN(EMPXL.GROUP.SUM(rank; p_groups) - n_ab * (n_ab + 1)/2);
+                STATISTIC; MIN(GROUP.SUM(rank; p_groups) - n_ab * (n_ab + 1)/2);
                 
                 prod_ab; PRODUKT(n_ab);
                 sum_ab; SUMME(n_ab);
@@ -31,15 +31,29 @@
 
                 SIGMA; WURZEL((prod_ab * ((sum_ab + 1) - correctTies))/12);
 
-                correction_value; t_correct * ERSTERWERT(
-                        t_alt; 
+                correction_value; correct * ERSTERWERT(
+                        alternative; 
                         "t"; STAT.SIGN(z_value) * 0.5;
                         "l"; -0.5; 
                         "g"; 0.5;
                     );
                 ZVAL; (z_value - correction_value)/SIGMA;
                 PVAL; STAT.CORRECT.PVALUE.NORM(NORM.VERT(ZVAL; 0; 1; WAHR));
-                HSTAPELN(STATISTIC; ZVAL; PVAL; SIGMA; Textverketten(ersterwert(t_alt; "t"; " <> "; "l"; " < "; "g"; " > ");; ab_names))
+                HSTAPELN(
+                    STATISTIC; 
+                    ZVAL; 
+                    PVAL; 
+                    SIGMA; 
+                    TEXTVERKETTEN(
+                        ersterwert(
+                            t_alt; 
+                            "t"; "<>"; 
+                            "l"; "<"; 
+                            "g"; ">"
+                        );;
+                        ab_names
+                    )
+                )
             ); 
             #WERT!
         )
