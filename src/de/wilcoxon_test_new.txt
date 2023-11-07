@@ -46,7 +46,7 @@
                     SIGMA; 
                     TEXTVERKETTEN(
                         ersterwert(
-                            t_alt; 
+                            alternative; 
                             "t"; "<>"; 
                             "l"; "<"; 
                             "g"; ">"
