@@ -1,0 +1,9 @@
+= LAMBDA(
+    alt;
+    XVERWEIS(
+        LINKS(KLEIN(alt);1); 
+        {"t"; "g"; "l"; "r"}; 
+        {"t"; "g"; "l"; "g"}; 
+        #WERT!
+    ) 
+)
