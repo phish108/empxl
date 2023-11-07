@@ -2,7 +2,7 @@
     size; [p_lower]; [p_strict];
     LET(
         b_lower; WENN(WURDEAUSGELASSEN(p_lower); WAHR; p_lower);
-        b_strict; WENN(WURDEAUSGELASSEN(p_strict); FALSE; p_strict);
+        b_strict; WENN(WURDEAUSGELASSEN(p_strict); FALSCH; p_strict);
         WENN(
             UND(ANZAHL(size) = 1; ANZAHL2(b_lower) = 1; ANZAHL2(b_strict) = 1); 
             LET(
