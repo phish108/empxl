@@ -1,12 +1,11 @@
 =LAMBDA(
     p_n; 
-    [p_mean];
-    [p_stddev];
+    [mean];
+    [sdev];
     LET(
-        t_md; WENN(WURDEAUSGELASSEN(p_mean); 0; p_mean);
-        t_sd; WENN(WURDEAUSGELASSEN(p_stddev); 1; p_stddev);
-        u_1; ZUFALLSMATRIX(p_n); 
-        u_2; ZUFALLSMATRIX(p_n); 
-        WURZEL(-2 * LN(u_1)) + COS(2*PI()*u_2) * t_sd + t_md
+        mean; WENN(WURDEAUSGELASSEN(mean); 0; mean);
+        sdev; WENN(WURDEAUSGELASSEN(sd); 1; sdev);
+
+        WURZEL(-2 * LN(ZUFALLSMATRIX(p_n))) + COS(2 * PI() * ZUFALLSMATRIX(p_n)) * sdev + mean
     )
 )
