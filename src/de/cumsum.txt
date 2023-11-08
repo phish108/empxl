@@ -1,0 +1,14 @@
+= LAMBDA(
+    vector;
+    WENN(
+        ZEILEN(vector) > SPALTEN(vector); 
+        MMULT(
+            MTRIANGLE(ANZAHL(vector));
+            vector
+        );    
+        MMULT(
+            vector;
+            MTRIANGLE(ANZAHL(vector); FALSCH)
+        )
+    )
+)

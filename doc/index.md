@@ -28,20 +28,19 @@
 
 - MTRIANGLE(size, lower, strict) - creates lower and upper triangle matrices. If strict is TRUE, then the diagonal values are 0.
 - MTRACE(matrix) - compute the trace of a matrix
-
-### Other helper functions
-
 - COLSUM(matrix) - calculates the sum of each column in a matrix
 - ROWSUM(matrix) - computes the sum of each row in a matrix
 
+### Vector functions
+
+- CUMSUM(vektor) - computes the cumulative sum of a numeric vector
 - VREPEAT(value, n_times) - repeats a value n-times as a column vector
 - HREPEAT(value, n_times) - repeats a value n-times as a line vector
-
-- STAT.SIGN(value) - implements the sign function that returns -1, 0, or 1 for a given value
 - IS.EQUAL.VALUES(vector_or_matrix) - returns TRUE if all values are equal
 
-### Internal helper functions
+### Other helper functions
 
+- STAT.SIGN(value) - implements the sign function that returns -1, 0, or 1 for a given value
 - STAT.CORRECT.PVALUE(p_value, alternative) - Adjusts a P-Value to the given alternative
 
 #### Group Functions
