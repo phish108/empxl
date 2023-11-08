@@ -1,0 +1,10 @@
+=LAMBDA(
+    values; groups;
+    MAP( 
+        EINDEUTIG(groups); 
+        LAMBDA(
+            name;
+            STAT.MAD(FILTER(values; groups = name))
+        )
+    )
+)
