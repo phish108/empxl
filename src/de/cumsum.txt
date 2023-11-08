@@ -1,14 +1,22 @@
 = LAMBDA(
     vector;
-    WENN(
-        ZEILEN(vector) > SPALTEN(vector); 
-        MMULT(
-            MTRIANGLE(ANZAHL(vector));
-            vector
-        );    
-        MMULT(
-            vector;
-            MTRIANGLE(ANZAHL(vector); FALSCH)
+    LET(
+        rows; ZEILEN(vector);
+        cols; SPALTEN(vector);
+            
+        WENNS(
+            UND(rows > 1; cols > 1); 
+            #WERT!;
+            ZEILEN(vector) > SPALTEN(vector); 
+            MMULT(
+                MTRIANGLE(ANZAHL(vector));
+                vector
+            );    
+            WAHR;
+            MMULT(
+                vector;
+                MTRIANGLE(ANZAHL(vector); FALSCH)
+            )
         )
     )
 )
