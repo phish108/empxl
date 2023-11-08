@@ -4,8 +4,9 @@
 
 ### Descriptive Statistics
 
-- STAT.MAD - Mean deviation from the Median (MEDIAN variant of SD)
-- STAT.TABLE(vectorA, vectorB_or_heading; heading) - creates contingency tables for one or two vectors. Optional with headings.
+- [STAT.MAD](STAT_MAD.md) - Median absolute deviation (MEDIAN variant of SD)
+- [STAT.IQR](STAT_IQR.md) - Inter quartile range
+- [STAT.TABLE](STAT_TABLE.md) - creates contingency tables for one or two vectors. Optional with headings.
 
 ### Correlations
 
@@ -28,15 +29,15 @@
 
 ### Matrix Functions
 
-- MDIM(matrix) - returns the dimensions of a matrix
+- [MDIM(matrix)](MDIM.md) - returns the dimensions of a matrix
 - MTRIANGLE(size, lower, strict) - creates lower and upper triangle matrices. If strict is TRUE, then the diagonal values are 0.
 - MTRACE(matrix) - compute the trace of a matrix
-- COLSUM(matrix) - calculates the sum of each column in a matrix
-- ROWSUM(matrix) - computes the sum of each row in a matrix
+- [COLSUM(matrix)](COLSUM.md) - calculates the sum of each column in a matrix
+- [ROWSUM(matrix)](COLSUM.md) - computes the sum of each row in a matrix
 
 ### Vector functions
 
-- CUMSUM(vektor) - computes the cumulative sum of a numeric vector
+- [CUMSUM(vektor)](CUMSUM.md) - computes the cumulative sum of a numeric vector
 - VREPEAT(value, n_times) - repeats a value n-times as a column vector
 - HREPEAT(value, n_times) - repeats a value n-times as a line vector
 - IS.ALL.EQUAL(vector_or_matrix) - returns TRUE if all values are equal
