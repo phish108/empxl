@@ -38,7 +38,7 @@
 
 ### Vector functions
 
-- [CUMSUM(vektor)](CUMSUM.md) - computes the cumulative sum of a numeric vector
+- [CUMSUM](CUMSUM.md) - computes the cumulative sum of a numeric vector
 - VREPEAT(value, n_times) - repeats a value n-times as a column vector
 - HREPEAT(value, n_times) - repeats a value n-times as a line vector
 - IS.ALL.EQUAL(vector_or_matrix) - returns TRUE if all values are equal
@@ -51,14 +51,19 @@
 
 #### Group Functions
 
-Group functions are needed only because the *FUNCTION*IFS() functions do not work inside LAMBDA and LET functions. This allows us to add a few more (slow) grouping functions.
+Group functions are needed only because the `IFS` family of functions does not work consistently inside LAMBDA and LET functions. This allows us to add a few more (despite being a bit slower than the native) grouping functions.
 
-- GROUP.SUM(values, groups)
-- GROUP.MEAN(values, groups)
-- GROUP.MEDIAN(values, groups)
-- GROUP.MIN(values, groups)
-- GROUP.MAX(values, groups)
-- GROUP.COUNT(groups)
-- GROUP.STDEV(values, groups)
-- GROUP.IQR(values, groups)
-- GROUP.MAD(values, groups)
+Counting
+
+- [GROUP.COUNT(groups)](GROUP_COUNT.md)
+
+Aggregations
+
+- [GROUP.SUM(values, groups)](GROUP_SUM.md)
+- [GROUP.MAD(values, groups)](GROUP_SUM.md)
+- [GROUP.MAX(values, groups)](GROUP_SUM.md)
+- [GROUP.MEAN(values, groups)](GROUP_SUM.md)
+- [GROUP.MEDIAN(values, groups)](GROUP_SUM.md)
+- [GROUP.MIN(values, groups)](GROUP_SUM.md)
+- [GROUP.IQR(values, groups)](GROUP_SUM.md)
+- [GROUP.STDEV(values, groups)](GROUP_SUM.md)
