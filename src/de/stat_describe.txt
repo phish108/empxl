@@ -1,0 +1,47 @@
+=LAMBDA(
+    data; [names]; [type];
+    LET(
+        type; WENN(
+            WURDEAUSGELASSEN(type); 
+            "m"; links(KLEIN(type); 1)
+        );
+        colids; sequenz(spalten(data));
+        vals; wert(textteilen(textverketten("|"; WAHR; map(
+            colids;
+            LAMBDA(
+                colid; 
+                LET(
+                    values; spaltenwahl(data; colid);
+                    cnt_values; ANZAHL(values);
+                    basic_stats; HSTAPELN(
+                            MIN(values);
+                            MEDIAN(values);
+                            MAX(values);
+                            STAT.IQR(values);
+                            STAT.MAD(values)
+                        );
+                    sdev; STABW.S(values);
+                    WENN(
+                        type = "o";
+                        textverketten( ";"; WAHR;
+                            cnt_values;
+                            basic_stats
+                        );
+                        textverketten( ";"; WAHR;
+                            cnt_values;
+                            MITTELWERT(values);
+                            sdev;
+                            sdev / WURZEL(cnt_values);
+                            basic_stats
+                        )
+                    )
+                )
+            )
+        )); ";"; "|"));
+        WENN(
+            WURDEAUSGELASSEN(names);
+            HSTAPELN(colids; vals);
+            HSTAPELN(mtrans(names); vals)
+        )
+    )
+)
