@@ -11,7 +11,7 @@
 
 ### Correlations
 
-- STAT.TABLE(vectorA, [vectorB], [withHeadings]) - create contingeny tables for one or two vectors. Optionally with headings.
+- [STAT.TABLE](STAT_TABLE.md) - create contingeny tables for one or two vectors. Optionally with headings.
 
 - CORR.SPEARMAN - correlation coefficient for ordinal values (Spearman's rho)
 - CORR.KENDALL - correlation coefficient for ordinal values (Kendall's tau) (without correction for linearity)
