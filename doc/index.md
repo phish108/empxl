@@ -9,6 +9,8 @@
 
 ### Correlations
 
+- STAT.TABLE(vectorA, [vectorB], [withHeadings]) - create contingeny tables for one or two vectors. Optionally with headings.
+
 - CORR.SPEARMAN - correlation coefficient for ordinal values (Spearman's rho)
 - CORR.KENDALL - correlation coefficient for ordinal values (Kendall's tau) (without correction for linearity)
 
@@ -26,6 +28,7 @@
 
 ### Matrix Functions
 
+- MDIM(matrix) - returns the dimensions of a matrix
 - MTRIANGLE(size, lower, strict) - creates lower and upper triangle matrices. If strict is TRUE, then the diagonal values are 0.
 - MTRACE(matrix) - compute the trace of a matrix
 - COLSUM(matrix) - calculates the sum of each column in a matrix
@@ -36,12 +39,13 @@
 - CUMSUM(vektor) - computes the cumulative sum of a numeric vector
 - VREPEAT(value, n_times) - repeats a value n-times as a column vector
 - HREPEAT(value, n_times) - repeats a value n-times as a line vector
-- IS.EQUAL.VALUES(vector_or_matrix) - returns TRUE if all values are equal
+- IS.ALL.EQUAL(vector_or_matrix) - returns TRUE if all values are equal
 
 ### Other helper functions
 
 - STAT.SIGN(value) - implements the sign function that returns -1, 0, or 1 for a given value
 - STAT.CORRECT.PVALUE(p_value, alternative) - Adjusts a P-Value to the given alternative
+- PREP.ALTERNATIVE(alternative) - prepare alternative for internal handling
 
 #### Group Functions
 

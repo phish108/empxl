@@ -10,7 +10,7 @@
         n_ab; GROUP.COUNT(p_groups);
 
         wenn(
-            UND(ab_n = 2; n_ab > 1; ODER(NICHT(paired); IS.EQUAL.VALUES(n_ab))); 
+            UND(ab_n = 2; n_ab > 1; ODER(NICHT(paired); IS.ALL.EQUAL(n_ab))); 
             LET(
                 rank; RANG.MITTELW(p_values; p_values);
                 
