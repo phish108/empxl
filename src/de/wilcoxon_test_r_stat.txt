@@ -20,14 +20,11 @@
                 sum_ab; SUMME(n_ab);
                 z_value; STATISTIC - prod_ab/2;
 
-                correctTies; WENN(
-                    ANZAHL(EINDEUTIG(rank)) < ANZAHL(rank);
+                correctTies; (ANZAHL(EINDEUTIG(rank)) < ANZAHL(rank))*
                     LET( 
                         NTIES; STAT.TABLE(rank);
                         SUMME(NTIES^3 - NTIES)/(sum_ab *(sum_ab - 1))
                     );
-                    0
-                );
 
                 SIGMA; WURZEL((prod_ab * ((sum_ab + 1) - correctTies))/12);
 
