@@ -35,12 +35,11 @@
                         "g"; 0.5;
                     );
                 ZVAL; (z_value - correction_value)/SIGMA;
-                PVAL; STAT.CORRECT.PVALUE.NORM(NORM.VERT(ZVAL; 0; 1; WAHR));
+                PVAL; STAT.CORRECT.PVALUE(NORM.VERT(ZVAL; 0; 1; WAHR));
                 HSTAPELN(
                     STATISTIC; 
                     ZVAL; 
                     PVAL; 
-                    SIGMA; 
                     TEXTVERKETTEN(
                         ersterwert(
                             alternative; 
