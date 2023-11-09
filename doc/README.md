@@ -6,7 +6,7 @@
 
 - [STAT.DESCRIBE](STAT_DESCRIBE.md) - core descriptive statistics
 - [STAT.MAD](STAT_MAD.md) - Median absolute deviation (MEDIAN variant of SD)
-- [STAT.IQR](STAT_IQR.md) - Inter quartile range
+- [STAT.IQR](STAT_IQR.md) - Interquartile range
 - [STAT.TABLE](STAT_TABLE.md) - creates contingency tables for one or two vectors. Optional with headings.
 
 ### Correlations
