@@ -6,9 +6,11 @@
             "m"; links(KLEIN(type); 1)
         );
         colids; sequenz(spalten(data));
-        vals; wert(textteilen(textverketten("|"; WAHR; map(
+        vals; zeilenwahl(REDUCE(
+            sequenz(1; WENN(type = "o"; 5; 8)); 
             colids;
             LAMBDA(
+                lines;
                 colid; 
                 LET(
                     values; spaltenwahl(data; colid);
@@ -21,23 +23,28 @@
                             STAT.MAD(values)
                         );
                     sdev; STABW.S(values);
-                    WENN(
-                        type = "o";
-                        textverketten( ";"; WAHR;
-                            cnt_values;
-                            basic_stats
-                        );
-                        textverketten( ";"; WAHR;
-                            cnt_values;
-                            MITTELWERT(values);
-                            sdev;
-                            sdev / WURZEL(cnt_values);
-                            basic_stats
+
+                    vstapeln(
+                        lines; 
+                        wenn(
+                            type = "o";
+                            HSTAPELN(
+                                cnt_values;
+                                basic_stats
+                            );
+                            HSTAPELN(
+                                cnt_values;
+                                MITTELWERT(values);
+                                sdev;
+                                sdev / WURZEL(cnt_values);
+                                basic_stats
+                            )
                         )
                     )
                 )
             )
-        )); ";"; "|"));
+        ); colids + 1);
+
         WENN(
             WURDEAUSGELASSEN(names);
             HSTAPELN(colids; vals);
