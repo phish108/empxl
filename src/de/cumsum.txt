@@ -1,22 +1,8 @@
 = LAMBDA(
     vector;
-    LET(
-        rows; ZEILEN(vector);
-        cols; SPALTEN(vector);
-            
-        WENNS(
-            UND(rows > 1; cols > 1); 
-            #WERT!;
-            ZEILEN(vector) > SPALTEN(vector); 
-            MMULT(
-                MTRIANGLE(ANZAHL(vector));
-                vector
-            );    
-            WAHR;
-            MMULT(
-                vector;
-                MTRIANGLE(ANZAHL(vector); FALSCH)
-            )
-        )
+    SCAN(
+        0; 
+        vector; 
+        LAMBDA(accu, value; accu + value)
     )
 )
