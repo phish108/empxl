@@ -1,0 +1,7 @@
+=LAMBDA(
+    vector;
+    WENNFEHLER(
+        IS.ALL.EQUAL(MAP(REMOVE.INVALID(vector); LAMBDA(val; TYP(val))));
+        FALSCH
+    )
+)

@@ -1,0 +1,12 @@
+=LAMBDA(
+    vector;
+    wenn(
+        ODER(ZEILEN(vector) = 1; SPALTEN(vector) = 1);
+        FILTER(
+            vector;
+            NICHT(ISTLEER(vector) + ISTFEHLER(vector));
+            #NV
+        );
+        #WERT!
+    )
+)

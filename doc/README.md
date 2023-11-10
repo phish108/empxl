@@ -42,12 +42,14 @@
 - VREPEAT(value, n_times) - repeats a value n-times as a column vector
 - HREPEAT(value, n_times) - repeats a value n-times as a line vector
 - IS.ALL.EQUAL(vector_or_matrix) - returns TRUE if all values are equal
+- IS.VECTOR(range) - returns TRUE if the range points to a column or line vector containing the same data type.
 
 ### Other helper functions
 
 - STAT.SIGN(value) - implements the sign function that returns -1, 0, or 1 for a given value
 - STAT.CORRECT.PVALUE(p_value, alternative) - Adjusts a P-Value to the given alternative
 - PREP.ALTERNATIVE(alternative) - prepare alternative for internal handling
+- REMOVE.INVALID(vector) - removes all empty values and errors (e.g., `#NA`) from a vector.
 
 #### Group Functions
 
