@@ -43,6 +43,7 @@
 - HREPEAT(value, n_times) - repeats a value n-times as a line vector
 - IS.ALL.EQUAL(vector_or_matrix) - returns TRUE if all values are equal
 - IS.VECTOR(range) - returns TRUE if the range points to a column or line vector containing the same data type.
+- VLENGTH(vector) - returns the length of a vector irespectively of its orientation.
 
 ### Other helper functions
 
