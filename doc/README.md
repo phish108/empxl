@@ -59,9 +59,11 @@
 
 ## Group Functions
 
+> **NOTE** This function will disappear with the new `GROUPBY` Function Group
+
 Group functions are needed only because the `IFS` family of functions does not work consistently inside LAMBDA and LET functions. This allows us to add a few more (despite being a bit slower than the native) grouping functions.
 
-Counting
+### Counting
 
 - [GROUP.COUNT(groups)](GROUP_COUNT.md)
 
