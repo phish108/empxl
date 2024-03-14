@@ -1,0 +1,17 @@
+= LAMBDA(
+    names;
+    labels; 
+    
+    TEXTVERKETTEN(",";;
+        NACHZEILE(
+            MAP(
+                HSTAPELN(labels; names);
+                LAMBDA(string; """" & string & """")
+            );
+            LAMBDA(
+                row; 
+                "{" & TEXTVERKETTEN(", ";; row) & "}"
+            )
+        )
+    )
+)
