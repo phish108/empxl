@@ -6,7 +6,7 @@
         type; WENN(WURDEAUSGELASSEN(type); "m"; LINKS(KLEIN(type);1));
         types; LINKS(KLEIN(types);1);
         WENN(SPALTEN(data) = 1;
-            FILTER(data; type = types);
+            MTRANS(FILTER(data; type = types));
             SPALTENWAHL(
                 data;
                 FILTER(
