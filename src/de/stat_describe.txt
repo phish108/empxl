@@ -1,5 +1,5 @@
 =LAMBDA(
-    data; [names]; [type];
+    data; [type]; [names];
     LET(
         type; WENN(
             WURDEAUSGELASSEN(type); 
