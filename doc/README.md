@@ -4,7 +4,8 @@
 
 ### Descriptive Statistics
 
-- [STAT.DESCRIBE](STAT_DESCRIBE.md) - core descriptive statistics
+- [STAT.DESCRIBE](STAT_DESCRIBE.md) - core descriptive statistics.
+- [STAT.DESCRIBE.LABELS](STAT_DESCRIBE_LABELS.md) - Helper function for `STAT.DESCRIBE`.
 - [STAT.MAD](STAT_MAD.md) - Median absolute deviation (MEDIAN variant of SD)
 - [STAT.IQR](STAT_IQR.md) - Interquartile range
 - [STAT.TABLE](STAT_TABLE.md) - creates contingency tables for one or two vectors. Optional with headings.
@@ -45,6 +46,10 @@
 - IS.VECTOR(range) - returns TRUE if the range points to a column or line vector containing the same data type.
 - VLENGTH(vector) - returns the length of a vector irespectively of its orientation.
 
+### Schema helper function
+
+- [SCHEMA.CHOOSE](SCHEMA_CHOOSE.md) - select variables by the scale of measurement. 
+
 ### Other helper functions
 
 - STAT.SIGN(value) - implements the sign function that returns -1, 0, or 1 for a given value
@@ -52,7 +57,7 @@
 - PREP.ALTERNATIVE(alternative) - prepare alternative for internal handling
 - REMOVE.INVALID(vector) - removes all empty values and errors (e.g., `#NA`) from a vector.
 
-#### Group Functions
+## Group Functions
 
 Group functions are needed only because the `IFS` family of functions does not work consistently inside LAMBDA and LET functions. This allows us to add a few more (despite being a bit slower than the native) grouping functions.
 
@@ -60,7 +65,7 @@ Counting
 
 - [GROUP.COUNT(groups)](GROUP_COUNT.md)
 
-Aggregations
+### Aggregations
 
 - [GROUP.SUM(values, groups)](GROUP_SUM.md)
 - [GROUP.MAD(values, groups)](GROUP_SUM.md)
