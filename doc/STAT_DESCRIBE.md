@@ -3,7 +3,7 @@
 ## Synopsis
 
 ```
-STAT.DESCRIBE(data; [variable_names]; [type])
+STAT.DESCRIBE(data; [scale_type]; [variable_names])
 ```
 
 ## Description
@@ -28,3 +28,5 @@ The result columns have the following meaning:
 10. Median absolute diviation (MAD)
 
 The parameter `type` can be either `metric`, `ordinal`, `likert`, `continuous`, or `kontinuierlich` or any abreviation of those types. This defines the scaling of the provided variables. For `ordinal` scales the output is reduced to 1, 2, 6 - 10.
+
+This function should be used in conjunction with STAT.DESCRIBE.LABELS(), which describes the labels for the key values.
