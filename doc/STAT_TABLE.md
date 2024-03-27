@@ -4,14 +4,19 @@
 
 ```
 STAT.TABLE(vector_or_matrix, [headings])
+STAT.TABLE.RELATIVE(vector_or_matrix, [headings])
+
 STAT.TABLE(vectorA, vectorB, [headings])
+STAT.TABLE.RELATIVE(vectorA, vectorB, [headings])
 ```
 
 ## Description
 
 Function to create contingency or coocurrance tables. A contingency table contains the counts of each unique value or unique pair of values.
 
-This function has two variants: 
+The variant `STAT.TABLE.RELATIVE` computes relative contingency tables. In this case the sum of all values is `1`.
+
+The function can get called in two ways: 
 
 - one vector
 - two vectors
