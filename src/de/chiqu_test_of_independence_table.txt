@@ -1,0 +1,12 @@
+= LAMBDA(
+    n_ij;
+    LET(
+        n_i; rowsum(n_ij);
+        n_j; colsum(n_ij);
+        n; SUMME(n_j);
+        EW; n_i * MTRANS(n_j) / n; 
+        v_xi2; SUMME((n_ij - EW) ^ 2 / EW); 
+        df; MAX(ANZAHL(n_i); ANZAHL(n_j)) - 1;
+        HSTAPELN(CHIQU.VERT.RE(v_xi2; df); df)
+    )
+)

@@ -1,0 +1,12 @@
+= LAMBDA(
+    x_i; y_i;
+    LET(
+        n_i; STAT.TABLE(x_i);
+        n_j; STAT.TABLE(y_i);
+        div; MIN(ANZAHL(n_i); ANZAHL(n_j));
+        n; SUMME(n_j);
+        x_base; n_i * MTRANS(n_j) / n; 
+        n_ij; STAT.TABLE(x_i; y_i);
+        WURZEL((SUMME((n_ij - x_base) ^ 2 / x_base))/(n*(div-1)))
+    )
+)
