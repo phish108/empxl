@@ -2,7 +2,7 @@
     p_values; p_groups; [alternative]; [paired]; 
     LET(
         ab_names; EINDEUTIG(p_groups);
-        paired; WENN(WURDEAUSGELASSEN(paired); 3; 1);
+        paired; WENN(WURDEAUSGELASSEN(paired); 3; wenn(paired; 1; 3));
         alternative; WENN(WURDEAUSGELASSEN(alternative); "t"; PREP.ALTERNATIVE(alternative));
         altV; wenn(alternative = "t"; 2; 1);
         altO; wenn(alternative = "g"; WAHR; FALSCH);
