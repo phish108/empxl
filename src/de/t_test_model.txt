@@ -4,14 +4,14 @@
         ab_names; EINDEUTIG(p_groups);
         paired; WENN(WURDEAUSGELASSEN(paired); 3; wenn(paired; 1; 3));
         alternative; WENN(WURDEAUSGELASSEN(alternative); "t"; PREP.ALTERNATIVE(alternative));
-        altV; wenn(alternative = "t"; 2; 1);
-        altO; wenn(alternative = "g"; WAHR; FALSCH);
-        g1; ZEILENWAHL(ab_names; 1);
-        g2; ZEILENWAHL(ab_names; 2);
+        altV; WENN(alternative = "t"; 2; 1);
+        altO; WENN(alternative = "g"; WAHR; FALSCH);
+        g_1; ZEILENWAHL(ab_names; 1);
+        g_2; ZEILENWAHL(ab_names; 2);
         p_v; WENN(
-            ANZAHL2(ab_names) <> 2; 
-            #KALK!; 
-            T.TEST(FILTER(p_values; p_groups = g1); FILTER(p_values; p_groups = g2); altV; paired)
+            ANZAHL2(ab_names) = 2; 
+            T.TEST(FILTER(p_values; p_groups = g_1); FILTER(p_values; p_groups = g_2); altV; paired);
+            #WERT!
         );
         WENN(altO; 1 - p_v; p_v)
     )
