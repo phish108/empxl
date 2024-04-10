@@ -2,8 +2,8 @@
     alt;
     XVERWEIS(
         LINKS(KLEIN(alt);1); 
-        {"t"; "g"; "l"; "r"}; 
-        {"t"; "g"; "l"; "g"}; 
+        {"t"; "g"; "l"; "r"; "k";"u"}; 
+        {"t"; "g"; "l"; "g"; "l";"t"}; 
         #WERT!
     ) 
 )
