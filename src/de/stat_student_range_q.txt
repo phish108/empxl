@@ -1,4 +1,4 @@
-# See https://en.wikipedia.org/wiki/Studentized_range_distribution
+// See https://en.wikipedia.org/wiki/Studentized_range_distribution
 =LAMBDA(
     values; groups;
     LET(

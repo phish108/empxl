@@ -1,4 +1,4 @@
-# See https://en.wikipedia.org/wiki/Pooled_variance
+// See https://en.wikipedia.org/wiki/Pooled_variance
 = LAMBDA(
     values; groups;
     LET(
