@@ -1,4 +1,4 @@
-= LAMBDA(
+GROUP.COUNT = LAMBDA(
     groups;
     MAP( 
         EINDEUTIG(groups); 
@@ -15,4 +15,4 @@
             )
         )
     )
-)
+);; 

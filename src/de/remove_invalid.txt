@@ -1,4 +1,4 @@
-=LAMBDA(
+REMOVE.INVALID=LAMBDA(
     vector;
     wenn(
         ODER(ZEILEN(vector) = 1; SPALTEN(vector) = 1);
@@ -9,4 +9,4 @@
         );
         #WERT!
     )
-)
+);;

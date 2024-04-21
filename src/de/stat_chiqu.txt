@@ -1,4 +1,4 @@
-= LAMBDA(
+STAT.CHIQU= LAMBDA(
     x_i; y_i;
     LET(
         n_i; STAT.TABLE(x_i);
@@ -8,5 +8,5 @@
         n_ij; STAT.TABLE(x_i; y_i);
         SUMME((n_ij - EW) ^ 2 / EW)
     )
-)
+);;
 

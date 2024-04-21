@@ -1,4 +1,4 @@
-=LAMBDA(
+STAT.DESCRIBE.LABELS = LAMBDA(
     [type];
     LET(
         type; WENN(WURDEAUSGELASSEN(type); "m"; LINKS(KLEIN(type); 1));
@@ -11,4 +11,4 @@
             HSTAPELN(labels_base; labels_m; labels_o)
         )
     )
-)
+);;

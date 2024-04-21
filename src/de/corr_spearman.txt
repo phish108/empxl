@@ -1,7 +1,7 @@
-=LAMBDA(
+CORR.SPEARMAN=LAMBDA(
     left; right;
     KORREL(
         RANG.MITTELW(left; left);
         RANG.MITTELW(right; right)
     )
-)
+);;

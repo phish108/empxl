@@ -1,8 +1,8 @@
 // Tukey HSD Test
 
-= LAMBDA(
+TukeyHSD.TEST= LAMBDA(
     values; groups;
     LET(
 
     )
-)
+);;

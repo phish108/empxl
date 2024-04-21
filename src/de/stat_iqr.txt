@@ -1,4 +1,4 @@
-= LAMBDA(
+STAT.IQR = LAMBDA(
     vector_or_matrix;
     SUMME(QUARTILE.INKL(vector_or_matrix;{3;1})*{1;-1})
-)
+);;

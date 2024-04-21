@@ -1,4 +1,4 @@
-=LAMBDA(
+MDIM=LAMBDA(
     matrix; 
     HSTAPELN(ZEILEN(matrix); SPALTEN(matrix))
-)
+);;

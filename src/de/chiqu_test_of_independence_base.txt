@@ -1,4 +1,4 @@
-= LAMBDA(
+CHIQU.TEST2 = LAMBDA(
     x_i; y_i;
     LET(
         n_i; STAT.TABLE(x_i);
@@ -10,4 +10,4 @@
         df; MAX(ANZAHL(n_i); ANZAHL(n_j)) - 1;
         HSTAPELN(CHIQU.VERT.RE(v_xi2; df); df)
     )
-)
+);;

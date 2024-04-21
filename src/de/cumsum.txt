@@ -1,8 +1,8 @@
-= LAMBDA(
+CUMSUM = LAMBDA(
     vector;
     SCAN(
         0; 
         vector; 
-        LAMBDA(accu, value; accu + value)
+        LAMBDA(accu; value; accu + value)
     )
-)
+);;

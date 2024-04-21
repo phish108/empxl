@@ -1,4 +1,4 @@
-= LAMBDA(
+STAT.MAD = LAMBDA(
     vector_or_matrix;
     MEDIAN(ABS(vector_or_matrix - MEDIAN(vector_or_matrix)))
-)
+);;

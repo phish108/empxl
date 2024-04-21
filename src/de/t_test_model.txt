@@ -1,4 +1,4 @@
-= LAMBDA( 
+T.TEST.S = LAMBDA( 
     p_values; p_groups; [alternative]; [paired]; 
     LET(
         ab_names; EINDEUTIG(p_groups);
@@ -17,4 +17,6 @@
         mw_2; MITTELWERT(FILTER(p_values; p_groups = g_2));
         WENN(ODER(UND(altO; mw_1 > mw_2); UND(alternative = "l"; mw_1 < mw_2)); 1 - p_v; p_v)
     )
-)
+);;
+
+AB.TEST = T.TEST.S;;

@@ -1,7 +1,7 @@
-=LAMBDA(
+ROWSUM=LAMBDA(
     matrix; 
     MMULT(
         matrix; 
         VREPEAT(1; SPALTEN(matrix))
     )
-)
+);;

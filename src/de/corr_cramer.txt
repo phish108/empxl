@@ -1,4 +1,4 @@
-= LAMBDA(
+CORR.CRAMER = LAMBDA(
     x_i; y_i;
     LET(
         n_i; STAT.TABLE(x_i);
@@ -9,4 +9,4 @@
         n_ij; STAT.TABLE(x_i; y_i);
         WURZEL((SUMME((n_ij - x_base) ^ 2 / x_base))/(n*(div-1)))
     )
-)
+);;

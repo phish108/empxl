@@ -1,4 +1,4 @@
-=LAMBDA(
+STAT.DESCRIBE = LAMBDA(
     data; [type]; [names];
     LET(
         type; WENN(
@@ -52,4 +52,4 @@
             HSTAPELN(mtrans(names); vals)
         )
     )
-)
+);;

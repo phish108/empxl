@@ -1,4 +1,4 @@
-=LAMBDA(
+GROUP.MAD=LAMBDA(
     values; groups;
     MAP( 
         EINDEUTIG(groups); 
@@ -7,4 +7,4 @@
             STAT.MAD(FILTER(values; groups = name))
         )
     )
-)
+);;

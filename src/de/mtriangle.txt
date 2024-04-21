@@ -1,4 +1,4 @@
-=LAMBDA(
+MTRIANGLE=LAMBDA(
     size; [p_lower]; [p_strict];
     LET(
         b_lower; WENN(WURDEAUSGELASSEN(p_lower); WAHR; p_lower);
@@ -18,4 +18,4 @@
             #WERT!
         )
     ) 
-)
+);;

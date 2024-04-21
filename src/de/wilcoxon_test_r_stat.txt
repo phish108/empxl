@@ -1,4 +1,4 @@
-= LAMBDA( 
+WILCOXON.TEST = LAMBDA( 
     p_values; p_groups; [alternative]; [paired]; [correct]; 
     LET( 
         alternative; wenn(WURDEAUSGELASSEN(alternative); "t"; PREP.ALTERNATIVE(alternative));
@@ -54,4 +54,4 @@
             #WERT!
         )
     )
-)
+);;

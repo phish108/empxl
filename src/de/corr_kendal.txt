@@ -1,4 +1,4 @@
-= LAMBDA(
+CORR.KENDAL = LAMBDA(
     x_i; y_i;
     LET(
         s_n; ANZAHL(x_i);
@@ -11,4 +11,4 @@
             #WERT!
         )
     )
-)
+);;

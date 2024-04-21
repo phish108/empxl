@@ -1,4 +1,4 @@
-=LAMBDA(
+GROUP.MEDIAN=LAMBDA(
     values; groups;
     MAP( 
         EINDEUTIG(groups); 
@@ -7,4 +7,4 @@
             MEDIAN(FILTER(values; groups = name))
         )
     )
-)
+);;

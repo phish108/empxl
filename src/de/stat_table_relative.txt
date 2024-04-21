@@ -1,4 +1,4 @@
-= LAMBDA(
+STAT.TABLE.RELATIVE = LAMBDA(
     aval; [bval_or_heading]; [heading];
     LET(
         mdim_a; Zeilen(aval) - Spalten(aval);
@@ -49,4 +49,4 @@
             )
         )
     )
-)
+);;

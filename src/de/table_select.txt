@@ -1,6 +1,6 @@
 // select columns from a table by names
 
-= LAMBDA(
+TABLE.SELECT = LAMBDA(
     tab_name; 
     col_names;
     [with_headers];
@@ -35,4 +35,4 @@
             VSTAPELN(col_headers; result)
         )
     )
-)
+);;

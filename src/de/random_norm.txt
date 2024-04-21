@@ -1,4 +1,4 @@
-=LAMBDA(
+RANDOM.NORM =LAMBDA(
     p_n; 
     [mean];
     [sdev];
@@ -8,4 +8,4 @@
 
         WURZEL(-2 * LN(ZUFALLSMATRIX(p_n))) + COS(2 * PI() * ZUFALLSMATRIX(p_n)) * sdev + mean
     )
-)
+);;

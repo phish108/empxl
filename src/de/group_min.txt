@@ -1,4 +1,4 @@
-=LAMBDA(
+GROUP.MIN=LAMBDA(
     values; groups;
     MAP( 
         EINDEUTIG(groups); 
@@ -7,4 +7,4 @@
             MIN(FILTER(values; groups = name))
         )
     )
-)
+);;

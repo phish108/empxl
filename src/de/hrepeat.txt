@@ -1,4 +1,4 @@
-=LAMBDA(
+HREPEAT=LAMBDA(
     value; n_times; 
     WENN(
         UND(ANZAHL2(value) = 1; ANZAHL(n_times) = 1; n_times > 0); 
@@ -9,4 +9,4 @@
         ); 
         #WERT!
     )
-)
+);;

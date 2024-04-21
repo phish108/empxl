@@ -1,8 +1,8 @@
-=LAMBDA(
+VLENGTH =LAMBDA(
     vector; 
     LET(
         cols; SPALTEN(vector);
         length; IS.VECTOR(vector)*(cols*(cols <> 1) +  ZEILEN(vector) * (cols = 1));
         wenn(length; length; #WERT!)
     )
-)
+);;

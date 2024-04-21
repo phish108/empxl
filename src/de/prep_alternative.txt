@@ -1,4 +1,4 @@
-= LAMBDA(
+PREP.ALTERNATIVE = LAMBDA(
     alt;
     XVERWEIS(
         LINKS(KLEIN(alt);1); 
@@ -6,4 +6,4 @@
         {"t"; "g"; "l"; "g"; "l"; "t"; "t"}; 
         #WERT!
     ) 
-)
+);;

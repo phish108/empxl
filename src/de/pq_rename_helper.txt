@@ -1,4 +1,4 @@
-= LAMBDA(
+PQ.RENAME.HELPER= LAMBDA(
     names;
     labels; 
     
@@ -14,4 +14,4 @@
             )
         )
     )
-)
+);;

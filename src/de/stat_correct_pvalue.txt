@@ -1,4 +1,4 @@
-=LAMBDA(
+STAT.CORRECT.PVALUE=LAMBDA(
     p_value; [alternative];
     LET(
         alt; WENN(WURDEAUSGELASSEN(alternative); "t"; alternative);
@@ -12,4 +12,4 @@
             #WERT!
         )
     ) 
-)
+);;

@@ -1,4 +1,4 @@
-= LAMBDA(
+MTRACE = LAMBDA(
     matrix; 
     WENN(
         ZEILEN(matrix) = SPALTEN(matrix); 
@@ -8,4 +8,4 @@
         ); 
         #WERT!
     )
-)
+);;
