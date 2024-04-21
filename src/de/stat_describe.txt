@@ -13,7 +13,8 @@
                 lines;
                 colid; 
                 LET(
-                    values; spaltenwahl(data; colid);
+                    raw_values; spaltenwahl(data; colid);
+                    values; filter(raw_values; istzahl(raw_values)); // drop errors, text and empty cells
                     cnt_values; ANZAHL(values);
                     basic_stats; HSTAPELN(
                             MIN(values);
