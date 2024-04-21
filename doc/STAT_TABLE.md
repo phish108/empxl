@@ -32,3 +32,5 @@ If matrix style ranges are passed to the function, the function will convert the
 For **presentation purposes** the function acceps the optional parameter `headings`. If this parameter is `TRUE`, then the function will add one additional row/column to the result containing the unique values for each result.
 
 **IMPORTANT:** The function will *NOT* sort the uniqe values.
+
+STAT.TABLE() accounts for error values. If error values should be excluded, then these falues must be filtered first. 
