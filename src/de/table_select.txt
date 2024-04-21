@@ -1,0 +1,38 @@
+// select columns from a table by names
+
+= LAMBDA(
+    tab_name; 
+    col_names;
+    [with_headers];
+    let(
+        n_rows; ZEILEN(INDIREKT(tab_name));
+        col_refs; tab_name & "[" & col_names & "]";
+        no_rows; sequence(n_rows);
+        no_cols; ANZAHL2(col_names) + 1;
+        col_headers; WENN(
+            ZEILEN(col_names) > SPALTEN(col_names);
+            MTRANS(col_names);
+            col_names
+        );
+        result; SPALTENWAHL(
+            REDUCE(
+                no_rows;
+                col_refs;
+                LAMBA(
+                    accu;
+                    col_ref;
+                    HSTAPELN(
+                        accu;
+                        INDIREKT(col_ref)
+                    )
+                )
+            ); 
+            no_cols
+        );
+        WENN(
+            ODER(WURDEAUSGELASSEN(with_headers); NICHT(with_headers)); 
+            result; 
+            VSTAPELN(col_headers; result)
+        )
+    )
+)
