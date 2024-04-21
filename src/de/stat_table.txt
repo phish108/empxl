@@ -27,8 +27,8 @@
                 bval; wenn(mdim_a > 0; zuspalte(bval); zuzeile(bval));
                 id_bval; MTRANS(EINDEUTIG(bval));
                 results; MMULT(
-                    1*(id_aval = MTRANS(aval));
-                    1*(id_bval = bval)
+                    (ISTFEHLER(id_aval) + ISTFEHLER(taval) - ISTFEHLER(taval)*ISTFEHLER(id_aval))*wennfehler(FEHLER.TYP(id_aval) = FEHLER.TYP(taval);0) + wennfehler(1*(id_aval = taval); 0);
+                    (ISTFEHLER(id_bval)+ISTFEHLER(bval)- ISTFEHLER(bval)*ISTFEHLER(id_bval))*wennfehler(FEHLER.TYP(id_bval) = FEHLER.TYP(bval);0) + wennfehler(1*(id_bval = bval); 0)
                 );
                 WENN(
                     heading; 
@@ -40,7 +40,21 @@
                 )
             );
             LET(
-                results; MAP(id_aval; LAMBDA(n; ANZAHL2(filter(aval; aval = n)))); 
+                results; MAP(
+                    id_aval; 
+                    LAMBDA(
+                            name;
+                            LET(
+                                fname; WENNFEHLER(FEHLER.TYP(name); 0);
+                                groups_no_errors; filter(aval; NICHT(ISTFEHLER(aval)));
+                                wenn(
+                                    fname > 0;
+                                    ANZAHL(FEHLER.TYP(filter(aval; wennfehler(FEHLER.TYP(aval); 0) = fname)));
+                                    ANZAHL2(filter(groups_no_errors; groups_no_errors = name))
+                                )
+                            )
+                        )
+                ); 
                 WENNS(
                     UND(heading; mdim_a > 0); HSTAPELN(id_aval; results);
                     heading; VSTAPELN(id_aval; results);
