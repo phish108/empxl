@@ -1,10 +1,18 @@
-=LAMBDA(
+= LAMBDA(
     groups;
     MAP( 
         EINDEUTIG(groups); 
         LAMBDA(
             name;
-            ANZAHL2(FILTER(groups; groups = name))
+            LET(
+                fname; WENNFEHLER(FEHLER.TYP(name); 0);
+                groups_no_errors; filter(groups; NICHT(ISTFEHLER(groups)));
+                wenn(
+                    fname > 0;
+                    ANZAHL(FEHLER.TYP(filter(groups; wennfehler(FEHLER.TYP(groups); 0) = fname)));
+                    ANZAHL2(filter(groups_no_errors; groups_no_errors = name))
+                )
+            )
         )
     )
 )
