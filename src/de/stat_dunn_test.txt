@@ -1,0 +1,61 @@
+// as described in Dinno, A. (2015). Nonparametric pairwise multiple 
+// comparisons in independent groups using Dunn’s  test. The Stata Journal,
+// 15(1), 292-300.
+
+DUNN.TEST = LAMBDA(
+    values; groups; [adjustment]; 
+    LET(
+        ranks; RANG.MITTELW(values; values);
+        n_all; ANZAHL(values);
+        n_i; GROUP.COUNT(groups);
+        group_i; EINDEUTIG(groups);
+        ranksum_i; COLSUM(ranks*(groups = MTRANS(group_i))) / MTRANS(n_i);
+        sigma_correction; n_all*(n_all+1)/12;
+        bind_count; GROUP.COUNT(ranks);
+        bind_correction; SUMME(bind_count^3 - bind_count)/(12*(n_all-1));
+
+        mat_triang; MTRIANGLE(ANZAHL(n_i); FALSCH; WAHR);
+        mat_W1; mat_triang * mtrans(ranksum_i);
+        mat_W2; mat_triang * ranksum_i;
+
+        mat_n1; mat_triang * MTRANS(1/n_i);
+        mat_n2; mat_triang * 1/n_i;
+
+        sigma; WURZEL((sigma_correction - bind_correction) * (mat_n1 + mat_n2));
+        delta_RS; mat_W1 - mat_W2;
+
+        z_value; delta_RS / sigma;
+
+        g_nbr; SEQUENZ(ANZAHL(n_i));
+        z_id_raw; zuspalte(g_nbr * mat_triang);
+        s_id_raw; zuspalte(mtrans(g_nbr) * mat_triang);
+        z_id; filter(z_id_raw; z_id_raw);
+        s_id; filter(s_id_raw; s_id_raw);
+        z_final; index(z_value; z_id; s_id);
+
+        // adjustment
+        m_pairs; summe(SEQUENZ(ANZAHL(n_i); 1; 0));
+        p_value_raw; NORM.S.VERT(wenn(z_final > 0; -1 * z_final; z_final);WAHR);
+
+        p_value; WENNS(
+            ODER(WURDEAUSGELASSEN(adjustment); KLEIN(adjustment) = "holm");P.ADJ.HOLM(p_value_raw; m_pairs);
+            KLEIN(adjustment) = "bonferroni"; P.ADJ.BONFERRONI(p_value_raw; m_pairs);
+            KLEIN(adjustment) = "hochberg"; P.ADJ.HOCHBERG(p_value_raw; m_pairs);
+            KLEIN(adjustment) = "sidak"; P.ADJ.SIDAK(p_value_raw; m_pairs);
+            KLEIN(adjustment) = "holmsidak"; P.ADJ.HOLM_SIDAK(p_value_raw; m_pairs);
+            KLEIN(adjustment) = "holm-sidak"; P.ADJ.HOLM_SIDAK(p_value_raw; m_pairs);
+            KLEIN(adjustment) = "holm_sidak"; P.ADJ.HOLM_SIDAK(p_value_raw; m_pairs);
+            WAHR; p_value_raw
+        );
+
+        vstapeln(
+            HSTAPELN("A"; "B"; "z"; "p");
+            HSTAPELN(
+                ZEILENWAHL(group_i; z_id);
+                zeilenwahl(group_i; s_id);
+                z_final;
+                p_value
+            )
+        )
+    )
+);;

@@ -1,0 +1,33 @@
+P.ADJ.BONFERRONI = LAMBDA(p_v; m_v; p_v * m_v);;
+P.ADJ.HOLM = LAMBDA(p_v; m_v; 
+    LET(
+        p_s; SORTIEREN(p_v);
+        id_v; SEQUENZ(ANZAHL(p_v));
+        id_s; SORTIERENNACH(id_v;p_v);
+        p_star; p_s * (m_v + 1 - id_v);
+        SORTIERENNACH(p_star; id_s)
+    )
+);;
+P.ADJ.SIDAK = LAMBDA(
+    p_v; m_v;
+    1 - (1- p_v) ^ m_v
+);;
+P.ADJ.HOLM_SIDAK = LAMBDA(
+    p_v; m_v;
+    LET(
+        p_s; SORTIEREN(p_v);
+        id_v; SEQUENZ(ANZAHL(p_v));
+        id_s; SORTIERENNACH(id_v;p_v);
+        p_star; 1 - (1- p_s) ^ (m_v + 1 - id_v);
+        SORTIERENNACH(p_star; id_s)
+    )
+);;
+P.ADJ.HOCHBERG = LAMBDA(p_v; m_v; 
+    LET(
+        p_s; SORTIEREN(p_v);
+        id_v; SEQUENZ(ANZAHL(p_v));
+        id_s; SORTIERENNACH(id_v;p_v);
+        p_star; p_s * m_v / ( m_v + 1 - id_v);
+        SORTIERENNACH(p_star; id_s)
+    )
+);;
