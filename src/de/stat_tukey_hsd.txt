@@ -35,3 +35,5 @@ TUKEYHSD.TEST= LAMBDA(
         )
     )
 );;
+
+TUKEY.TEST = TUKEYHSD.TEST;;
