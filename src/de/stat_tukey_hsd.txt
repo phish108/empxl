@@ -16,6 +16,7 @@ TUKEYHSD.TEST= LAMBDA(
         m_qvalue; absolut(m_GM1 - m_GM2 / std_err);
         m_pvalue; map(m_qvalue; LAMBDA(x; T.VERT.RE(x; df_test))); // map is needed, because t.VERT.RE is not vectorised
 
+        // organize the permutation output
         g_nbr; SEQUENZ(ANZAHL(n_i));
         z_id_raw; zuspalte(g_nbr * mat_triang);
         s_id_raw; zuspalte(mtrans(g_nbr) * mat_triang);
