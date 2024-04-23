@@ -35,19 +35,23 @@ WILCOXON.TEST = LAMBDA(
                         "g"; 0.5;
                     );
                 ZVAL; (z_value - correction_value)/SIGMA;
-                PVAL; STAT.CORRECT.PVALUE(NORM.VERT(ZVAL; 0; 1; WAHR));
-                HSTAPELN(
-                    STATISTIC; 
-                    ZVAL; 
-                    PVAL; 
-                    TEXTVERKETTEN(
-                        ersterwert(
-                            alternative; 
-                            "t"; "<>"; 
-                            "l"; "<"; 
-                            "g"; ">"
-                        );;
-                        ab_names
+                PVAL; (1 + (alternative = "t")) * STAT.CORRECT.PVALUE(NORM.VERT(ZVAL; 0; 1; WAHR));
+
+                VSTAPELN(
+                    HSTAPELN("Statistik"; "Z-Wert"; "p-Wert"; "Alternative");
+                    HSTAPELN(
+                        STATISTIC; 
+                        ZVAL; 
+                        PVAL; 
+                        TEXTVERKETTEN(
+                            ersterwert(
+                                alternative; 
+                                "t"; "<>"; 
+                                "l"; "<"; 
+                                "g"; ">"
+                            );;
+                            ab_names
+                        )
                     )
                 )
             ); 

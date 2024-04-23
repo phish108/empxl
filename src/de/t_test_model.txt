@@ -15,7 +15,9 @@ T.TEST.S = LAMBDA(
         );
         mw_1; MITTELWERT(FILTER(p_values; p_groups = g_1));
         mw_2; MITTELWERT(FILTER(p_values; p_groups = g_2));
-        WENN(ODER(UND(altO; mw_1 > mw_2); UND(alternative = "l"; mw_1 < mw_2)); 1 - p_v; p_v)
+        
+        // altV also compensates for p-value doubling in two-tailed tests
+        altV * WENN(ODER(UND(altO; mw_1 > mw_2); UND(alternative = "l"; mw_1 < mw_2)); 1 - p_v; p_v)
     )
 );;
 
