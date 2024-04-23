@@ -1,0 +1,10 @@
+STAT.SE = LAMBDA(
+    values;
+    LET(
+        sdev; STABW.S(values);
+        cnt_values; ANZAHL(values);
+        sdev / WURZEL(cnt_values)
+    )
+);;
+
+STAT.STD.ERROR = STAT.SE;;
