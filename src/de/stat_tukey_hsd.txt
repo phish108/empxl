@@ -1,8 +1,37 @@
 // Tukey HSD Test
 
-TukeyHSD.TEST= LAMBDA(
+TUKEYHSD.TEST= LAMBDA(
     values; groups;
     LET(
+        n_all; ANZAHL(values);
+        k_all; ANZAHL2(EINDEUTIG(groups));
+        group_names; EINDEUTIG(groups);
+        
+        df_test; n_all - k_all;
+        m_triang; MTRIANGLE(k_all);
+        std_err; STAT.SE(values);
+        grp_means; GROUP.MEAN(values; groups);
+        m_GM1; m_triang * grp_means;
+        m_GM2; m_triang * MTRANS(grp_means);
+        m_qvalue; absolut(m_GM1 - m_GM2 / std_err);
+        m_pvalue; map(m_qvalue; LAMBDA(x; T.VERT.RE(x; df_test))); // map is needed, because t.VERT.RE is not vectorised
 
+        g_nbr; SEQUENZ(ANZAHL(n_i));
+        z_id_raw; zuspalte(g_nbr * mat_triang);
+        s_id_raw; zuspalte(mtrans(g_nbr) * mat_triang);
+        z_id; filter(z_id_raw; z_id_raw);
+        s_id; filter(s_id_raw; s_id_raw);
+        q_final; index(m_qvalue; z_id; s_id);
+        p_final; index(m_pvalue; z_id; s_id);
+
+        vstapeln(
+            HSTAPELN("A"; "B"; "Statistik"; "p");
+            HSTAPELN(
+                ZEILENWAHL(group_names; z_id);
+                zeilenwahl(group_names; s_id);
+                z_final;
+                p_value
+            )
+        )
     )
 );;

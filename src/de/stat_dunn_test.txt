@@ -49,7 +49,7 @@ DUNN.TEST = LAMBDA(
         );
 
         vstapeln(
-            HSTAPELN("A"; "B"; "z"; "p");
+            HSTAPELN("A"; "B"; "Statistik"; "p");
             HSTAPELN(
                 ZEILENWAHL(group_i; z_id);
                 zeilenwahl(group_i; s_id);
