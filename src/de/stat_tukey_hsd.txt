@@ -13,8 +13,8 @@ TUKEYHSD.TEST= LAMBDA(
         grp_means; GROUP.MEAN(values; groups);
         m_GM1; m_triang * grp_means;
         m_GM2; m_triang * MTRANS(grp_means);
-        m_qvalue; absolut(m_GM1 - m_GM2 / std_err);
-        m_pvalue; map(m_qvalue; LAMBDA(x; T.VERT.RE(x; df_test))); // map is needed, because t.VERT.RE is not vectorised
+        m_qvalue; min(m_GM1; m_GM2) - max(m_GM1; m_GM2) / std_err);
+        m_pvalue; 2 * map(m_qvalue; LAMBDA(x; T.VERT.RE(x; df_test))); // map is needed, because t.VERT.RE is not vectorised (the 2 doubles the p-value for two-tailed tests)
 
         // organize the permutation output
         g_nbr; SEQUENZ(ANZAHL(n_i));
