@@ -37,7 +37,7 @@ DUNN.TEST = LAMBDA(
         m_pairs; summe(SEQUENZ(ANZAHL(n_i); 1; 0));
         p_value_raw; NORM.S.VERT(wenn(z_final > 0; -1 * z_final; z_final);WAHR);
 
-        p_value; WENNS(
+        p_value; 2 * WENNS(
             ODER(WURDEAUSGELASSEN(adjustment); KLEIN(adjustment) = "holm");P.ADJ.HOLM(p_value_raw; m_pairs);
             KLEIN(adjustment) = "bonferroni"; P.ADJ.BONFERRONI(p_value_raw; m_pairs);
             KLEIN(adjustment) = "hochberg"; P.ADJ.HOCHBERG(p_value_raw; m_pairs);
