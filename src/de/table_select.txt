@@ -1,5 +1,4 @@
 // select columns from a table by names
-
 TABLE.SELECT = LAMBDA(
     tab_name; 
     col_names;
@@ -8,7 +7,7 @@ TABLE.SELECT = LAMBDA(
         n_rows; ZEILEN(INDIREKT(tab_name));
         col_refs; tab_name & "[" & col_names & "]";
         no_rows; sequenz(n_rows);
-        no_cols; ANZAHL2(col_names) + 1;
+        no_cols; sequenz(ANZAHL2(col_names)) + 1;
         col_headers; WENN(
             ZEILEN(col_names) > SPALTEN(col_names);
             MTRANS(col_names);
@@ -23,7 +22,10 @@ TABLE.SELECT = LAMBDA(
                     col_ref;
                     HSTAPELN(
                         accu;
-                        INDIREKT(col_ref)
+                        LET(
+                            values; INDIREKT(col_ref);
+                            wenn(ISTLEER(values); #NV; values)
+                        )
                     )
                 )
             ); 
