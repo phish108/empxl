@@ -7,7 +7,7 @@ TABLE.SELECT = LAMBDA(
     let(
         n_rows; ZEILEN(INDIREKT(tab_name));
         col_refs; tab_name & "[" & col_names & "]";
-        no_rows; sequence(n_rows);
+        no_rows; sequenz(n_rows);
         no_cols; ANZAHL2(col_names) + 1;
         col_headers; WENN(
             ZEILEN(col_names) > SPALTEN(col_names);
@@ -18,7 +18,7 @@ TABLE.SELECT = LAMBDA(
             REDUCE(
                 no_rows;
                 col_refs;
-                LAMBA(
+                LAMBDA(
                     accu;
                     col_ref;
                     HSTAPELN(

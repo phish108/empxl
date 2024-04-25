@@ -27,7 +27,7 @@ STAT.TABLE = LAMBDA(
                 bval; wenn(mdim_a > 0; zuspalte(bval); zuzeile(bval));
                 id_bval; MTRANS(EINDEUTIG(bval));
                 results; MMULT(
-                    (ISTFEHLER(id_aval) + ISTFEHLER(taval) - ISTFEHLER(taval)*ISTFEHLER(id_aval))*wennfehler(FEHLER.TYP(id_aval) = FEHLER.TYP(taval);0) + wennfehler(1*(id_aval = taval); 0);
+                    (ISTFEHLER(id_aval) + ISTFEHLER(aval) - ISTFEHLER(aval)*ISTFEHLER(id_aval))*wennfehler(FEHLER.TYP(id_aval) = FEHLER.TYP(aval);0) + wennfehler(1*(id_aval = aval); 0);
                     (ISTFEHLER(id_bval)+ISTFEHLER(bval)- ISTFEHLER(bval)*ISTFEHLER(id_bval))*wennfehler(FEHLER.TYP(id_bval) = FEHLER.TYP(bval);0) + wennfehler(1*(id_bval = bval); 0)
                 );
                 WENN(

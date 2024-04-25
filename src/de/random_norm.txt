@@ -4,7 +4,7 @@ RANDOM.NORM =LAMBDA(
     [sdev];
     LET(
         mean; WENN(WURDEAUSGELASSEN(mean); 0; mean);
-        sdev; WENN(WURDEAUSGELASSEN(sd); 1; sdev);
+        sdev; WENN(WURDEAUSGELASSEN(sdev); 1; sdev);
 
         WURZEL(-2 * LN(ZUFALLSMATRIX(p_n))) + COS(2 * PI() * ZUFALLSMATRIX(p_n)) * sdev + mean
     )

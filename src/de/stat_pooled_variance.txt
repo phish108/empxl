@@ -5,6 +5,6 @@ STAT.POOLED.VARIANCE = LAMBDA(
         n_i; STAT.TABLE(groups)-1;
         sum_n; SUMME(n_i);
         s_i; GROUP.SD(values; groups)^2;
-        PRODUKTSUMME(n_i; s_i) / sum_n
+        SUMMENPRODUKT(n_i; s_i) / sum_n
     )
 );;

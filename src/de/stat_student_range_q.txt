@@ -7,6 +7,6 @@ STAT.STUDENT.RANGE = LAMBDA(
         y_max; MAX(mean_i);
         n_all; ANZAHL2(values);
         s_2; STAT.POOLED.VARIANCE(values; groups);
-        (y_max - y_min) / SQRT(s_2 / (2 * n_all))
+        (y_max - y_min) / WURZEL(s_2 / (2 * n_all))
     )
 );;
