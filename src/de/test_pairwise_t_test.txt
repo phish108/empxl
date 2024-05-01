@@ -1,0 +1,47 @@
+PAIRWISE.T.TEST = LAMBDA(
+    values; groups; [adjustment];
+    LET(
+        n_all; ANZAHL(values);
+        group_names; EINDEUTIG(groups);
+        k_all; ANZAHL2(group_names);
+        m_triang; MTRIANGLE(k_all;;1);
+        group_id; SEQUENZ(k_all);
+        grp_1; ZUSPALTE(m_triang * group_id);
+        grp_2; ZUSPALTE(m_triang * MTRANS(group_id));
+        g1_id; filter(grp_1; grp_1);
+        g2_id; filter(grp_2; grp_2);
+        g1_names; INDEX(group_names; g1_id);
+        g2_names; INDEX(group_names; g2_id);
+        p_values; map(
+            g1_names; g2_names; 
+            LAMBDA(
+                a_v; b_v; 
+                T.TEST(
+                    filter(values; groups = a_v); filter(values; groups = b_v);
+                    2; 3
+                )
+            )
+        );
+        p_value_raw; wenn( p_values > 0.5; 1-p_values; p_values);
+        p_star;
+        2 * WENNS(
+            WURDEAUSGELASSEN(adjustment); P.ADJ.BONFERRONI(p_value_raw; k_all);
+            KLEIN(adjustment) = "holm";P.ADJ.HOLM(p_value_raw; k_all);
+            KLEIN(adjustment) = "bonferroni"; P.ADJ.BONFERRONI(p_value_raw; k_all);
+            KLEIN(adjustment) = "hochberg"; P.ADJ.HOCHBERG(p_value_raw; k_all);
+            KLEIN(adjustment) = "sidak"; P.ADJ.SIDAK(p_value_raw; k_all);
+            KLEIN(adjustment) = "holmsidak"; P.ADJ.HOLM_SIDAK(p_value_raw; k_all);
+            KLEIN(adjustment) = "holm-sidak"; P.ADJ.HOLM_SIDAK(p_value_raw; k_all);
+            KLEIN(adjustment) = "holm_sidak"; P.ADJ.HOLM_SIDAK(p_value_raw; k_all);
+            WAHR; p_value_raw
+        );
+        hstapeln(
+            g1_names; 
+            g2_names; 
+            p_star
+        )
+    )
+);;
+
+PAARWEISER.T.TEST = PAIRWISE.T.TEST;;
+PAARWEISER.AB.TEST = PAIRWISE.T.TEST;;
