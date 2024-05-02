@@ -3,22 +3,22 @@ KRUSKAL_WALLIS.TEST = LAMBDA(
     LET(
         n_all; ANZAHL(values);
         n_groups; ANZAHL2(EINDEUTIG(groups));
-        df; n_groups - 1;
+        d_f; n_groups - 1;
         n_h; GROUP.COUNT(groups);
         ranks; RANG.MITTELW(values; values);
         b_bindings; ANZAHL(EINDEUTIG(ranks)) < n_all;
-        h_factor; 12/ (n_groups * (n_groups + 1));
         h_correction; -3 * (n_all + 1);
+        h_factor; 12/ (n_groups * (n_groups + 1) - h_correction);
         m_groups; 1*(groups = MTRANS(EINDEUTIG(groups)));
         H_core; h_factor * SUMME(
-            COLSUM(m_groups * ranks)/ MTRANS(n_groups) + h_correction
+            COLSUM(m_groups * ranks)/ MTRANS(n_h)
         );
         bind_factor; 1/ (n_all^3 - n_all);
         bind_count; GROUP.COUNT(ranks);
         bind_correction; 1 - SUMME(bind_count^3 - bind_count) * bind_factor;
         H_value; wenn(b_bindings; H_core / bind_correction; H_core);
-        p_value; CHIQU.VERT.RE(H_value; df);
-        results; HSTAPELN(H_value; df; p_value);
+        p_value; CHIQU.VERT.RE(H_value; d_f);
+        results; HSTAPELN(H_value; d_f; p_value);
         wenn(
             oder(WURDEAUSGELASSEN(headers); nicht(headers));
             results;
