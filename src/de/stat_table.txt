@@ -19,48 +19,32 @@ STAT.TABLE = LAMBDA(
             WAHR; n(heading)
         ) <> 0;
 
-        bval; bval_or_heading; 
-
-        WENN(
+        bval; wenn(
             b_p1 = 2; 
-            LET(
-                bval; wenn(mdim_a > 0; zuspalte(bval); zuzeile(bval));
-                id_bval; MTRANS(EINDEUTIG(bval));
-                results; MMULT(
-                    (ISTFEHLER(id_aval) + ISTFEHLER(aval) - ISTFEHLER(aval)*ISTFEHLER(id_aval))*wennfehler(FEHLER.TYP(id_aval) = FEHLER.TYP(aval);0) + wennfehler(1*(id_aval = aval); 0);
-                    (ISTFEHLER(id_bval)+ISTFEHLER(bval)- ISTFEHLER(bval)*ISTFEHLER(id_bval))*wennfehler(FEHLER.TYP(id_bval) = FEHLER.TYP(bval);0) + wennfehler(1*(id_bval = bval); 0)
-                );
-                WENN(
-                    heading; 
-                    VSTAPELN(
-                        HSTAPELN(""; id_bval); 
-                        HSTAPELN(id_aval; results)
-                    ); 
-                    results
-                )
-            );
-            LET(
-                results; MAP(
-                    id_aval; 
-                    LAMBDA(
-                            name;
-                            LET(
-                                fname; WENNFEHLER(FEHLER.TYP(name); 0);
-                                groups_no_errors; filter(aval; NICHT(ISTFEHLER(aval)));
-                                wenn(
-                                    fname > 0;
-                                    ANZAHL(FEHLER.TYP(filter(aval; wennfehler(FEHLER.TYP(aval); 0) = fname)));
-                                    ANZAHL2(filter(groups_no_errors; groups_no_errors = name))
-                                )
-                            )
-                        )
-                ); 
-                WENNS(
-                    UND(heading; mdim_a > 0); HSTAPELN(id_aval; results);
-                    heading; VSTAPELN(id_aval; results);
-                    WAHR; results
-                )
+            bval_or_heading; 
+            wenn(
+                mdim_a > 0; 
+                VREPEAT(1; n_aval); 
+                HREPEAT(1;n_aval)
             )
+        );
+        id_bval; MTRANS(EINDEUTIG(bval));
+        id_avalT; MTRANS(id_aval); 
+
+        results; MMULT(
+            mtrans((ISTFEHLER(id_avalT) + ISTFEHLER(aval) - ISTFEHLER(aval)*ISTFEHLER(id_avalT)) * wennfehler(FEHLER.TYP(id_avalT) = FEHLER.TYP(aval);0) + wennfehler(1*(id_avalT = aval); 0));
+            (ISTFEHLER(id_bval) + ISTFEHLER(bval) - ISTFEHLER(bval)*ISTFEHLER(id_bval)) * wennfehler(FEHLER.TYP(id_bval) = FEHLER.TYP(bval);0) + wennfehler(1*(id_bval = bval); 0)
+        );
+        WENN(
+            heading; 
+            wenn(b_p1 = 2;
+                VSTAPELN(
+                    HSTAPELN(""; id_bval); 
+                    HSTAPELN(id_aval; results)
+                );
+                HSTAPELN(id_aval; results)
+            );
+            results
         )
     )
 );;
