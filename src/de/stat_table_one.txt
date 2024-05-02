@@ -1,12 +1,10 @@
 STAT.DESCRIBE.NOMINAL = LAMBDA(
-    variable; data; vnames;
+    data; [variable];
     LET(
-        idx; xvergleich(variable; vnames);
-        values; SPALTENWAHL(data; idx);
-        reale_values; filter(values; NICHT(ISTFEHLER(values)));
+        variable; wenn(WURDEAUSGELASSEN(variable); ""; variable);
         VSTAPELN(
             HSTAPELN(variable; "Absolut"; "Relativ");
-            HSTAPELN(STAT.TABLE(reale_values; WAHR); stat.table.relative(reale_values))
+            HSTAPELN(STAT.TABLE(data; WAHR); stat.table.relative(data))
         )
     )
 );;
