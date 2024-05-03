@@ -1,0 +1,4 @@
+CORR.PEARSON=LAMBDA(
+    x_i; y_i; 
+    KORREL(x_i; y_i)
+);;
