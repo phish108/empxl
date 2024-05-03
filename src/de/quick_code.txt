@@ -1,0 +1,4 @@
+QUICK.CODE= LAMBDA(
+    variable; order;
+    XVERGLEICH(variable; order)
+);;
