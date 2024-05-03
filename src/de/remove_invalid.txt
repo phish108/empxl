@@ -3,7 +3,7 @@ REMOVE.INVALID=LAMBDA(
     LET(
         invalid; WENNFEHLER(
             NACHZEILE(
-                J2#;
+                vectors;
                 LAMBDA(
                     zeile;
                     UND(zeile)
@@ -11,6 +11,6 @@ REMOVE.INVALID=LAMBDA(
             );
             FALSCH
         );
-        FILTER(vectors;invalid);
+        FILTER(vectors;invalid)
     )
 );;
