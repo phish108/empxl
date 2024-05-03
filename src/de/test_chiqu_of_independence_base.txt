@@ -9,3 +9,5 @@ CHIQU.TEST.S = LAMBDA(
         )
     )
 );;
+
+CHIQU.TEST2 = CHIQU.TEST.S;;
