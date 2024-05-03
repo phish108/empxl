@@ -21,4 +21,3 @@ T.TEST.S = LAMBDA(
     )
 );;
 
-AB.TEST = T.TEST.S;;
