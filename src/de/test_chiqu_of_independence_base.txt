@@ -1,13 +1,11 @@
-CHIQU.TEST2 = LAMBDA(
-    x_i; y_i;
+CHIQU.TEST.S = LAMBDA(
+    x_i; y_i;[header];
     LET(
-        n_i; STAT.TABLE(x_i);
-        n_j; STAT.TABLE(y_i);
-        n; SUMME(n_j);
-        EW; n_i * MTRANS(n_j) / n; 
         n_ij; STAT.TABLE(x_i; y_i);
-        v_xi2; SUMME((n_ij - EW) ^ 2 / EW); 
-        df; MAX(ANZAHL(n_i); ANZAHL(n_j)) - 1;
-        HSTAPELN(CHIQU.VERT.RE(v_xi2; df); df)
+        WENN(
+            WURDEAUSGELASSEN(header);
+            CHIQU.TEST.X(n_ij; FALSCH);
+            CHIQU.TEST.X(n_ij; header)
+        )
     )
 );;
