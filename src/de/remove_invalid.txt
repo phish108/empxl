@@ -1,12 +1,16 @@
 REMOVE.INVALID=LAMBDA(
-    vector;
-    wenn(
-        ODER(ZEILEN(vector) = 1; SPALTEN(vector) = 1);
-        FILTER(
-            vector;
-            NICHT(ISTLEER(vector) + ISTFEHLER(vector));
-            #NV
+    vectors;
+    LET(
+        invalid; WENNFEHLER(
+            NACHZEILE(
+                J2#;
+                LAMBDA(
+                    zeile;
+                    UND(zeile)
+                )
+            );
+            FALSCH
         );
-        #WERT!
+        FILTER(vectors;invalid);
     )
 );;
