@@ -1,0 +1,22 @@
+// sequence generator function for sequences between two numbers
+SEQUENCE.RANGE = LAMBDA(
+    a_v; [b_or_step]; [step];
+    LET(
+        a_vs; ZUSPALTE(a_v);
+        n_a; ANZAHL(a_vs);
+        b_v; wenn(
+            UND(n_a = 2; WURDEAUSGELASSEN(b_or_step);WURDEAUSGELASSEN(step));
+            INDEX(a_vs; 2;1);
+            b_or_step
+        );
+        step; WENNS(
+            UND(WURDEAUSGELASSEN(b_or_step);WURDEAUSGELASSEN(step)); 1;
+            UND(n_a = 2; WURDEAUSGELASSEN(step)); b_or_step;
+            WURDEAUSGELASSEN(step); 1;
+            WAHR; step
+        );
+        a_v; INDEX(a_vs; 1;1);
+        s_delta; GANZZAHL(b_v - a_v) + 1;
+        SEQUENZ(s_delta; 1; a_v; step)
+    )
+);;
