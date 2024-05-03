@@ -1,0 +1,11 @@
+DUMMY.CODE = LAMBDA(
+    variable; [header];
+    LET(
+        variable; FILTER(variable; NICHT(ISTFEHLER(variable)));
+        k_names; MTRANS(EINDEUTIG(variable));
+        // strip the last name
+        k_ref; SPALTENWAHL(k_names; SEQUENZ(1; ANZAHL2(k_names) -1));
+        codes; 1*(variable = k_ref);
+        wenn(ODER(WURDEAUSGELASSEN(header); nicht(header)); codes; vstapeln(k_ref; codes))
+    )
+);;
