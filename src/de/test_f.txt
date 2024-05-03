@@ -1,0 +1,12 @@
+F.TEST.S=LAMBDA(
+    a_v; u_v; [headers];
+    LET(
+        l_uv; ZUSPALTE(EINDEUTIG(u_v));
+        result; WENN(
+            ANZAHL2(l_uv) = 2; 
+            F.TEST(FILTER(a_v; u_v = INDEX(u_v; 1; 1));FILTER(a_v; u_v = INDEX(u_v; 2; 1)));
+            #WERT!
+        );
+        WENN(ODER(WURDEAUSGELASSEN(headers); NICHT(headers)); result; VSTAPELN("p"; result))
+    )
+);;
