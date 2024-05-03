@@ -54,7 +54,7 @@ DUNN.TEST = LAMBDA(
                 ZEILENWAHL(group_i; z_id);
                 zeilenwahl(group_i; s_id);
                 z_final;
-                p_value
+                wenn(p_value > 1; 1; p_value)
             )
         )
     )

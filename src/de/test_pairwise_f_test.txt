@@ -1,4 +1,4 @@
-PAIRWISE.T.TEST = LAMBDA(
+PAIRWISE.F.TEST = LAMBDA(
     values; groups; [adjustment];
     LET(
         n_all; ANZAHL(values);
@@ -16,9 +16,9 @@ PAIRWISE.T.TEST = LAMBDA(
             g1_names; g2_names; 
             LAMBDA(
                 a_v; b_v; 
-                T.TEST(
-                    filter(values; groups = a_v); filter(values; groups = b_v);
-                    2; 3
+                F.TEST(
+                    filter(values; groups = a_v); 
+                    filter(values; groups = b_v)
                 )
             )
         );
