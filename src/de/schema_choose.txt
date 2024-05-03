@@ -2,6 +2,8 @@
 // and is not very flexible.
 // The better function is TABLE.SELECT
 
+// Lifecycle: DEPRECATED/REFACTOR
+
 SCHEMA.CHOOSE = LAMBDA(
     data;
     types;
