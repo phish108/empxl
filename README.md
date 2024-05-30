@@ -14,8 +14,8 @@ This allows this template to be used in security sensitive environments.
 
 [![German Cheat Sheet](empxl_sheet_mini.png)](cheat_sheet_DE.pdf)
 
-1. Download a release version
-2. Create a fresh worksheet from the empxl-template
+1. Download a release version of `empxl.xltx`
+2. Create a fresh worksheet from the empxl-template `empxl.xltx`
 3. Import your data
 4. Use the functions
 
@@ -23,8 +23,15 @@ This allows this template to be used in security sensitive environments.
 
 - Matrix and vector convinience functions 
 - LAMBDA-safe group functions
+- Cleanup and datawrangling functions
+- Descriptive statistics
+- Basic inference statistics for data vectors (t-Test, F-Test, ANOVA, etc.)
+- Ordinal scale statistics (Wilcoxon-Test, Kruskal-Wallis-Test, Dunn-Test)
+- p-Value Adjustment Function for grouped measures (used in pairwise tests)
 
 ## Build manually 
+
+Building manually requires the [EXCEL Advanced Formula Environment (AFE)](https://www.microsoft.com/en-us/garage/blog/2022/03/a-new-way-to-author-and-share-excel-named-formulas-advanced-formula-environment-a-microsoft-garage-project/) installed with the Excel Instance that is used to to build the template. When using the template, AFE is **not** required.
 
 **Important:** Currently, the code builds on the German Naming of Excel formula. Therefore, **Building the template manually requires Excel's German edition**. This will change in one of the upcomin editions.
 
@@ -33,7 +40,7 @@ This allows this template to be used in security sensitive environments.
 1. Run the `bin/compile.sh` script to strip extra whitespaces from the source formulas. This creates a `compile`-folder with clean versions of the formula.
 2. Open a fresh Excel workbook. 
 3. Save the workbook as an Excel template (`.xlst`)
-4. Open the name manager in the Formula ribbon.
-5. Add the functions name by name.
-
-The Name Manager has a tendency to crash excel, randomly. Therefore, it is recommended to close the name manager during the building process and save the workbook to disk.
+4. Open AFE
+5. Open the Modules-Tab
+6. Paste the content of `empxl.afe` into the Workbook-Module. 
+7. Save the template for release. 
