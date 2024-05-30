@@ -1,4 +1,4 @@
-DUMMY.CODE = LAMBDA(
+DUMMY.CODING = LAMBDA(
     variable; [header];
     LET(
         variable; FILTER(variable; NICHT(ISTFEHLER(variable)));
