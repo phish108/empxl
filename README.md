@@ -6,9 +6,13 @@ A collection of statistical tests written using pure Excel functions
 
 This collection of pure Excel functions aims at students and practitioners who want to use basic statistical tests in excel.
 
-This project aims at a macro-free set of basic functions using the Excel 365 features without python, extensions or VBA macros. 
+This project aims at a macro-free set of basic functions using only Excel core features without python, extensions or VBA macros. 
+This allows this template to be used in security sensitive environments.
+
 
 ## How to use
+
+[![Cheat Sheet](empxl_sheet_mini.png)](cheat_sheet_DE.pdf)
 
 1. Download a release version
 2. Create a fresh worksheet from the empxl-template
