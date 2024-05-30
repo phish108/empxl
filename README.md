@@ -12,7 +12,7 @@ This allows this template to be used in security sensitive environments.
 
 ## How to use
 
-[![Cheat Sheet](empxl_sheet_mini.png)](cheat_sheet_DE.pdf)
+[![Cheat Sheet](empxl_sheet_mini.png)](https://github.com/ac3b91c1-769e-4228-9e32-903e1efd6baf)
 
 1. Download a release version
 2. Create a fresh worksheet from the empxl-template
