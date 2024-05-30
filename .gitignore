@@ -1,6 +1,8 @@
 ~$*.xltx
 ~$*.xlsx
+~$*.pptx
 **/.DS_STORE
 doc/tmp
 compile
 tmp
+
