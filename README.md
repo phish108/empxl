@@ -1,4 +1,4 @@
-# empxl 
+# empxl - Macro-free Empirical Excel Functions
 
 A collection of statistical tests written using pure Excel functions
 
