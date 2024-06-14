@@ -1,7 +1,10 @@
 ROWSUM=LAMBDA(
     matrix; 
-    MMULT(
+    NACHZEILE(
         matrix; 
-        VREPEAT(1; SPALTEN(matrix))
+        LAMBDA(
+            zeile; 
+            SUMME(zeile)
+        )
     )
 );;
