@@ -35,7 +35,7 @@ WILCOXON.TEST = LAMBDA(
                         "g"; 0.5;
                     );
                 ZVAL; (z_value - correction_value)/SIGMA;
-                PVAL; (1 + (alternative = "t")) * STAT.CORRECT.PVALUE(NORM.VERT(ZVAL; 0; 1; WAHR));
+                PVAL; STAT.CORRECT.PVALUE(NORM.VERT(ZVAL; 0; 1; WAHR));
 
                 VSTAPELN(
                     HSTAPELN("Statistik"; "Z-Wert"; "p-Wert"; "Alternative");
