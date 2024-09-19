@@ -1,10 +1,7 @@
 GROUP.SUM=LAMBDA(
     values; groups;
-    MAP( 
-        EINDEUTIG(groups); 
-        LAMBDA(
-            name;
-            SUMME(FILTER(values; groups = name))
-        )
+    SPALTENWAHL(
+        GRUPPIERENNACH(groups; values; SUMME);
+        2
     )
 );;

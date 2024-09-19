@@ -1,10 +1,7 @@
 GROUP.MEDIAN=LAMBDA(
     values; groups;
-    MAP( 
-        EINDEUTIG(groups); 
-        LAMBDA(
-            name;
-            MEDIAN(FILTER(values; groups = name))
-        )
+    SPALTENWAHL(
+        GRUPPIERENNACH(groups; values; MEDIAN);
+        2
     )
 );;

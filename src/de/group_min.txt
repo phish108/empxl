@@ -1,10 +1,7 @@
 GROUP.MIN=LAMBDA(
     values; groups;
-    MAP( 
-        EINDEUTIG(groups); 
-        LAMBDA(
-            name;
-            MIN(FILTER(values; groups = name))
-        )
+    SPALTENWAHL(
+        GRUPPIERENNACH(groups; values; MIN);
+        2
     )
 );;

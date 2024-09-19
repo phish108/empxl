@@ -1,10 +1,7 @@
 GROUP.MAD=LAMBDA(
     values; groups;
-    MAP( 
-        EINDEUTIG(groups); 
-        LAMBDA(
-            name;
-            STAT.MAD(FILTER(values; groups = name))
-        )
+    SPALTENWAHL(
+        GRUPPIERENNACH(groups; values; STAT.MAD);
+        2
     )
 );;

@@ -1,10 +1,7 @@
 GROUP.SD=LAMBDA(
     values; groups;
-    MAP( 
-        EINDEUTIG(groups); 
-        LAMBDA(
-            name;
-            STABW.S(FILTER(values; groups = name))
-        )
+    SPALTENWAHL(
+        GRUPPIERENNACH(groups; values; STABW.S);
+        2
     )
 );;

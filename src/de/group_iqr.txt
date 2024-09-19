@@ -1,10 +1,7 @@
 GROUP.IQR=LAMBDA(
     values; groups;
-    MAP( 
-        EINDEUTIG(groups); 
-        LAMBDA(
-            name;
-            STAT.IQR(FILTER(values; groups = name))
-        )
+    SPALTENWAHL(
+        GRUPPIERENNACH(groups; values; STAT.IQR);
+        2
     )
 );;

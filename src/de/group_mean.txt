@@ -1,10 +1,7 @@
 GROUP.MEAN=LAMBDA(
     values; groups;
-    MAP( 
-        EINDEUTIG(groups); 
-        LAMBDA(
-            name;
-            MITTELWERT(FILTER(values; groups = name))
-        )
+    SPALTENWAHL(
+        GRUPPIERENNACH(groups; values; MITTELWERT);
+        2
     )
 );;
