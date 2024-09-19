@@ -1,7 +1,7 @@
 GROUP.MIN=LAMBDA(
     values; groups;
     SPALTENWAHL(
-        GRUPPIERENNACH(groups; values; MIN);
+        GRUPPIERENNACH(groups; values; MIN;;0);
         2
     )
 );;

@@ -1,7 +1,7 @@
 GROUP.MEAN=LAMBDA(
     values; groups;
     SPALTENWAHL(
-        GRUPPIERENNACH(groups; values; MITTELWERT);
+        GRUPPIERENNACH(groups; values; MITTELWERT;;0);
         2
     )
 );;

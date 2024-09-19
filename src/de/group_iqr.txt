@@ -1,7 +1,7 @@
 GROUP.IQR=LAMBDA(
     values; groups;
     SPALTENWAHL(
-        GRUPPIERENNACH(groups; values; STAT.IQR);
+        GRUPPIERENNACH(groups; values; STAT.IQR;;0);
         2
     )
 );;

@@ -1,7 +1,7 @@
 GROUP.SUM=LAMBDA(
     values; groups;
     SPALTENWAHL(
-        GRUPPIERENNACH(groups; values; SUMME);
+        GRUPPIERENNACH(groups; values; SUMME;;0);
         2
     )
 );;

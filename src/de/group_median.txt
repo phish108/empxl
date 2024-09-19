@@ -1,7 +1,7 @@
 GROUP.MEDIAN=LAMBDA(
     values; groups;
     SPALTENWAHL(
-        GRUPPIERENNACH(groups; values; MEDIAN);
+        GRUPPIERENNACH(groups; values; MEDIAN;;0);
         2
     )
 );;

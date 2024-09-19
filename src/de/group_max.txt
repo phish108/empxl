@@ -1,7 +1,7 @@
 GROUP.MAX=LAMBDA(
     values; groups;
     SPALTENWAHL(
-        GRUPPIERENNACH(groups; values; MAX);
+        GRUPPIERENNACH(groups; values; MAX;;0);
         2
     )
 );;

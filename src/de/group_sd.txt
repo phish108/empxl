@@ -1,7 +1,7 @@
 GROUP.SD=LAMBDA(
     values; groups;
     SPALTENWAHL(
-        GRUPPIERENNACH(groups; values; STABW.S);
+        GRUPPIERENNACH(groups; values; STABW.S;;0);
         2
     )
 );;
