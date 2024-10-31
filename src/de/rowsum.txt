@@ -2,9 +2,6 @@ ROWSUM=LAMBDA(
     matrix; 
     NACHZEILE(
         matrix; 
-        LAMBDA(
-            zeile; 
-            SUMME(zeile)
-        )
+        SUMME
     )
 );;

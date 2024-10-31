@@ -2,9 +2,6 @@ COLSUM=LAMBDA(
     matrix; 
     NACHSPALTE(
         matrix; 
-        LAMBDA(
-            spalte; 
-            SUMME(spalte)
-        )
+        SUMME
     )
 );;
