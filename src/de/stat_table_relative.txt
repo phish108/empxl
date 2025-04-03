@@ -1,16 +1,10 @@
 STAT.TABLE.RELATIVE = LAMBDA(
     aval; [bval_or_heading]; [heading];
     LET(
-        mdim_a; Zeilen(aval) - Spalten(aval);
-        aval; wenn(mdim_a > 0; zuspalte(aval); zuzeile(aval));
-
-        n_aval; ANZAHL2(aval);
-        id_aval; EINDEUTIG(aval);
-
         b_p1; WENNS(
             WURDEAUSGELASSEN(bval_or_heading); 0; 
             ANZAHL2(bval_or_heading) = 1; 1;
-            ANZAHL2(bval_or_heading) = n_aval; 2;
+            ANZAHL2(bval_or_heading) = Anzahl2(aval); 2;
             WAHR; 0
         );
         heading; WENNS(
@@ -18,35 +12,26 @@ STAT.TABLE.RELATIVE = LAMBDA(
             WURDEAUSGELASSEN(heading); 0;
             WAHR; n(heading)
         ) <> 0;
-
-        bval; bval_or_heading; 
-
-        WENN(
+        tab; wenn(
+            b_p1 = 2;
+            STAT.TABLE(aval; bval_or_heading);
+            STAT.TABLE(aval)
+        );
+        totals; summe(tab);
+        results; tab/totals;
+        id_aval; EINDEUTIG(aval);
+        id_bval; WENN(b_p1 = 2; mtrans(EINDEUTIG(bval_or_heading)); #NV);
+        wenn(
+            heading;
+            wenn(
             b_p1 = 2; 
-            LET(
-                bval; wenn(mdim_a > 0; zuspalte(bval); zuzeile(bval));
-                id_bval; MTRANS(EINDEUTIG(bval));
-                results; MMULT(
-                    1*(id_aval = MTRANS(aval));
-                    1*(id_bval = bval)
-                ) / n_aval;
-                WENN(
-                    heading; 
-                    VSTAPELN(
-                        HSTAPELN(""; id_bval); 
-                        HSTAPELN(id_aval; results)
-                    ); 
-                    results
-                )
+            VSTAPELN(
+                HSTAPELN(""; id_bval);
+                HSTAPELN(id_aval; results)
             );
-            LET(
-                results; MAP(id_aval; LAMBDA(n; ANZAHL2(filter(aval; aval = n))))/n_aval; 
-                WENNS(
-                    UND(heading; mdim_a > 0); HSTAPELN(id_aval; results);
-                    heading; VSTAPELN(id_aval; results);
-                    WAHR; results
-                )
-            )
+            HSTAPELN(id_aval; results)
+            );
+            results
         )
     )
 );;
