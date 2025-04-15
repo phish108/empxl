@@ -8,7 +8,7 @@ CORR.KENDAL = LAMBDA(
         tr_sign; STAT.SIGN(x_i - x_j) * STAT.SIGN(y_i - y_j) * triangle;
         n_c; SUMME(1 * (tr_sign > 0));
         n_d; SUMME(1 * (tr_sign < 0));
-        m_k; MIN(EINDEUTIG(x_i); EINDEUTIG(y_i));
+        m_k; MIN(ANZAHL(EINDEUTIG(x_i)); ANZAHL(EINDEUTIG(y_i)));
         WENN(
             s_n = ANZAHL(y_i); 
             (n_c - n_d) * 2 / (s_n ^ 2 * ((m_k - 1)/m_k)); 
