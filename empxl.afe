@@ -1,7 +1,7 @@
 
 COLSUM=LAMBDA(matrix;NACHSPALTE(matrix;SUMME));;
 CORR.CRAMER=LAMBDA(x_i;y_i;LET(n_i;STAT.TABLE(x_i);n_j;STAT.TABLE(y_i);div;MIN(ANZAHL(n_i);ANZAHL(n_j));n;SUMME(n_j);x_base;n_i*MTRANS(n_j)/n;n_ij;STAT.TABLE(x_i;y_i);WURZEL((SUMME((n_ij-x_base)^2/x_base))/(n*(div-1)))));;
-CORR.KENDAL=LAMBDA(x_i;y_i;LET(s_n;ANZAHL(x_i);s_idx;SEQUENZ(1;s_n);x_j;INDEX(x_i;s_idx);y_j;INDEX(y_i;s_idx);WENN(s_n=ANZAHL(y_i);SUMME(STAT.SIGN(x_i-x_j)*STAT.SIGN(y_i-y_j)*MTRIANGLE(s_n;WAHR;WAHR))/KOMBINATIONEN(s_n;2);#WERT!)));;
+CORR.KENDAL=LAMBDA(x_i;y_i;LET(s_n;ANZAHL(x_i);x_j;MTRANS(x_i);y_j;MTRANS(y_i);triangle;MTRIANGLE(s_n;WAHR;WAHR);tr_sign;STAT.SIGN(x_i-x_j)*STAT.SIGN(y_i-y_j)*triangle;n_c;SUMME(1*(tr_sign>0));n_d;SUMME(1*(tr_sign<0));m_k;MIN(ANZAHL(EINDEUTIG(x_i));ANZAHL(EINDEUTIG(y_i)));WENN(s_n=ANZAHL(y_i);(n_c-n_d)*2/(s_n^2*((m_k-1)/m_k));#WERT!)));;
 CORR.PEARSON=LAMBDA(x_i;y_i;KORREL(x_i;y_i));;
 CORR.SPEARMAN=LAMBDA(left;right;KORREL(RANG.MITTELW(left;left);RANG.MITTELW(right;right)));;
 CUMSUM=LAMBDA(vector;SCAN(0;vector;LAMBDA(accu;value;accu+value)));;
