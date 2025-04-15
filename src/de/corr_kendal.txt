@@ -2,12 +2,16 @@ CORR.KENDAL = LAMBDA(
     x_i; y_i;
     LET(
         s_n; ANZAHL(x_i);
-        s_idx; SEQUENZ(1;s_n);
-        x_j; INDEX(x_i; s_idx);
-        y_j; INDEX(y_i; s_idx);
+        x_j; MTRANS(x_i);
+        y_j; MTRANS(y_i);
+        triangle; MTRIANGLE(s_n; WAHR; WAHR);
+        tr_sign; STAT.SIGN(x_i - x_j) * STAT.SIGN(y_i - y_j) * triangle;
+        n_c; SUMME(1 * (tr_sign > 0));
+        n_d; SUMME(1 * (tr_sign < 0));
+        m_k; MIN(EINDEUTIG(x_i); EINDEUTIG(y_i));
         WENN(
             s_n = ANZAHL(y_i); 
-            SUMME(STAT.SIGN(x_i - x_j) * STAT.SIGN(y_i - y_j) * MTRIANGLE(s_n; WAHR; WAHR))/ KOMBINATIONEN(s_n; 2); 
+            (n_c - n_d) * 2 / (s_n ^ 2 * ((m_k - 1)/m_k)); 
             #WERT!
         )
     )
