@@ -6,7 +6,7 @@ CORR.PEARSON=LAMBDA(x_i;y_i;KORREL(x_i;y_i));;
 CORR.SPEARMAN=LAMBDA(left;right;KORREL(RANG.MITTELW(left;left);RANG.MITTELW(right;right)));;
 CUMSUM=LAMBDA(vector;SCAN(0;vector;LAMBDA(accu;value;accu+value)));;
 DUMMY.CODING=LAMBDA(variable;[header];LET(variable;FILTER(variable;NICHT(ISTFEHLER(variable)));k_names;MTRANS(EINDEUTIG(variable));k_ref;SPALTENWAHL(k_names;SEQUENZ(1;ANZAHL2(k_names)-1));codes;1*(variable=k_ref);wenn(ODER(WURDEAUSGELASSEN(header);nicht(header));codes;vstapeln(k_ref;codes))));;
-GROUP.COUNT=LAMBDA(groups;SPALTENWAHL(GRUPPIERENNACH(groups;values;ANZAHL2;;0);2));;
+GROUP.COUNT=LAMBDA(groups;SPALTENWAHL(GRUPPIERENNACH(groups;groups;ANZAHL2;;0);2));;
 GROUP.IQR=LAMBDA(values;groups;SPALTENWAHL(GRUPPIERENNACH(groups;values;STAT.IQR;;0);2));;
 GROUP.MAD=LAMBDA(values;groups;SPALTENWAHL(GRUPPIERENNACH(groups;values;STAT.MAD;;0);2));;
 GROUP.MAX=LAMBDA(values;groups;SPALTENWAHL(GRUPPIERENNACH(groups;values;MAX;;0);2));;

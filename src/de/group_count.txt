@@ -1,7 +1,7 @@
 GROUP.COUNT = LAMBDA(
     groups;
     SPALTENWAHL(
-        GRUPPIERENNACH(groups; values; ANZAHL2;;0);
+        GRUPPIERENNACH(groups; groups; ANZAHL2;;0);
         2
     )
 );; 
