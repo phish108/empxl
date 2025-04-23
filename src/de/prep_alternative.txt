@@ -2,8 +2,8 @@ PREP.ALTERNATIVE = LAMBDA(
     alt;
     XVERWEIS(
         LINKS(KLEIN(alt);1); 
-        {"t"; "g"; "l"; "r"; "k"; "u"; "b"}; 
-        {"t"; "g"; "l"; "g"; "l"; "t"; "t"}; 
+        {"t"; "g"; "l"; "r"; "k"; "u"; "b"; "<"; ">"}; 
+        {"t"; "g"; "l"; "g"; "l"; "t"; "t"; "l"; "g"}; 
         #WERT!
     ) 
 );;
