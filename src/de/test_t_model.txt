@@ -17,7 +17,18 @@ T.TEST.S = LAMBDA(
         mw_2; MITTELWERT(FILTER(p_values; p_groups = g_2));
         
         // The t-Test function already adjusts the p-value to two sided hypotheses.
-        WENN(ODER(UND(altO; mw_1 > mw_2); UND(alternative = "l"; mw_1 < mw_2)); 1 - p_v; p_v)
+        HSTAPELN(
+            WENN(ODER(UND(altO; mw_1 < mw_2); UND(alternative = "l"; mw_1 > mw_2)); 1 - p_v; p_v);
+            TEXTVERKETTEN(
+                            ersterwert(
+                                alternative; 
+                                "t"; "<>"; 
+                                "l"; "<"; 
+                                "g"; ">"
+                            );;
+                            ab_names
+                        )
+        )
     )
 );;
 
