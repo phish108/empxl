@@ -7,11 +7,14 @@ CORR.PEARSON.TEST = LAMBDA(
     x_i; y_i; [headers];
     LET(
         c_pearson; KORREL(x_i; y_i);
-        z_value; WENNFEHLER(ARCTANHYP(c_pearson); 1000000);
+        z_value; WENNFEHLER(
+            ARCTANHYP(c_pearson); 
+            1000000
+        );
         p_v; NORM.VERT(z_value; 0; 1; WAHR); 
         p_value; 2 * wenn(p_v > .5; 1 - p_v; p_v);
         // Compute results
-        results; HSTAPELN(z_value; p_value));
+        results; HSTAPELN(z_value; p_value);
         WENN(
             ODER(WURDEAUSGELASSEN(headers); NICHT(headers));
             results;
