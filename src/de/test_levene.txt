@@ -1,0 +1,32 @@
+// Levene's test is a ANOVA on the reresiduals on the group means (or more generic the group medians)
+
+LEVENE.TEST = LAMBDA(
+    x_i; y_i; [headers];
+    LET(
+        // m_all; STAT.MEDIAN(x_i);
+        m_grp; STAT.GROUP.MEDIAN(x_i; y_i);
+        l_grp; EINDEUTIG(y_i);
+        resi_grp; ABS(x_i - xverweis(y_i; l_grp; m_grp));
+
+        // FIXME: use the the actual formula for the test statistic rather than the shortcut via the ANOVA.
+        ANOVA.TEST(resi_grp; y_i; WAHR)
+    )
+);;
+
+// The posthoc test for levene's test is a pairwise t-test on the group residuals. This approach is 
+// appropriate as the residuals are computed the same way as in the LEVENE test.
+// ALternatively, one can use the pairwise f-test on the raw data. However, this computes the variance instead of the
+// MAD for the residuals.
+
+LEVENE.POSTHOC.TEST = LAMBDA(
+    x_i; y_i; [adjustment];
+    LET(
+        m_grp; STAT.GROUP.MEDIAN(x_i; y_i);
+        l_grp; EINDEUTIG(y_i);
+        resi_grp; ABS(x_i - xverweis(y_i; l_grp; m_grp));
+
+        adj_t; wenn(WURDEAUSGELASSEN(adjustment); "bonferroni"; adjustment);
+        // pairwise t-test on the group residuals
+        PAIRWISE.T.TEST(resi_grp; y_i, adj_t)          
+    )
+);;
