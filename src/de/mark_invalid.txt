@@ -1,0 +1,18 @@
+MARK.INVALID =  LAMBDA(
+    vectors; invalid_values;
+    MAP(
+        vectors; 
+        LAMBDA(
+            v_i;
+            wenn(
+                wennfehler(
+                    XVERGLEICH(
+                        v_i; invalid_values; 0
+                    ); 
+                0);
+                #NV;
+                v_i
+            )
+        )
+    )
+);; 

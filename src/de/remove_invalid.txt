@@ -1,8 +1,9 @@
 REMOVE.INVALID=LAMBDA(
-    vectors;
+    vectors; [extra_values];
     LET(
+        v_iv; wenn(WURDEAUSGELASSEN(extra_values); vectors; MARK.INVALID(vectors; extra_values));
         invalid; NACHZEILE(
-            vectors;
+            v_iv;
             LAMBDA(
                 zeile;
                 ODER(ISTFEHLER(zeile))
