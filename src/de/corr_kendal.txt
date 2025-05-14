@@ -62,6 +62,6 @@ CORR.KENDAL.TEST = LAMBDA(
                 z_b; 
                 p_value
             )
-        );
+        )
     )
 );;
