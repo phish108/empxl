@@ -15,8 +15,8 @@ CORR.CRAMER = LAMBDA(
 CORR.CRAMER.TEST = LAMBDA(
     x_i; y_i; [headers];
     LET(
-        r_value = CORR.CRAMER(x_i; y_i);
-        p_value = CHIQU.TEST.S(x_i; y_i);
+        r_value; CORR.CRAMER(x_i; y_i);
+        p_value; CHIQU.TEST.S(x_i; y_i);
         results; HSTAPELN(r_value; p_value);
         WENN(
             ODER(WURDEAUSGELASSEN(headers); NICHT(headers));
