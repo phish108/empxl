@@ -4,7 +4,7 @@ LEVENE.TEST = LAMBDA(
     x_i; y_i; [headers];
     LET(
         // m_all; STAT.MEDIAN(x_i);
-        m_grp; STAT.GROUP.MEDIAN(x_i; y_i);
+        m_grp; GROUP.MEDIAN(x_i; y_i);
         l_grp; EINDEUTIG(y_i);
         resi_grp; ABS(x_i - xverweis(y_i; l_grp; m_grp));
 
@@ -21,12 +21,12 @@ LEVENE.TEST = LAMBDA(
 LEVENE.POSTHOC.TEST = LAMBDA(
     x_i; y_i; [adjustment];
     LET(
-        m_grp; STAT.GROUP.MEDIAN(x_i; y_i);
+        m_grp; GROUP.MEDIAN(x_i; y_i);
         l_grp; EINDEUTIG(y_i);
-        resi_grp; ABS(x_i - xverweis(y_i; l_grp; m_grp));
+        resi_grp; ABS(x_i - XVERWEIS(y_i; l_grp; m_grp));
 
         adj_t; wenn(WURDEAUSGELASSEN(adjustment); "bonferroni"; adjustment);
         // pairwise t-test on the group residuals
-        PAIRWISE.T.TEST(resi_grp; y_i, adj_t)          
+        PAIRWISE.T.TEST(resi_grp; y_i; adj_t)          
     )
 );;
