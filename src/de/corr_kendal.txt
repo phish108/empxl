@@ -53,7 +53,7 @@ CORR.KENDAL.TEST = LAMBDA(
 
         VSTAPELN( 
             HSTAPELN(
-                "r"; 
+                "tau"; 
                 "z"; 
                 "p"
             );
