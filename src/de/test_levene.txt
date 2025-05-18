@@ -5,28 +5,23 @@ LEVENE.TEST = LAMBDA(
     LET(
         // m_all; STAT.MEDIAN(x_i);
         m_grp; GROUP.MEDIAN(x_i; y_i);
+        mn_grp; GROUP.MEAN(x_i; y_i);
+        n_grp; GROUP.COUNT(y_i);
         l_grp; EINDEUTIG(y_i);
-        resi_grp; ABS(x_i - xverweis(y_i; l_grp; m_grp));
-
-        // FIXME: use the the actual formula for the test statistic rather than the shortcut via the ANOVA.
-        ANOVA.TEST(resi_grp; y_i; WAHR)
+        resi_grp; (x_i - xverweis(y_i; l_grp; m_grp))^2;
+        m_all; MITTELWERT(x_i);
+        n_all; SUMME(n_grp);
+        n_k; ANZAHL2(l_grp);
+        W_val; (n_all - n_k) / (n_k - 1) * (SUMME(n_grp * (mn_grp - m_all)^2)/ SUMME(resi_grp));
+        p_val; F.VERT(W_val; n_k - 1; n_all - n_k; WAHR)/2;
+        results; HSTAPELN(W_val;n_k - 1; n_all - n_k; p_val);
+        wenn(oder(WURDEAUSGELASSEN(headers); nicht(headers));
+            results;
+            VSTAPELN(
+                HSTAPELN("W"; "df_1"; "df_2"; "p");
+                results
+            )
+        )
     )
 );;
 
-// The posthoc test for levene's test is a pairwise t-test on the group residuals. This approach is 
-// appropriate as the residuals are computed the same way as in the LEVENE test.
-// ALternatively, one can use the pairwise f-test on the raw data. However, this computes the variance instead of the
-// MAD for the residuals.
-
-LEVENE.POSTHOC.TEST = LAMBDA(
-    x_i; y_i; [adjustment];
-    LET(
-        m_grp; GROUP.MEDIAN(x_i; y_i);
-        l_grp; EINDEUTIG(y_i);
-        resi_grp; ABS(x_i - XVERWEIS(y_i; l_grp; m_grp));
-
-        adj_t; wenn(WURDEAUSGELASSEN(adjustment); "bonferroni"; adjustment);
-        // pairwise t-test on the group residuals
-        PAIRWISE.T.TEST(resi_grp; y_i; adj_t)          
-    )
-);;

@@ -12,7 +12,7 @@ ANOVA.TEST = LAMBDA(
         t_SSB; SUMME(n_j * (mu_j - mu_all)^2);
         t_SSE; SUMME((m_groups * values - m_groups * MTRANS(mu_j))^2);
         F_value; (t_SSB / df_1) / (t_SSE / df_2);
-        p_value; F.VERT.RE(F_value; df_1; df_2);
+        p_value; F.VERT(F_value; df_1; df_2; WAHR);
         results; HSTAPELN(F_value; df_1; df_2; p_value);
         wenn(oder(WURDEAUSGELASSEN(headers); nicht(headers));
             results;
