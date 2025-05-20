@@ -46,10 +46,10 @@ STAT.DESCRIBE = LAMBDA(
             )
         ); colids + 1);
 
-        WENN(
-            WURDEAUSGELASSEN(names);
-            HSTAPELN(colids; vals);
-            HSTAPELN(mtrans(names); vals)
+        WENNS(
+            WURDEAUSGELASSEN(names); HSTAPELN(colids; vals);
+            ZEILEN(names) > 1; HSTAPELN(names; vals);
+            WAHR; HSTAPELN(mtrans(names); vals)
         )
     )
 );;
