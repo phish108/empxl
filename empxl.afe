@@ -25,6 +25,7 @@ MTRACE=LAMBDA(matrix;WENN(ZEILEN(matrix)=SPALTEN(matrix);LET(index;SEQUENZ(ZEILE
 MTRIANGLE=LAMBDA(size;[p_lower];[p_strict];LET(b_lower;WENN(WURDEAUSGELASSEN(p_lower);WAHR;p_lower);b_strict;WENN(WURDEAUSGELASSEN(p_strict);FALSCH;p_strict);WENN(UND(ANZAHL(size)=1;ANZAHL2(b_lower)=1;ANZAHL2(b_strict)=1);LET(vector;SEQUENZ(size);tvector;MTRANS(vector);1*WENNS(UND(b_lower;b_strict);vector>tvector;b_lower;vector>=tvector;b_strict;vector<tvector;WAHR;vector<=tvector));#WERT!)));;
 PQ.RENAME.HELPER=LAMBDA(names;labels;TEXTVERKETTEN(",";;NACHZEILE(MAP(HSTAPELN(labels;names);LAMBDA(string;""""&string&""""));LAMBDA(row;"{"&TEXTVERKETTEN(",";;row)&"}"))));;
 PREP.ALTERNATIVE=LAMBDA(alt;XVERWEIS(LINKS(KLEIN(alt);1);{"t";"g";"l";"r";"k";"u";"b";"<";">"};{"t";"g";"l";"g";"l";"t";"t";"l";"g"};#WERT!));;
+QQ.DATA=LAMBDA(Values;[headers];LET(with_headers;WENN(WURDEAUSGELASSEN(with_headers);WAHR;with_headers);m_w;MITTELWERT(Values);m_s;STABW.S(Values);rank;(RANG.MITTELW(Values;Values;1)-0.5)/ANZAHL(Values);results;HSTAPELN(NORM.S.INV(rank);(Values-m_w)/m_s);WENN(with_headers;VSTAPELN(MTRANS({"Theoretisch";"Gemessen"});results);results)));;
 QUICK.CODE=LAMBDA(variable;order;XVERGLEICH(variable;order));;
 RANDOM.NORM=LAMBDA(p_n;[mean];[sdev];LET(mean;WENN(WURDEAUSGELASSEN(mean);0;mean);sdev;WENN(WURDEAUSGELASSEN(sdev);1;sdev);WURZEL(-2*LN(ZUFALLSMATRIX(p_n)))+COS(2*PI()*ZUFALLSMATRIX(p_n))*sdev+mean));;
 REGRESSION.RESIDUALS=LAMBDA(A_VAR;UA_VAR;KOEF;LET(KOEFMAT;HSTAPELN(SEQUENZ(ZEILEN(A_VAR);1;1;0);UA_VAR);ESTIMATES;MMULT(KOEFMAT;KOEF);ESTIMATES-A_VAR));;
