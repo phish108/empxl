@@ -1,0 +1,21 @@
+QQ.DATA = LAMBDA(
+    Values; [headers];
+    LET(
+        with_headers; WENN(WURDEAUSGELASSEN(with_headers); WAHR; with_headers);  
+        m_w; MITTELWERT(Values);
+        m_s; STABW.S(Values);
+        rank; (RANG.MITTELW(Values; Values; 1) - 0.5)/ANZAHL(Values);
+        results; HSTAPELN(
+            NORM.S.INV(rank);
+            (Values - m_w) / m_s
+        );
+        WENN(
+            with_headers;
+            VSTAPELN(
+                MTRANS({"Theoretisch"; "Gemessen"});
+                results
+            );
+            results
+        )
+    )
+);;
