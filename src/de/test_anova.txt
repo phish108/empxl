@@ -8,7 +8,7 @@ ANOVA.TEST = LAMBDA(
         df_2; N_all - group_k;
         mu_all; MITTELWERT(values);
         mu_j; GROUP.MEAN(values; groups);
-        m_groups; 1*(groups = MTRANS(EINDEUTIG(groups)));
+        m_groups; 1*(groups = MTRANS(GROUP.LABELS(groups)));
         t_SSB; SUMME(n_j * (mu_j - mu_all)^2);
         t_SSE; SUMME((m_groups * values - m_groups * MTRANS(mu_j))^2);
         F_value; (t_SSB / df_1) / (t_SSE / df_2);

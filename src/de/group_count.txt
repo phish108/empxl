@@ -5,3 +5,11 @@ GROUP.COUNT = LAMBDA(
         2
     )
 );; 
+
+GROUP.LABELS = LAMBDA(
+    groups;
+    SPALTENWAHL(
+        GRUPPIERENNACH(groups; groups; ANZAHL2;;0);
+        1
+    )
+);;
