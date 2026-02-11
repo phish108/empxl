@@ -1,0 +1,23 @@
+
+REGRESSION.STATS=LAMBDA(
+    A_VAR; UA_VAR;
+    LET(
+        R_KOEF; RGP(A_VAR; UA_VAR; WAHR; WAHR);
+        Func_koef; ZEILENWAHL(R_KOEF; 1);
+        se_koef; ZEILENWAHL(R_KOEF; 2);
+        t_Values; Func_koef / se_koef;
+        f_df; zeilenwahl(SPALTENWAHL(R_KOEF;2); 4);
+        p_Values; T.VERT.2S(ABS(t_Values); f_df);
+        HSTAPELN(
+            VSTAPELN("Koef."; "se"; "t"; "p(|t|)"; "r2/rse"; "F Stat."; "SSres");
+            VSTAPELN(
+                VREVERSE(Func_koef);
+                VREVERSE(se_koef); 
+                VREVERSE(t_Values);
+                VREVERSE(p_Values);
+                ZEILENWAHL(R_KOEF; 3; 4; 5)
+            )
+        )
+    )
+);;
+
