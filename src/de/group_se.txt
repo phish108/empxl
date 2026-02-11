@@ -1,0 +1,7 @@
+GROUP.SE=LAMBDA(
+    values; groups;
+    SPALTENWAHL(
+        GRUPPIERENNACH(groups; values; STAT.SE;;0);
+        2
+    )
+);;
