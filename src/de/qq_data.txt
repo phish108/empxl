@@ -1,7 +1,7 @@
 QQ.DATA = LAMBDA(
-    Values; [headers];
+    Values; [with_headers];
     LET(
-        with_headers; WENN(WURDEAUSGELASSEN(with_headers); WAHR; with_headers);  
+        with_headers; ODER(WURDEAUSGELASSEN(with_headers); with_headers);  
         m_w; MITTELWERT(Values);
         m_s; STABW.S(Values);
         rank; (RANG.MITTELW(Values; Values; 1) - 0.5)/ANZAHL(Values);

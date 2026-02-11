@@ -14,12 +14,13 @@ CORR.CRAMER = LAMBDA(
 // The p-value test is CHIQU.TEST.S()
 CORR.CRAMER.TEST = LAMBDA(
     x_i; y_i; [headers];
+    headers; ODER(WURDEAUSGELASSEN(headers); NICHT(headers));
     LET(
         r_value; CORR.CRAMER(x_i; y_i);
         p_value; CHIQU.TEST.S(x_i; y_i);
         results; HSTAPELN(r_value; p_value);
         WENN(
-            ODER(WURDEAUSGELASSEN(headers); NICHT(headers));
+            headers;
             results;
             VSTAPELN(
                 HSTAPELN("V"; "p");

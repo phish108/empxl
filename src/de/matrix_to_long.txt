@@ -1,8 +1,8 @@
 MATRIX_TO_LONG=LAMBDA(
     matrix;[p_headers]; [p_withnames];
     LET(
-        p_headers; WENN(
-            WURDEAUSGELASSEN(p_headers); WAHR; p_headers
+        p_headers; ODER(
+            WURDEAUSGELASSEN(p_headers); p_headers
         );
         p_withnames; WENN(WURDEAUSGELASSEN(p_withnames); {"name"; "value"}; p_withnames);
         b_headers; UND(SPALTEN(p_headers) = 1; ZEILEN(p_headers) = 1; p_headers);
