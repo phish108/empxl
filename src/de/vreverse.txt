@@ -1,0 +1,15 @@
+
+VREVERSE = LAMBDA(
+    vektor; 
+    LET(
+        v_length; VLENGTH(vektor);
+        v_pos; SEQUENZ(v_length;1;v_length;-1);
+        WENN(
+            SPALTEN(vektor) = v_length;
+            SPALTENWAHL(vektor; v_pos);
+            ZEILENWAHL(vektor; v_pos)
+        )
+    )
+);;
+
+VEKTOR.UMKEHREN = VREVERSE;;
