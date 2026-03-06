@@ -1,0 +1,12 @@
+RESIDUALS = LAMBDA(
+    MATRIX_OR_VAR; [VALUES];
+    LET(
+        REF_VALUES; WENN(wurdeausgelassen(VALUES); SPALTENWAHL(MATRIX_OR_VAR; 2); VALUES);
+        ESTIMATES; SPALTENWAHL(MATRIX_OR_VAR;1);
+        WENN( 
+            ZEILEN(REF_VALUES) <> ZEILEN(ESTIMATES);
+            #WERT!;
+            ESTIMATES - REF_VALUES
+        )
+    )
+);;
