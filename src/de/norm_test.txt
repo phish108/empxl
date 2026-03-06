@@ -1,0 +1,20 @@
+CHIQU.FUNC.TEST=LAMBDA(
+    Vals;
+    REFFUNCTION;
+    LET(
+        nVals; ANZAHL(Vals);
+        nGrps; AUFRUNDEN(nVals^0.4*2;0);
+        props; REFFUNCTION(Vals);
+        vGrp; GANZZAHL(nGrps*props + 1);
+        allgrps; sequenz(nGrps);
+        ogrps; GROUP.LABELS(vGrp);
+        vgrps; GROUP.COUNT(vGrp);
+        allvals; XVERWEIS(allgrps; ogrps; vgrps; 0);
+        CHIQU.TEST(allvals; VREPEAT(nVals/nGrps; nGrps))
+    )
+);;
+
+NORM.TEST=LAMBDA(
+    Vals;
+    CHIQU.FUNC.TEST(Vals; LAMBDA(tVals; NORM.VERT(tVals; MITTELWERT(tVals); STABW.S(tVals); WAHR)))
+);;
