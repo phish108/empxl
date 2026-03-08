@@ -1,20 +1,43 @@
 CHIQU.FUNC.TEST=LAMBDA(
     Vals;
+    params;
     REFFUNCTION;
     LET(
         nVals; ANZAHL(Vals);
         nGrps; AUFRUNDEN(nVals^0.4*2;0);
+        expV; nVals/nGrps;
+
+        // catch the edge case where the are a few distinct values (less than nGrps)
+        // In this case the number of groups leads to empty groups and the expected value is incorrect. 
+        uniqueVals; ANZAHL(EINDEUTIG(Vals));
+        nGrpsCalc; wenn(uniqueVals < (nGrps + expV); AUFRUNDEN(uniqueVals^0.4*2;0) ; nGrps);
+
+        expVCalc; nVals/nGrpsCalc;
         props; REFFUNCTION(Vals);
-        vGrp; GANZZAHL(nGrps*props + 1);
-        allgrps; sequenz(nGrps);
-        ogrps; GROUP.LABELS(vGrp);
-        vgrps; GROUP.COUNT(vGrp);
-        allvals; XVERWEIS(allgrps; ogrps; vgrps; 0);
-        CHIQU.TEST(allvals; VREPEAT(nVals/nGrps; nGrps))
+        vGrp; GANZZAHL(nGrpsCalc*props + 1);
+        allgrps; sequenz(nGrpsCalc);
+
+        cnts; GRUPPIERENNACH(vGrp; vGrp; ANZAHL;;0);
+        ogrps; spaltenwahl(cnts;1);
+        vgrps; spaltenwahl(cnts;2);
+
+        // Catch the edge case where only part of the distribution is present in the data. 
+        // check if the group labels are a sequence. In this case we have to adjust the group numers accordingly, 
+        // because parts of the distribution are missing. In this case we only test against the 
+        // part of the distribution that is present in the data.
+        // in this case the expected values are shifted into the existing groups
+        seqOgroups; UND(ANZAHL(ogrps)< nGrpsCalc; SEQUENZ(ANZAHL(ogrps);;min(ogrps))=ogrps);
+        allgrpsOG; WENN(seqOgroups; ogrps; allgrps);
+        nGrpsCalcOG; wenn(seqOgroups; ANZAHL(ogrps); nGrpsCalc);
+        expVCalcOG; nVals/nGrpsCalcOG;
+        
+        allvals; XVERWEIS(allgrpsOG; ogrps; vgrps; 0);
+        chiq; SUMME((allvals-expVCalcOG)^2/expVCalcOG);
+        hstapeln(CHIQU.vert.RE(chiq; nGrpsCalcOG-1-params); chiq; nGrpsCalcOG-params-1)
     )
 );;
 
 NORM.TEST=LAMBDA(
     Vals;
-    CHIQU.FUNC.TEST(Vals; LAMBDA(tVals; NORM.VERT(tVals; MITTELWERT(tVals); STABW.S(tVals); WAHR)))
+    CHIQU.FUNC.TEST(Vals; 2; LAMBDA(tVals; NORM.VERT(tVals; MITTELWERT(tVals); STABW.S(tVals); WAHR)))
 );;
