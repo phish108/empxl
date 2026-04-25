@@ -36,10 +36,12 @@ PAIRWISE.T.TEST = LAMBDA(
             KLEIN(adjustment) = "holm_sidak"; P.ADJ.HOLM_SIDAK(p_value_raw; k_all);
             WAHR; p_value_raw
         );
+        filter(
         hstapeln(
             g1_names; 
             g2_names; 
             wenn(p_star > 1; 1; p_star)
-        )
+        );
+        g1_names <> g2_names)
     )
 );;
