@@ -17,7 +17,8 @@ PAIRWISE.T.TEST = LAMBDA(
             LAMBDA(
                 a_v; b_v; 
                 T.TEST(
-                    filter(values; groups = a_v); filter(values; groups = b_v);
+                    filter(values; groups = a_v); 
+                    filter(values; groups = b_v);
                     2; 3
                 )
             )
