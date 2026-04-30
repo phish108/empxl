@@ -17,12 +17,13 @@ PAIRWISE.F.TEST = LAMBDA(
             LAMBDA(
                 a_v; b_v; 
                 F.TEST(
-                    filter(values; groups = a_v); 
-                    filter(values; groups = b_v)
+                    filter(values; (groups = a_v) + (groups = b_v)); 
+                    filter(groups; (groups = a_v) + (groups = b_v))
                 )
             )
         );
-        p_value_raw; wenn( p_values > 0.5; 1-p_values; p_values);
+        // p_value_raw; wenn( p_values > 0.5; 1-p_values; p_values);
+        p_value_raw; p_values;
         p_star;
         2 * WENNS(
             WURDEAUSGELASSEN(adjustment); P.ADJ.BONFERRONI(p_value_raw; k_all);
