@@ -225,27 +225,75 @@ GRUPPEN.MAD=LAMBDA(werte_vektor;gruppen_vektor; GROUP.MAD(werte_vektor; gruppen_
 GRUPPEN.IQA = LAMBDA(werte_vektor;gruppen_vektor; GROUP.IQR(werte_vektor; gruppen_vektor));;
 
 // Vektor und Matrix Information
-IST.VEKTOR=IS.VECTOR;;
-SIND.ALLE.GLEICH = IS.ALL.EQUAL;;
-IST.ALLE.GLEICH = IS.ALL.EQUAL;;
-VEKTOR.LÄNGE = VLENGTH;;
-MDIMENSION=MDIM;;
-RESIDUEN=RESIDUALS;;
+IST.VEKTOR=LAMBDA(vektor; IS.VECTOR(vektor));;
+SIND.ALLE.GLEICH=LAMBDA(vektor; IS.ALL.EQUAL(vektor));;
+IST.ALLE.GLEICH=LAMBDA(vektor; IS.ALL.EQUAL(vektor));;;;
+VEKTOR.LÄNGE=LAMBDA(vektor; VLENGTH(vektor));;;;
+RESIDUEN=LAMBDA(
+    vektor_oder_matrix; 
+    [referenz_vektor]; 
+    wenn(
+        wurdeausgelassen(referenzvektor);
+        RESIDUALS(vektor_oder_matrix);
+        RESIDUALS(vektor_oder_matrix; referenz_vektor)
+    )
+);;
 
 // Vektor und Matrix Funktionen
+MDIMENSION=LAMBDA(matrix; MDIM(matrix));;
 MSPUR=LAMBDA(matrix; MTRACE(matrix));;
 
 // Generatoren
-HWIEDERHOLEN=HREPEAT;;
-VWIEDERHOLEN=VREPEAT;;
-MDREIECK=MTRIANGLE;;
-ZUFALLSMATRIX.NORMAL=RANDOM.NORM;;
-SEQUENZ.INTERVALL=SEQUENCE.RANGE;;
+HWIEDERHOLEN=LAMBDA(wert; n_wiederholungen; HREPEAT(wert; n_wiederholungen));;
+VWIEDERHOLEN=LAMBDA(wert; n_wiederholungen; VREPEAT(wert; n_wiederholungen));;
+SEQUENZ.INTERVALL=LAMBDA(wert; [obere_grenze_oder_schrittweite]; [schrittweite];
+    wenns(
+        UND(WURDEAUSGELASSEN(obere_grenze_oder_schrittweite); WURDEAUSGELASSEN(schrittweite)); 
+        SEQUENCE.RANGE(n_werte);
+        WURDEAUSGELASSEN(obere_grenze_oder_schrittweite);
+        SEQUENCE.RANGE(n_werte;; schrittweite);
+        WURDEAUSGELASSEN(schrittweite);
+        SEQUENCE.RANGE(n_werte; obere_grenze_oder_schrittweitet);
+        WAHR;
+        SEQUENCE.RANGE(n_werte; obere_grenze_oder_schrittweite; schrittweite);
+    )
+);;
+
+MDREIECK=LAMBDA(grösse; [ist_unten]; [ohne_diagonale];
+    wenns(
+        UND(WURDEAUSGELASSEN(ist_unten); WURDEAUSGELASSEN(ohne_diagonale)); 
+        MTRIANGLE(grösse);
+        WURDEAUSGELASSEN(ist_unten);
+        MTRIANGLE(grösse;; ohne_diagonale);
+        WURDEAUSGELASSEN(ohne_diagonale);
+        MTRIANGLE(grösse;ist_unten);
+        WAHR;
+        MTRIANGLE(grösse;ist_unten; ohne_diagonale);
+    )
+);;
+ZUFALLSMATRIX.NORMAL=LAMBDA(n_werte; [soll_mittelwert]; [soll_standardabweichung]; 
+ wenns(
+        UND(WURDEAUSGELASSEN(soll_mittelwert); WURDEAUSGELASSEN(soll_standardabweichung)); 
+        RANDOM.NORM(n_werte);
+        WURDEAUSGELASSEN(soll_mittelwert);
+        RANDOM.NORM(n_werte;; soll_standardabweichung);
+        WURDEAUSGELASSEN(soll_standardabweichung);
+        RANDOM.NORM(n_werte;soll_mittelwert);
+        WAHR;
+        RANDOM.NORM(n_werte; soll_mittelwert; soll_standardabweichung);
+    )
+);;
 
 // Vektorselektoren
-TABELLEN.AUSWAHL=TABLE.SELECT;;
+TABELLEN.AUSWAHL=LAMBDA(
+    tabellen_name; 
+    spalten_namen; 
+    [mit_überschrift];
+    TABLE.SELECT(tabellen_name; spalten_namen; UND(NICHT(WURDEAUSGELASSEN(mit_überschrift); mit_überschrift)))   
+);;
 
 // Data Wrangling
+UNGÜLTIGE.MARKIEREN=MARK.INVALID;;
 UNGÜLTIGE.LÖSCHEN=REMOVE.INVALID;;
 ENTFERNE.FEHLER=REMOVE.INVALID;;
 SCHNELL.KODIEREN=QUICK.CODE;;
