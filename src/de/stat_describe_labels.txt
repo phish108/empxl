@@ -2,7 +2,7 @@ STAT.DESCRIBE.LABELS = LAMBDA(
     [type];
     LET(
         type; WENN(WURDEAUSGELASSEN(type); "m"; LINKS(KLEIN(type); 1));
-        labels_base; mtrans({"id"; "n"}); 
+        labels_base; mtrans({"id"; "n (total)"; "n (valid)"}); 
         labels_m; mtrans({"mean"; "stddev"; "stderr"});
         labels_o; mtrans({"min"; "median"; "max"; "IQR"; "mad"});
         WENN(

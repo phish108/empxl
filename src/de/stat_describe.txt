@@ -18,6 +18,7 @@ STAT.DESCRIBE = LAMBDA(
                 LET(
                     raw_values; spaltenwahl(data; colid);
                     values; filter(raw_values; istzahl(raw_values)); // drop errors, text and empty cells
+                    cnt_raw; ZEILEN(raw_values);
                     cnt_values; ANZAHL(values);
                     basic_stats; HSTAPELN(
                             MIN(values);
@@ -28,11 +29,12 @@ STAT.DESCRIBE = LAMBDA(
                         );
                     sdev; STABW.S(values);
 
-                    result; vstapeln(
+                    vstapeln(
                         lines; 
                         wenn(
                             type = "o";
                             HSTAPELN(
+                                cnt_raw;
                                 cnt_values;
                                 basic_stats
                             );
@@ -44,26 +46,25 @@ STAT.DESCRIBE = LAMBDA(
                                 basic_stats
                             )
                         )
-                    );
-                    wenn(
-                        ODER(
-                            WURDEAUSGELASSEN(with_labels); 
-                            nicht(with_labels)
-                        ); 
-                        result; 
-                        VSTAPELN(
-                            STAT.DESCRIBE.LABELS(type);
-                            result
-                        )
                     )
                 )
             )
         ); colids + 1);
-
-        WENNS(
+        full_results; WENNS(
             WURDEAUSGELASSEN(names); HSTAPELN(colids; vals);
             ZEILEN(names) > 1; HSTAPELN(names; vals);
             WAHR; HSTAPELN(mtrans(names); vals)
+        );
+        wenn(
+            ODER(
+                WURDEAUSGELASSEN(with_labels); 
+                nicht(with_labels)
+            ); 
+            full_results; 
+            VSTAPELN(
+                STAT.DESCRIBE.LABELS(type);
+                full_results
+            )
         )
     )
 );;
