@@ -47,7 +47,7 @@ STAT.DESCRIBE = LAMBDA(
                     );
                     wenn(
                         ODER(
-                            WURDEAUSGLASSEN(with_labels); 
+                            WURDEAUSGELASSEN(with_labels); 
                             nicht(with_labels)
                         ); 
                         result; 
