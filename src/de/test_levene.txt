@@ -2,12 +2,12 @@
 // This implementation is the same as R's implementation at https://github.com/cran/car/blob/master/R/leveneTest.R
 
 LEVENE.TEST = LAMBDA(
-    x_i; y_i; [headers];
+    dep_var; indep_var; [headers];
     LET(
-        grps; SORTIEREN(EINDEUTIG(y_i));
-        meds; GROUP.MEDIAN(x_i; y_i);
-        resp; ABS(x_i - XVERWEIS(y_i; grps; meds));
-        results; ANOVA.TEST(resp; y_i);
+        grps; SORTIEREN(EINDEUTIG(indep_var));
+        meds; GROUP.MEDIAN(dep_var; indep_var);
+        resp; ABS(dep_var - XVERWEIS(indep_var; grps; meds));
+        results; ANOVA.TEST(resp; indep_var);
         wenn(oder(WURDEAUSGELASSEN(headers); nicht(headers));
             results;
             VSTAPELN(

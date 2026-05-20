@@ -1,8 +1,8 @@
 PAIRWISE.F.TEST = LAMBDA(
-    values; groups; [adjustment];
+    dep_var; indep_var; [headers]; [adjustment];
     LET(
-        n_all; ANZAHL(values);
-        group_names; EINDEUTIG(groups);
+        n_all; ANZAHL(dep_var);
+        group_names; EINDEUTIG(indep_var);
         k_all; ANZAHL2(group_names);
         m_triang; MTRIANGLE(k_all;;1);
         group_id; SEQUENZ(k_all);
@@ -17,8 +17,8 @@ PAIRWISE.F.TEST = LAMBDA(
             LAMBDA(
                 a_v; b_v; 
                 F.TEST(
-                    filter(values; (groups = a_v) + (groups = b_v)); 
-                    filter(groups; (groups = a_v) + (groups = b_v))
+                    filter(dep_var; (indep_var = a_v) + (indep_var = b_v)); 
+                    filter(indep_var; (indep_var = a_v) + (indep_var = b_v))
                 )
             )
         );
@@ -36,13 +36,21 @@ PAIRWISE.F.TEST = LAMBDA(
             KLEIN(adjustment) = "holm_sidak"; P.ADJ.HOLM_SIDAK(p_value_raw; k_all);
             WAHR; p_value_raw
         );
-        FILTER(
+        result; FILTER(
             hstapeln(
                 g1_names; 
                 g2_names; 
                 wenn(p_star > 1; 1; p_star)
             );
             g1_names <> g2_names
+        );
+        wenn(
+            ODER(WURDEAUSGELASSEN(headers); NICHT(headers));
+            result;
+            VSTAPELN(
+                {"g1"; "g2"; "p"};
+                result
+            )
         )
     )
 );;

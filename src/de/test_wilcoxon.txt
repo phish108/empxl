@@ -1,20 +1,20 @@
 WILCOXON.TEST = LAMBDA( 
-    p_values; p_groups; [alternative]; [paired]; [correct]; 
+    dep_var; indep_var; [alternative]; [paired]; [correct]; 
     LET( 
         alternative; wenn(WURDEAUSGELASSEN(alternative); "t"; PREP.ALTERNATIVE(alternative));
         correct; wenn(WURDEAUSGELASSEN(correct); WAHR; correct);
         paired; WENN(WURDEAUSGELASSEN(paired); FALSCH; paired);
 
-        ab_names; EINDEUTIG(p_groups);
+        ab_names; EINDEUTIG(indep_var);
         ab_n; ANZAHL2(ab_names);
-        n_ab; GROUP.COUNT(p_groups);
+        n_ab; GROUP.COUNT(indep_var);
 
         wenn(
             UND(ab_n = 2; n_ab > 1; ODER(NICHT(paired); IS.ALL.EQUAL(n_ab))); 
             LET(
-                rank; RANG.MITTELW(p_values; p_values);
+                rank; RANG.MITTELW(dep_var; dep_var);
                 
-                STATISTIC; MIN(GROUP.SUM(rank; p_groups) - n_ab * (n_ab + 1)/2);
+                STATISTIC; MIN(GROUP.SUM(rank; indep_var) - n_ab * (n_ab + 1)/2);
                 
                 prod_ab; PRODUKT(n_ab);
                 sum_ab; SUMME(n_ab);

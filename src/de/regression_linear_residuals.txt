@@ -1,10 +1,10 @@
 REGRESSION.RESIDUALS=LAMBDA(
-    A_VAR; UA_VAR;
+    dep_var; indep_var;
     LET(
-        KOEF; VREVERSE(MTRANS(RGP(A_VAR;UA_VAR)));
-        KOEFMAT; HSTAPELN(SEQUENZ(ZEILEN(A_VAR);1;1;0); UA_VAR);
+        KOEF; VREVERSE(MTRANS(RGP(dep_var;indep_var)));
+        KOEFMAT; HSTAPELN(SEQUENZ(ZEILEN(dep_var);1;1;0); indep_var);
         ESTIMATES; MMULT(KOEFMAT; KOEF);
-        ESTIMATES - A_VAR
+        ESTIMATES - dep_var
     )
 );;
 

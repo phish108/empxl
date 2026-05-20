@@ -1,7 +1,7 @@
 CHIQU.TEST.S = LAMBDA(
-    x_i; y_i;[header];
+    dep_var; indep_var;[header];
     LET(
-        n_ij; STAT.TABLE(x_i; y_i);
+        n_ij; STAT.TABLE(dep_var; indep_var);
         WENN(
             WURDEAUSGELASSEN(header);
             CHIQU.TEST.X(n_ij; FALSCH);

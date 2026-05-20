@@ -1,15 +1,15 @@
 KRUSKAL_WALLIS.TEST = LAMBDA(
-    values; groups; [headers];
+    dep_var; indep_var; [headers];
     LET(
-        n_all; ANZAHL(values);
-        n_groups; ANZAHL2(EINDEUTIG(groups));
+        n_all; ANZAHL(dep_var);
+        n_groups; ANZAHL2(EINDEUTIG(indep_var));
         d_f; n_groups - 1;
-        n_h; GROUP.COUNT(groups);
-        ranks; RANG.MITTELW(values; values);
+        n_h; GROUP.COUNT(indep_var);
+        ranks; RANG.MITTELW(dep_var; dep_var);
         b_bindings; ANZAHL(EINDEUTIG(ranks)) < n_all;
         h_correction; -3 * (n_all + 1);
         h_factor; 12/ (n_groups * (n_groups + 1) - h_correction);
-        m_groups; 1*(groups = MTRANS(EINDEUTIG(groups)));
+        m_groups; 1*(indep_var = MTRANS(EINDEUTIG(indep_var)));
         H_core; h_factor * SUMME(
             COLSUM(m_groups * ranks)/ MTRANS(n_h)
         );

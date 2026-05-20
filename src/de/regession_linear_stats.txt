@@ -1,8 +1,8 @@
 
 REGRESSION.STATS=LAMBDA(
-    A_VAR; UA_VAR;
+    dep_var; indep_var;
     LET(
-        R_KOEF; RGP(A_VAR; UA_VAR; WAHR; WAHR);
+        R_KOEF; RGP(dep_var; indep_var; WAHR; WAHR);
         Func_koef; ZEILENWAHL(R_KOEF; 1);
         se_koef; ZEILENWAHL(R_KOEF; 2);
         t_Values; Func_koef / se_koef;

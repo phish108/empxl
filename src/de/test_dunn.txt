@@ -3,13 +3,13 @@
 // 15(1), 292-300.
 
 DUNN.TEST = LAMBDA(
-    values; groups; [adjustment]; 
+    dep_var; indep_var; [adjustment]; 
     LET(
-        ranks; RANG.MITTELW(values; values);
-        n_all; ANZAHL(values);
-        n_i; GROUP.COUNT(groups);
-        group_i; EINDEUTIG(groups);
-        ranksum_i; COLSUM(ranks*(groups = MTRANS(group_i))) / MTRANS(n_i);
+        ranks; RANG.MITTELW(dep_var; dep_var);
+        n_all; ANZAHL(dep_var);
+        n_i; GROUP.COUNT(indep_var);
+        group_i; EINDEUTIG(indep_var);
+        ranksum_i; COLSUM(ranks*(indep_var = MTRANS(group_i))) / MTRANS(n_i);
         sigma_correction; n_all*(n_all+1)/12;
         bind_count; GROUP.COUNT(ranks);
         bind_correction; SUMME(bind_count^3 - bind_count)/(12*(n_all-1));

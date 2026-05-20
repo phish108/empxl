@@ -1,10 +1,10 @@
 // See https://en.wikipedia.org/wiki/Pooled_variance
 STAT.POOLED.VARIANCE = LAMBDA(
-    values; groups;
+    dep_var; indep_var;
     LET(
-        n_i; STAT.TABLE(groups)-1;
+        n_i; STAT.TABLE(indep_var)-1;
         sum_n; SUMME(n_i);
-        s_i; GROUP.SD(values; groups)^2;
+        s_i; GROUP.SD(dep_var; indep_var)^2;
         SUMMENPRODUKT(n_i; s_i) / sum_n
     )
 );;
