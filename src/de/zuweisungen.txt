@@ -1,59 +1,228 @@
 // DESKTRIPTIVE STATISTIK
-STAT.DESKRIPTIV=STAT.DESCRIBE;;
-STAT.DESKRIPTIV.MERKMALE=STAT.DESCRIBE.NOMINAL;;
-STAT.DESKRIPTIV.FAKTORSTUFEN=STAT.DESCRIBE.NOMINAL;;
-STAT.DESKRIPTIV.NOMINAL=STAT.DESCRIBE.NOMINAL;;
-STAT.DESKRIPTIV.BESCHRIFTUNG=STAT.DESCRIBE.LABELS;;
+STAT.DESKRIPTIV=lambda(daten; [skalenniveau]; [namen]; [mit_üeberschrift]; 
+    LET(
+        type; WENN(wurdeausgelassen(skalenniveau); "m"; skalenniveau);
+        labels; WENN(WURDEAUSGELASSEN(mit_überschrift); FALSCH; mit_überschrift);
+        WENN(WURDEAUSGELASSEN(namen); 
+            STAT.DESCRIBE(daten; type; ; mit_üeberschrift);
+            STAT.DESCRIBE(daten; type; namen; mit_üeberschrift)
+        )
+    )
+);;
 
-STAT.TABELLE = STAT.TABLE;;
-STAT.TABELLE.RELATIV= STAT.TABLE.RELATIVE;;
+STAT.DESKRIPTIV.MERKMALE=LAMBDA(daten; [variable]; WENN(WURDEAUSGELASSEN(variable); STAT.DESCRIBE.NOMINAL(daten);STAT.DESCRIBE.NOMINAL(daten;variable)));;
+STAT.DESKRIPTIV.FAKTORSTUFEN=LAMBDA(daten; [variable]; WENN(WURDEAUSGELASSEN(variable); STAT.DESCRIBE.NOMINAL(daten);STAT.DESCRIBE.NOMINAL(daten;variable)));;
+STAT.DESKRIPTIV.NOMINAL=LAMBDA(daten; [variable]; WENN(WURDEAUSGELASSEN(variable); STAT.DESCRIBE.NOMINAL(daten);STAT.DESCRIBE.NOMINAL(daten;variable)));;
+STAT.DESKRIPTIV.BESCHRIFTUNG=LAMBDA(
+    skalenniveau; 
+    wenn(
+        wurdeausgelassen(skalenniveau);
+        STAT.DESCRIBE.LABELS();
+        STAT.DESCRIBE.LABELS(skalenniveau)
+    )
+);;
 
-STAT.IQA=STAT.IQR;;
-STAT.MAAD=STAT.MAD;;
-STAT.GEBUNDENE.VARIANZ=STAT.POOLED.VARIANCE;;
-STAT.GEPOOLTE.VARIANZ=STAT.POOLED.VARIANCE;;
-STAT.STANDARDFEHLER=STAT.SE;;
-STAT.STDFEHLER=STAT.SE;;
-STAT.VORZEICHEN=STAT.SIGN;;
+STAT.TABELLE = LAMBDA(
+    variable_a; 
+    [variable_b_oder_überschrift]; 
+    [mit_überschrift]; 
+    WENNS(
+        UND(WURDEAUSGELASSEN(variable_b_oder_überschrift); WURDEAUSGELASSEN(mit_überschrift));
+        STAT.TABLE(variable_a);
+        WURDEAUSGELASSEN(variable_b_oder_überschrift);
+        STAT.TABLE(variable_a;; mit_überschrift);
+        WAHR;
+        STAT.TABLE(variable_a; variable_b_oder_überschrift; mit_überschrift);
+    )
+);;
+STAT.TABELLE.RELATIV= AMBDA(
+    variable_a; 
+    [variable_b_oder_überschrift]; 
+    [mit_überschrift]; 
+    WENNS(
+        UND(WURDEAUSGELASSEN(variable_b_oder_überschrift); WURDEAUSGELASSEN(mit_überschrift));
+        STAT.TABLE.RELATIVE(variable_a);
+        WURDEAUSGELASSEN(variable_b_oder_überschrift);
+        STAT.TABLE.RELATIVE(variable_a;; mit_überschrift);
+        WAHR;
+        STAT.TABLE.RELATIVE(variable_a; variable_b_oder_überschrift; mit_überschrift);
+    )
+);;
+
+STAT.IQA=LAMBDA(vektor_oder_matrix;STAT.IQR(vektor_oder_matrix));;
+STAT.MAAD=LAMBDA(vektor_oder_matrix;STAT.MAD(vektor_oder_matrix));;
+STAT.GEBUNDENE.VARIANZ=LAMBDA(a_var; ua_var; STAT.POOLED.VARIANCE(a_var; ua_var));;
+STAT.GEPOOLTE.VARIANZ=LAMBDA(a_var; ua_var; STAT.POOLED.VARIANCE(a_var; ua_var));;
+STAT.STANDARDFEHLER=LAMBDA(vektor_oder_matrix;STAT.SE(vektor_oder_matrix));;
+STAT.STDFEHLER=LAMBDA(vektor_oder_matrix;STAT.SE(vektor_oder_matrix));;
+STAT.VORZEICHEN=LAMBDA(vektor_oder_matrix;STAT.SIGN(vektor_oder_matrix));;
 
 // Korrelationen
-KORREL.CRAMER=CORR.CRAMER;;
-KORREL.CRAMER.TEST=CORR.CRAMER.TEST;;
-KORREL.KENDAL=CORR.KENDAL;;
-KORREL.KENDAL.TEST=CORR.KENDAL.TEST;;
-KORREL.SPEARMAN=CORR.SPEARMAN;;
-KORREL.PEARSON=CORR.PEARSON;;
-KORREL.PEARSON.TEST=CORR.PEARSON.TEST;;
-REGRESSION.RESIDUEN=REGRESSION.RESIDUALS;;
+KORREL.CRAMER=LAMBDA(a_var; ua_var; CORR.CRAMER(a_var; ua_var));;
+KORREL.CRAMER.TEST=LAMBDA(
+    a_var; 
+    ua_var; 
+    [mit_überschrift]; 
+    CORR.CRAMER.TEST(
+        a_var;
+        ua_var;
+        UND(NICHT(WURDEAUSGELASSEN(mit_überschrift)); mit_überschrift)
+    )
+);;
+KORREL.KENDAL=LAMBDA(a_var; ua_var; CORR.KENDAL(a_var; ua_var));;
+KORREL.KENDAL.TEST=LAMBDA(
+    a_var; 
+    ua_var; 
+    [mit_überschrift]; 
+    CORR.KENDAL.TEST(
+        a_var;
+        ua_var;
+        UND(NICHT(WURDEAUSGELASSEN(mit_überschrift)); mit_überschrift)
+    )
+);;
+KORREL.SPEARMAN=LAMBDA(a_var; ua_var; CORR.SPEARMAN(a_var; ua_var));;
+KORREL.PEARSON=LAMBDA(a_var; ua_var; KORREL(a_var; ua_var));;;;
+KORREL.PEARSON.TEST=LAMBDA(
+    a_var; 
+    ua_var; 
+    [mit_überschrift]; 
+    CORR.PEARSON.TEST(
+        a_var;
+        ua_var;
+        UND(NICHT(WURDEAUSGELASSEN(mit_überschrift)); mit_überschrift)
+    )
+);;
+REGRESSION.RESIDUEN=LAMBDA(a_var; ua_var; REGRESSION.RESIDUALS(a_var; ua_var));;
 
 // Tests
-KRUSKAL.WALLIS.TEST = KRUSKAL_WALLIS.TEST;;
-PAARWEISER.T.TEST = PAIRWISE.T.TEST;;
-PAARWEISER.AB.TEST = PAIRWISE.T.TEST;;
-PAARWEISER.F.TEST = PAIRWISE.F.TEST;;
-AB.TEST = T.TEST.S;;
+KRUSKAL.WALLIS.TEST=LAMBDA(
+    a_var; 
+    ua_var; 
+    [mit_überschrift]; 
+    KRUSKAL_WALLIS.TEST(
+        a_var;
+        ua_var;
+        UND(NICHT(WURDEAUSGELASSEN(mit_überschrift)); mit_überschrift)
+    )
+);;
+
+PAARWEISER.T.TEST=LAMBDA(
+    a_var; 
+    ua_var; 
+    [mit_überschrift]; 
+    [anpassung];
+    wenn(
+        WURDEAUSGELASSEN(anpassung);
+        PAIRWISE.T.TEST(
+            a_var;
+            ua_var;
+            UND(NICHT(WURDEAUSGELASSEN(mit_überschrift)); mit_überschrift)
+        );
+        PAIRWISE.T.TEST(
+            a_var;
+            ua_var;
+            UND(NICHT(WURDEAUSGELASSEN(mit_überschrift)); mit_überschrift);
+            anpassung
+        )
+    )
+);;
+
+PAARWEISER.AB.TEST=LAMBDA(
+    a_var; 
+    ua_var; 
+    [mit_überschrift]; 
+    [anpassung];
+    wenn(
+        WURDEAUSGELASSEN(anpassung);
+        PAIRWISE.T.TEST(
+            a_var;
+            ua_var;
+            UND(NICHT(WURDEAUSGELASSEN(mit_überschrift)); mit_überschrift)
+        );
+        PAIRWISE.T.TEST(
+            a_var;
+            ua_var;
+            UND(NICHT(WURDEAUSGELASSEN(mit_überschrift)); mit_überschrift);
+            anpassung
+        )
+    )
+);;
+
+PAARWEISER.F.TEST=LAMBDA(
+    a_var; 
+    ua_var; 
+    [mit_überschrift]; 
+    [anpassung];
+    wenn(
+        WURDEAUSGELASSEN(anpassung);
+        PAIRWISE.F.TEST(
+            a_var;
+            ua_var;
+            UND(NICHT(WURDEAUSGELASSEN(mit_überschrift)); mit_überschrift)
+        );
+        PAIRWISE.F.TEST(
+            a_var;
+            ua_var;
+            UND(NICHT(WURDEAUSGELASSEN(mit_überschrift)); mit_überschrift);
+            anpassung
+        )
+    )
+);;
+AB.TEST = LAMBDA(
+    a_var; 
+    ua_var;
+    [alternative];
+    [gepaart]
+    WENNS(
+        UND(WURDEAUSGELASSEN(alternative); WURDEAUSGELASSEN(gepaart));
+        T.TEST.S(
+            a_var;
+            ua_var   
+        );
+        WURDEAUSGELASSEN(alternative);
+        T.TEST.S(
+            a_var;
+            ua_var;
+            ;
+            gepaart   
+        );
+        WURDEAUSGELASSEN(gepaart);
+        T.TEST.S(
+            a_var;
+            ua_var;
+            alternative
+        );
+        WAHR;
+        T.TEST.S(
+            a_var;
+            ua_var;
+            alternative;
+            gepaart   
+        )
+    )
+);;
 
 // Summen Funktionen
-SPALTENSUMME=COLSUM;;
-ZEILENSUMME=ROWSUM;;
-KUMULATIVESUMME=CUMSUM;;
+SPALTENSUMME=LAMBDA(matrix; COLSUM(matrix));;
+ZEILENSUMME=LAMBDA(matrix; ROWSUM(matrix));;
+KUMULATIVESUMME=LAMBDA(vektor; CUMSUM(vektor));;
 
 // Gruppen Funktionen
-GRUPPEN.SUMME=GROUP.SUM;;
+GRUPPEN.SUMME=LAMBDA(werte_vektor;gruppen_vektor; GROUP.SUM(werte_vektor; gruppen_vektor));;
 
-GRUPPEN.ANZAHL = GROUP.COUNT;;
-GRUPPEN.N = GROUP.COUNT;;
-GRUPPEN.MITTELWERT = GROUP.MEAN;;
-GRUPPEN.MEDIAN = GROUP.MEDIAN;;
-GRUPPEN.MIN = GROUP.MIN;;
-GRUPPEN.MAX = GROUP.MAX;;
-GRUPPEN.STDABW = GROUP.SD;;
-GRUPPEN.SD = GROUP.SD;;
-GRUPPEN.SE = GROUP.SE;;
-GRUPPEN.STANDARDFEHLER = GROUP.SE;;
-GRUPPEN.STDFEHLER = GROUP.SE;;
-GRUPPEN.MAD = GROUP.MAD;;
-GRUPPEN.IQA = GROUP.IQR;;
+GRUPPEN.ANZAHL=LAMBDA(gruppen_vektor; GROUP.COUNT(gruppen_vektor));;
+GRUPPEN.N=LAMBDA(gruppen_vektor; GROUP.COUNT(gruppen_vektor));;
+GRUPPEN.MITTELWERT=LAMBDA(werte_vektor;gruppen_vektor; GROUP.MEAN(werte_vektor; gruppen_vektor));;
+GRUPPEN.MEDIAN=LAMBDA(werte_vektor;gruppen_vektor; GROUP.MEDIAN(werte_vektor; gruppen_vektor));;
+GRUPPEN.MIN=LAMBDA(werte_vektor;gruppen_vektor; GROUP.MIN(werte_vektor; gruppen_vektor));;
+GRUPPEN.MAX=LAMBDA(werte_vektor;gruppen_vektor; GROUP.MAX(werte_vektor; gruppen_vektor));;
+GRUPPEN.STDABW=LAMBDA(werte_vektor;gruppen_vektor; GROUP.SD(werte_vektor; gruppen_vektor));;
+GRUPPEN.SD=LAMBDA(werte_vektor;gruppen_vektor; GROUP.SD(werte_vektor; gruppen_vektor));;
+GRUPPEN.SE=LAMBDA(werte_vektor;gruppen_vektor; GROUP.SE(werte_vektor; gruppen_vektor));;
+GRUPPEN.STANDARDFEHLER=LAMBDA(werte_vektor;gruppen_vektor; GROUP.SE(werte_vektor; gruppen_vektor));;
+GRUPPEN.STDFEHLER=LAMBDA(werte_vektor;gruppen_vektor; GROUP.SE(werte_vektor; gruppen_vektor));
+GRUPPEN.MAD=LAMBDA(werte_vektor;gruppen_vektor; GROUP.MAD(werte_vektor; gruppen_vektor));;
+GRUPPEN.IQA = LAMBDA(werte_vektor;gruppen_vektor; GROUP.IQR(werte_vektor; gruppen_vektor));;
 
 // Vektor und Matrix Information
 IST.VEKTOR=IS.VECTOR;;
@@ -64,7 +233,7 @@ MDIMENSION=MDIM;;
 RESIDUEN=RESIDUALS;;
 
 // Vektor und Matrix Funktionen
-MSPUR=MTRACE;;
+MSPUR=LAMBDA(matrix; MTRACE(matrix));;
 
 // Generatoren
 HWIEDERHOLEN=HREPEAT;;
