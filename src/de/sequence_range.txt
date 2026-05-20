@@ -4,6 +4,7 @@ SEQUENCE.RANGE = LAMBDA(
     LET(
         a_vs; ZUSPALTE(a_v);
         n_a; ANZAHL(a_vs);
+        // if n_a = 2, ignore step and use b_or_step as step
         b_v; wenn(
             UND(n_a = 2; WURDEAUSGELASSEN(b_or_step);WURDEAUSGELASSEN(step));
             INDEX(a_vs; 2;1);
@@ -11,7 +12,8 @@ SEQUENCE.RANGE = LAMBDA(
         );
         step; WENNS(
             UND(WURDEAUSGELASSEN(b_or_step);WURDEAUSGELASSEN(step)); 1;
-            UND(n_a = 2; WURDEAUSGELASSEN(step)); b_or_step;
+            UND(n_a = 2; WURDEAUSGELASSEN(b_or_step))); 1;
+            n_a = 2; b_or_step;
             WURDEAUSGELASSEN(step); 1;
             WAHR; step
         );
