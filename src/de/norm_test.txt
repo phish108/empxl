@@ -1,6 +1,6 @@
 CHIQU.FUNC.TEST=LAMBDA(
     Vals;
-    params;
+    n_params;
     REFFUNCTION;
     LET(
         nVals; ANZAHL(Vals);
@@ -33,7 +33,7 @@ CHIQU.FUNC.TEST=LAMBDA(
         
         allvals; XVERWEIS(allgrpsOG; ogrps; vgrps; 0);
         chiq; SUMME((allvals-expVCalcOG)^2/expVCalcOG);
-        hstapeln(CHIQU.vert.RE(chiq; nGrpsCalcOG-1-params); chiq; nGrpsCalcOG-params-1)
+        hstapeln(CHIQU.vert.RE(chiq; nGrpsCalcOG-1-n_params); chiq; nGrpsCalcOG-n_params-1)
     )
 );;
 

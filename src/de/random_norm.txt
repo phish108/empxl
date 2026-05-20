@@ -1,11 +1,11 @@
 RANDOM.NORM =LAMBDA(
-    p_n; 
+    n_values; 
     [mean];
     [sdev];
     LET(
         mean; WENN(WURDEAUSGELASSEN(mean); 0; mean);
         sdev; WENN(WURDEAUSGELASSEN(sdev); 1; sdev);
 
-        NORM.inv(ZUFALLSMATRIX(p_n);mean;sdev)
+        NORM.inv(ZUFALLSMATRIX(n_values);mean;sdev)
     )
 );;

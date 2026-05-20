@@ -1,13 +1,13 @@
 QQ.DATA = LAMBDA(
-    Values; [with_headers];
+    values; [with_headers];
     LET(
         with_headers; ODER(WURDEAUSGELASSEN(with_headers); with_headers);  
-        m_w; MITTELWERT(Values);
-        m_s; STABW.S(Values);
-        rank; (RANG.MITTELW(Values; Values; 1) - 0.5)/ANZAHL(Values);
+        m_w; MITTELWERT(values);
+        m_s; STABW.S(values);
+        rank; (RANG.MITTELW(values; values; 1) - 0.5)/ANZAHL(values);
         results; HSTAPELN(
             NORM.S.INV(rank);
-            (Values - m_w) / m_s
+            (values - m_w) / m_s
         );
         WENN(
             with_headers;
