@@ -18,8 +18,9 @@ CORR.KENDAL = LAMBDA(
 );;
 
 CORR.KENDAL.TEST = LAMBDA(
-    var_x; var_y; 
+    var_x; var_y; [headers];
     LET(
+        headers; ODER(WURDEAUSGELASSEN(headers); NICHT(headers));
         s_n; ANZAHL(var_x);
         x_j; MTRANS(var_x);
         y_j; MTRANS(var_y);
@@ -48,17 +49,21 @@ CORR.KENDAL.TEST = LAMBDA(
 
         p_v; NORM.VERT(z_b; 0; 1; WAHR);
         p_value; 2 * WENN(p_v > .5; 1 - p_v; p_v);
-
-        VSTAPELN( 
-            HSTAPELN(
-                "tau"; 
-                "z"; 
-                "p"
-            );
-            HSTAPELN(
-                r_tau; 
-                z_b; 
-                p_value
+        results; HSTAPELN(
+            r_tau; 
+            z_b; 
+            p_value
+        );
+        wenn(
+            headers;
+            results;
+            VSTAPELN( 
+                HSTAPELN(
+                    "tau"; 
+                    "z"; 
+                    "p"
+                );
+                results   
             )
         )
     )
