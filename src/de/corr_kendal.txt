@@ -1,16 +1,16 @@
 CORR.KENDAL = LAMBDA(
-    x_i; y_i;
+    var_x; var_y;
     LET(
-        s_n; ANZAHL(x_i);
-        x_j; MTRANS(x_i);
-        y_j; MTRANS(y_i);
+        s_n; ANZAHL(var_x);
+        x_j; MTRANS(var_x);
+        y_j; MTRANS(var_y);
         triangle; MTRIANGLE(s_n; WAHR; WAHR);
-        tr_sign; STAT.SIGN(x_i - x_j) * STAT.SIGN(y_i - y_j) * triangle;
+        tr_sign; STAT.SIGN(var_x - x_j) * STAT.SIGN(var_y - y_j) * triangle;
         n_c; SUMME(1 * (tr_sign > 0));
         n_d; SUMME(1 * (tr_sign < 0));
-        m_k; MIN(ANZAHL(EINDEUTIG(x_i)); ANZAHL(EINDEUTIG(y_i)));
+        m_k; MIN(ANZAHL(EINDEUTIG(var_x)); ANZAHL(EINDEUTIG(var_y)));
         WENN(
-            s_n = ANZAHL(y_i); 
+            s_n = ANZAHL(var_y); 
             (n_c - n_d) * 2 / (s_n ^ 2 * ((m_k - 1)/m_k)); 
             #WERT!
         )
@@ -18,23 +18,23 @@ CORR.KENDAL = LAMBDA(
 );;
 
 CORR.KENDAL.TEST = LAMBDA(
-    x_i; y_i; 
+    var_x; var_y; 
     LET(
-        s_n; ANZAHL(x_i);
-        x_j; MTRANS(x_i);
-        y_j; MTRANS(y_i);
+        s_n; ANZAHL(var_x);
+        x_j; MTRANS(var_x);
+        y_j; MTRANS(var_y);
         triangle; MTRIANGLE(s_n; WAHR; WAHR);
-        tr_sign; STAT.SIGN(x_i - x_j) * STAT.SIGN(y_i - y_j) * triangle;
+        tr_sign; STAT.SIGN(var_x - x_j) * STAT.SIGN(var_y - y_j) * triangle;
         n_c; SUMME(1 * (tr_sign > 0));
         n_d; SUMME(1 * (tr_sign < 0));
 
-        m_k; MIN(ANZAHL(EINDEUTIG(x_i)); ANZAHL(EINDEUTIG(y_i)));
+        m_k; MIN(ANZAHL(EINDEUTIG(var_x)); ANZAHL(EINDEUTIG(var_y)));
         r_tau; (n_c - n_d) * 2 / (s_n ^ 2 * ((m_k - 1)/m_k));
 
         v_0; s_n * (s_n - 1) * (2 * s_n + 5);
 
-        t_rank; RANG.MITTELW(x_i; x_i);
-        u_rank; RANG.MITTELW(y_i; y_i);
+        t_rank; RANG.MITTELW(var_x; var_x);
+        u_rank; RANG.MITTELW(var_y; var_y);
         t_i; GRUPPEN.ANZAHL(t_rank);
         u_i; GRUPPEN.ANZAHL(u_rank);
         v_t; SUMME(t_i * (t_i - 1) * (2 * t_i + 5));

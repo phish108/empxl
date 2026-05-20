@@ -1,24 +1,24 @@
 CORR.CRAMER = LAMBDA(
-    x_i; y_i;
+    var_x; var_y;
     LET(
-        n_i; STAT.TABLE(x_i);
-        n_j; STAT.TABLE(y_i);
+        n_i; STAT.TABLE(var_x);
+        n_j; STAT.TABLE(var_y);
         div; MIN(ANZAHL(n_i); ANZAHL(n_j));
         n; SUMME(n_j);
         x_base; n_i * MTRANS(n_j) / n; 
-        n_ij; STAT.TABLE(x_i; y_i);
+        n_ij; STAT.TABLE(var_x; var_y);
         WURZEL((SUMME((n_ij - x_base) ^ 2 / x_base))/(n*(div-1)))
     )
 );;
 
 // The p-value test is CHIQU.TEST.S()
 CORR.CRAMER.TEST = LAMBDA(
-    x_i; y_i; [headers];
+    var_x; var_y; [headers];
     LET(
 
         headers; ODER(WURDEAUSGELASSEN(headers); NICHT(headers));
-        r_value; CORR.CRAMER(x_i; y_i);
-        p_value; CHIQU.TEST.S(x_i; y_i);
+        r_value; CORR.CRAMER(var_x; var_y);
+        p_value; CHIQU.TEST.S(var_x; var_y);
         results; HSTAPELN(r_value; p_value);
         WENN(
             headers;

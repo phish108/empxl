@@ -1,7 +1,7 @@
 CORR.SPEARMAN=LAMBDA(
-    left; right;
+    var_x; var_y;
     KORREL(
-        RANG.MITTELW(left; left);
-        RANG.MITTELW(right; right)
+        RANG.MITTELW(var_x; var_x);
+        RANG.MITTELW(var_y; var_y)
     )
 );;
