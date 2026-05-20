@@ -1,5 +1,8 @@
 STAT.DESCRIBE = LAMBDA(
-    data; [type]; [names];
+    data; 
+    [type]; 
+    [names];
+    [with_labels]; 
     LET(
         type; WENN(
             WURDEAUSGELASSEN(type); 
@@ -25,7 +28,7 @@ STAT.DESCRIBE = LAMBDA(
                         );
                     sdev; STABW.S(values);
 
-                    vstapeln(
+                    result; vstapeln(
                         lines; 
                         wenn(
                             type = "o";
@@ -40,6 +43,17 @@ STAT.DESCRIBE = LAMBDA(
                                 sdev / WURZEL(cnt_values);
                                 basic_stats
                             )
+                        )
+                    );
+                    wenn(
+                        ODER(
+                            WURDEAUSGLASSEN(with_labels); 
+                            nicht(with_labels)
+                        ); 
+                        result; 
+                        VSTAPELN(
+                            STAT.DESCRIBE.LABELS(type);
+                            result
                         )
                     )
                 )
