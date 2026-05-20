@@ -32,10 +32,11 @@ STAT.TABELLE = LAMBDA(
         WURDEAUSGELASSEN(variable_b_oder_überschrift);
         STAT.TABLE(variable_a;; mit_überschrift);
         WAHR;
-        STAT.TABLE(variable_a; variable_b_oder_überschrift; mit_überschrift);
+        STAT.TABLE(variable_a; variable_b_oder_überschrift; mit_überschrift)
     )
 );;
-STAT.TABELLE.RELATIV= AMBDA(
+
+STAT.TABELLE.RELATIV= LAMBDA(
     variable_a; 
     [variable_b_oder_überschrift]; 
     [mit_überschrift]; 
@@ -45,7 +46,7 @@ STAT.TABELLE.RELATIV= AMBDA(
         WURDEAUSGELASSEN(variable_b_oder_überschrift);
         STAT.TABLE.RELATIVE(variable_a;; mit_überschrift);
         WAHR;
-        STAT.TABLE.RELATIVE(variable_a; variable_b_oder_überschrift; mit_überschrift);
+        STAT.TABLE.RELATIVE(variable_a; variable_b_oder_überschrift; mit_überschrift)
     )
 );;
 
@@ -172,7 +173,7 @@ AB.TEST = LAMBDA(
     a_var; 
     ua_var;
     [alternative];
-    [gepaart]
+    [gepaart];
     WENNS(
         UND(WURDEAUSGELASSEN(alternative); WURDEAUSGELASSEN(gepaart));
         T.TEST.S(
@@ -233,7 +234,7 @@ RESIDUEN=LAMBDA(
     vektor_oder_matrix; 
     [referenz_vektor]; 
     wenn(
-        wurdeausgelassen(referenzvektor);
+        wurdeausgelassen(referenz_vektor);
         RESIDUALS(vektor_oder_matrix);
         RESIDUALS(vektor_oder_matrix; referenz_vektor)
     )
@@ -253,9 +254,9 @@ SEQUENZ.INTERVALL=LAMBDA(wert; [obere_grenze_oder_schrittweite]; [schrittweite];
         WURDEAUSGELASSEN(obere_grenze_oder_schrittweite);
         SEQUENCE.RANGE(n_werte;; schrittweite);
         WURDEAUSGELASSEN(schrittweite);
-        SEQUENCE.RANGE(n_werte; obere_grenze_oder_schrittweitet);
+        SEQUENCE.RANGE(n_werte; obere_grenze_oder_schrittweite);
         WAHR;
-        SEQUENCE.RANGE(n_werte; obere_grenze_oder_schrittweite; schrittweite);
+        SEQUENCE.RANGE(n_werte; obere_grenze_oder_schrittweite; schrittweite)
     )
 );;
 
@@ -268,7 +269,7 @@ MDREIECK=LAMBDA(grösse; [ist_unten]; [ohne_diagonale];
         WURDEAUSGELASSEN(ohne_diagonale);
         MTRIANGLE(grösse;ist_unten);
         WAHR;
-        MTRIANGLE(grösse;ist_unten; ohne_diagonale);
+        MTRIANGLE(grösse;ist_unten; ohne_diagonale)
     )
 );;
 ZUFALLSMATRIX.NORMAL=LAMBDA(n_werte; [soll_mittelwert]; [soll_standardabweichung]; 
@@ -280,7 +281,7 @@ ZUFALLSMATRIX.NORMAL=LAMBDA(n_werte; [soll_mittelwert]; [soll_standardabweichung
         WURDEAUSGELASSEN(soll_standardabweichung);
         RANDOM.NORM(n_werte;soll_mittelwert);
         WAHR;
-        RANDOM.NORM(n_werte; soll_mittelwert; soll_standardabweichung);
+        RANDOM.NORM(n_werte; soll_mittelwert; soll_standardabweichung)
     )
 );;
 
@@ -289,15 +290,28 @@ TABELLEN.AUSWAHL=LAMBDA(
     tabellen_name; 
     spalten_namen; 
     [mit_überschrift];
-    TABLE.SELECT(tabellen_name; spalten_namen; UND(NICHT(WURDEAUSGELASSEN(mit_überschrift); mit_überschrift)))   
+    TABLE.SELECT(tabellen_name; spalten_namen; UND(NICHT(WURDEAUSGELASSEN(mit_überschrift)); mit_überschrift))   
 );;
 
 // Data Wrangling
-UNGÜLTIGE.MARKIEREN=MARK.INVALID;;
-UNGÜLTIGE.LÖSCHEN=REMOVE.INVALID;;
-ENTFERNE.FEHLER=REMOVE.INVALID;;
-SCHNELL.KODIEREN=QUICK.CODE;;
+UNGÜLTIGE.MARKIEREN=LAMBDA(vektor_oder_matrix; ungültige_werte; MARK.INVALID(vektor_oder_matrix; ungültige_werte));;
+UNGÜLTIGE.LÖSCHEN=LAMBDA(vektor_oder_matrix; [ungültige_werte]; 
+    wenn(
+        wurdeausgelassen(ungültige_werte); 
+        REMOVE.INVALID(vektor_oder_matrix);
+        REMOVE.INVALID(vektor_oder_matrix; ungültige_werte)
+    )
+);;
+ENTFERNE.FEHLER=LAMBDA(vektor_oder_matrix; [ungültige_werte]; 
+    wenn(
+        wurdeausgelassen(ungültige_werte); 
+        REMOVE.INVALID(vektor_oder_matrix);
+        REMOVE.INVALID(vektor_oder_matrix; ungültige_werte)
+    )
+);;
 
 // CODING
-ONE.HOT=DUMMY.CODING;;
-ONE.HOT.CODING=DUMMY.CODING;;
+SCHNELL.KODIEREN=LAMBDA(vektor; geordnete_werte; QUICK.CODE(vektor; geordnete_werte));;
+
+ONE.HOT=LAMBDA(vektor; [headings]; DUMMY.CODING(vektor; UND(NICHT(WURDEAUSGELASSEN(headings)); headings)));;
+ONE.HOT.CODING=LAMBDA(vektor; [headings]; DUMMY.CODING(vektor; UND(NICHT(WURDEAUSGELASSEN(headings)); headings)));;
