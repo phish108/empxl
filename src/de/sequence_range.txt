@@ -12,7 +12,7 @@ SEQUENCE.RANGE = LAMBDA(
         );
         step; WENNS(
             UND(WURDEAUSGELASSEN(b_or_step);WURDEAUSGELASSEN(step)); 1;
-            UND(n_a = 2; WURDEAUSGELASSEN(b_or_step))); 1;
+            UND(n_a = 2; WURDEAUSGELASSEN(b_or_step)); 1;
             n_a = 2; b_or_step;
             WURDEAUSGELASSEN(step); 1;
             WAHR; step
