@@ -2,11 +2,22 @@ F.TEST.S=LAMBDA(
     dep_var; indep_var; [headers];
     LET(
         l_uv; ZUSPALTE(EINDEUTIG(indep_var));
-        result; WENN(
+        g_df; GROUP.COUNT(indep_var)-1; 
+        g_sd; GROUP.SD(dep_var;indep_var)^2;
+        r_F; ZEILENWAHL(g_sd; 1)/zeilenwahl(g_sd; 2);
+        r_p; WENN(
             ANZAHL2(l_uv) = 2; 
-            F.TEST(FILTER(dep_var; indep_var = INDEX(indep_var; 1; 1));FILTER(dep_var; indep_var = INDEX(indep_var; 2; 1)));
+            F.TEST(
+                FILTER(dep_var; indep_var = INDEX(indep_var; 1; 1));
+                FILTER(dep_var; indep_var = INDEX(indep_var; 2; 1))
+            );
             #WERT!
         );
-        WENN(ODER(WURDEAUSGELASSEN(headers); NICHT(headers)); result; VSTAPELN("p"; result))
+        result; HSTAPELN(r_F; zeilenwahl(g_df; 1); zeilenwahl(g_df; 2); r_p);
+        WENN(
+            ODER(WURDEAUSGELASSEN(headers); NICHT(headers)); 
+            result; 
+            VSTAPELN(HSTAPELN("F"; "df1"; "df2"; "p"); result)
+        )
     )
 );;
