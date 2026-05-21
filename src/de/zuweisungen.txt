@@ -1,11 +1,11 @@
 // DESKTRIPTIVE STATISTIK
-STAT.DESKRIPTIV=lambda(daten; [skalenniveau]; [namen]; [mit_üeberschrift]; 
+STAT.DESKRIPTIV=lambda(daten; [skalenniveau]; [namen]; [mit_überschrift]; 
     LET(
         type; WENN(wurdeausgelassen(skalenniveau); "m"; skalenniveau);
         labels; WENN(WURDEAUSGELASSEN(mit_überschrift); FALSCH; mit_überschrift);
         WENN(WURDEAUSGELASSEN(namen); 
-            STAT.DESCRIBE(daten; type; ; mit_üeberschrift);
-            STAT.DESCRIBE(daten; type; namen; mit_üeberschrift)
+            STAT.DESCRIBE(daten; type; ; mit_überschrift);
+            STAT.DESCRIBE(daten; type; namen; mit_überschrift)
         )
     )
 );;
@@ -221,15 +221,15 @@ GRUPPEN.STDABW=LAMBDA(werte_vektor;gruppen_vektor; GROUP.SD(werte_vektor; gruppe
 GRUPPEN.SD=LAMBDA(werte_vektor;gruppen_vektor; GROUP.SD(werte_vektor; gruppen_vektor));;
 GRUPPEN.SE=LAMBDA(werte_vektor;gruppen_vektor; GROUP.SE(werte_vektor; gruppen_vektor));;
 GRUPPEN.STANDARDFEHLER=LAMBDA(werte_vektor;gruppen_vektor; GROUP.SE(werte_vektor; gruppen_vektor));;
-GRUPPEN.STDFEHLER=LAMBDA(werte_vektor;gruppen_vektor; GROUP.SE(werte_vektor; gruppen_vektor));
+GRUPPEN.STDFEHLER=LAMBDA(werte_vektor;gruppen_vektor; GROUP.SE(werte_vektor; gruppen_vektor));;
 GRUPPEN.MAD=LAMBDA(werte_vektor;gruppen_vektor; GROUP.MAD(werte_vektor; gruppen_vektor));;
 GRUPPEN.IQA = LAMBDA(werte_vektor;gruppen_vektor; GROUP.IQR(werte_vektor; gruppen_vektor));;
 
 // Vektor und Matrix Information
 IST.VEKTOR=LAMBDA(vektor; IS.VECTOR(vektor));;
 SIND.ALLE.GLEICH=LAMBDA(vektor; IS.ALL.EQUAL(vektor));;
-IST.ALLE.GLEICH=LAMBDA(vektor; IS.ALL.EQUAL(vektor));;;;
-VEKTOR.LÄNGE=LAMBDA(vektor; VLENGTH(vektor));;;;
+IST.ALLE.GLEICH=LAMBDA(vektor; IS.ALL.EQUAL(vektor));;
+VEKTOR.LÄNGE=LAMBDA(vektor; VLENGTH(vektor));;
 RESIDUEN=LAMBDA(
     vektor_oder_matrix; 
     [referenz_vektor]; 
@@ -250,13 +250,13 @@ VWIEDERHOLEN=LAMBDA(wert; n_wiederholungen; VREPEAT(wert; n_wiederholungen));;
 SEQUENZ.INTERVALL=LAMBDA(wert; [obere_grenze_oder_schrittweite]; [schrittweite];
     wenns(
         UND(WURDEAUSGELASSEN(obere_grenze_oder_schrittweite); WURDEAUSGELASSEN(schrittweite)); 
-        SEQUENCE.RANGE(n_werte);
+        SEQUENCE.RANGE(wert);
         WURDEAUSGELASSEN(obere_grenze_oder_schrittweite);
-        SEQUENCE.RANGE(n_werte;; schrittweite);
+        SEQUENCE.RANGE(wert;; schrittweite);
         WURDEAUSGELASSEN(schrittweite);
-        SEQUENCE.RANGE(n_werte; obere_grenze_oder_schrittweite);
+        SEQUENCE.RANGE(wert; obere_grenze_oder_schrittweite);
         WAHR;
-        SEQUENCE.RANGE(n_werte; obere_grenze_oder_schrittweite; schrittweite)
+        SEQUENCE.RANGE(wert; obere_grenze_oder_schrittweite; schrittweite)
     )
 );;
 
