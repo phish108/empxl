@@ -3,5 +3,5 @@ EMPXL=LAMBDA(HSTAPELN(
 INFO("SYSTEM"); 
 INFO("VERSION"); 
 "v2026.8"; 
-HYPERLINK("https://github.com/phish108/empxl"; "Source Code")
+"https://github.com/phish108/empxl"
 ));;
