@@ -37,6 +37,7 @@ Building manually requires the [EXCEL Advanced Formula Environment (AFE)](https:
 
 **Important:** It is not recommended, to use the formula in the `src` folder directly. Because these formula are indented, the extra whitespace cause Excel to misbehave.
 
+0. Check `src/de/empxl.txt` to point to the **next** release
 1. Run the `bin/compile.sh` script to strip extra whitespaces from the source formulas. This creates a `compile`-folder with clean versions of the formula.
 2. Open a fresh Excel workbook. 
 3. Save the workbook as an Excel template (`.xlst`)
