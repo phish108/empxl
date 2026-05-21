@@ -1,18 +1,16 @@
 MATRIX_TO_LONG=LAMBDA(
     matrix;[p_headers]; [p_withnames];
     LET(
-        p_headers; ODER(
-            WURDEAUSGELASSEN(p_headers); p_headers
-        );
+        use_headers; NICHT(WURDEAUSGELASSEN(p_headers));
         p_withnames; WENN(WURDEAUSGELASSEN(p_withnames); {"name"; "value"}; p_withnames);
-        b_headers; UND(SPALTEN(p_headers) = 1; ZEILEN(p_headers) = 1; p_headers);
+        b_headers; UND(use_headers; SPALTEN(p_headers) = 1; ZEILEN(p_headers) = 1; p_headers);
         n_cols; SPALTEN(matrix);
         n_rows; ZEILEN(matrix) - b_headers;
         sel_header; WENNS(
             UND(ANZAHL2(p_headers) = n_cols; SPALTEN(p_headers) = n_cols); p_headers;
-            ANZAHL2(p_headers) = n_cols; MTRANS(p_headers);
+            UND(ANZAHL2(p_headers) = n_cols; ZEILEN(p_headers) = n_cols); MTRANS(p_headers);
             b_headers; ZEILENWAHL(matrix; 1); 
-            WAHR; SEQUENZ(1; n_cols)
+            WAHR; #NV
         );
         sel_heading; WENNS(
             UND(ANZAHL2(p_withnames) = 2; ZEILEN(p_withnames) = 1); p_withnames;
@@ -23,7 +21,7 @@ MATRIX_TO_LONG=LAMBDA(
             WENN(b_headers; ZEILENWAHL(matrix; SEQUENZ(n_rows;1;2)); matrix)
         );
         idx_n; REST(SEQUENZ(n_rows * n_cols; 1; 0); n_cols) + 1;
-        names; INDEX(sel_header; 1; idx_n);
+        names; WENN(UND(ISTFEHLER(sel_header)); idx_n; INDEX(sel_header; 1; idx_n));
         result; HSTAPELN(names; values);
         WENN(SPALTEN(sel_heading) = 1; result; VSTAPELN(sel_heading; result))
     )
@@ -33,9 +31,9 @@ MATRIX_TO_LONG=LAMBDA(
 MATRIX.TO.LONG=MATRIX_TO_LONG;;
 
 MATRIX.ZU.LANGFORM=LAMBDA(
-    matrix; [p_namen]; [p_ttl];
+    matrix; [namen]; [vektor_namen];
     LET(
-        p_ttl; wenn(WURDEAUSGELASSEN(p_ttl); {"Name"; "Wert"}; p_ttl);
-        MATRIX_TO_LONG(matrix; p_namen; p_ttl)
+        vektor_namen; wenn(WURDEAUSGELASSEN(vektor_namen); {"Name"; "Wert"}; vektor_namen);
+        MATRIX_TO_LONG(matrix; namen; vektor_namen)
     )
 );;
