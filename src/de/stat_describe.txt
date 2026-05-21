@@ -39,6 +39,7 @@ STAT.DESCRIBE = LAMBDA(
                                 basic_stats
                             );
                             HSTAPELN(
+                                cnt_raw;
                                 cnt_values;
                                 MITTELWERT(values);
                                 sdev;
