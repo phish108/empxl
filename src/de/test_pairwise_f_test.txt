@@ -48,7 +48,7 @@ PAIRWISE.F.TEST = LAMBDA(
             ODER(WURDEAUSGELASSEN(headers); NICHT(headers));
             result;
             VSTAPELN(
-                {"g1"; "g2"; "p"};
+                zuzeile({"g1"; "g2"; "p"});
                 result
             )
         )
