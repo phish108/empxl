@@ -1,0 +1,11 @@
+# Function: `CHIQU.FUNC.TEST()` `NORM.TEST()` 
+
+# SYNOPSIS 
+
+```
+CHIQU.FUNC.TEST(Vals;n_params;REFFUNCTION)
+NORM.TEST(Vals)
+```
+
+# DESCRIPTION 
+

@@ -1,0 +1,11 @@
+# Function: `VREVERSE()` `VEKTOR.UMKEHREN()` 
+
+# SYNOPSIS 
+
+```
+VREVERSE(vector)
+VEKTOR.UMKEHREN(vektor)
+```
+
+# DESCRIPTION 
+

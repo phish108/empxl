@@ -1,0 +1,10 @@
+# Function: `PREP.ALTERNATIVE()` 
+
+# SYNOPSIS 
+
+```
+PREP.ALTERNATIVE(alt)
+```
+
+# DESCRIPTION 
+

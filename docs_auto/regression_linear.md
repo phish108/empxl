@@ -1,0 +1,23 @@
+# Function: `REGRESSION()` 
+
+# SYNOPSIS 
+
+```
+REGRESSION(dep_var;indep_var)
+```
+
+# DESCRIPTION 
+
+The `REGRESSION()` function computes a solution for a linear regression.  Its result vector always starts with the
+Intercept, followed by the koefficents of each independent variable. Each indepdentent variable must be provided in 
+its own vector. 
+
+The `dep_var` vector must be a single vector. 
+
+`indep_var` can be a matrix containing each vector of the model's independent variables. All vectors in 
+this `indep_var` matrix must have the same length as the `dep_var` vector. 
+
+## Related functions
+
+The function `REGRESSION.RESIDUALS()` computes the differences between the regression results and the actual data. 
+It expects the regression results as the last parameter. 

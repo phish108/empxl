@@ -1,0 +1,10 @@
+# Function: `RESIDUALS()` 
+
+# SYNOPSIS 
+
+```
+RESIDUALS(MATRIX_OR_VAR;[VALUES])
+```
+
+# DESCRIPTION 
+

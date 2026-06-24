@@ -1,0 +1,10 @@
+# Function: `CHIQU.TEST2.HEADER()` 
+
+# SYNOPSIS 
+
+```
+CHIQU.TEST2.HEADER=LAMBDA(HSTAPELN("p";"df"))
+```
+
+# DESCRIPTION 
+

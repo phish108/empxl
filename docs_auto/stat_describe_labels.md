@@ -1,0 +1,10 @@
+# Function: `STAT.DESCRIBE.LABELS()` 
+
+# SYNOPSIS 
+
+```
+STAT.DESCRIBE.LABELS([type])
+```
+
+# DESCRIPTION 
+

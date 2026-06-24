@@ -1,0 +1,14 @@
+# Function: `P.ADJ.BONFERRONI()` `P.ADJ.HOLM()` `P.ADJ.SIDAK()` `P.ADJ.HOLM_SIDAK()` `P.ADJ.HOCHBERG()` 
+
+# SYNOPSIS 
+
+```
+P.ADJ.BONFERRONI(p_v;m_v)
+P.ADJ.HOLM(p_v;m_v)
+P.ADJ.SIDAK(p_v;m_v)
+P.ADJ.HOLM_SIDAK(p_v;m_v)
+P.ADJ.HOCHBERG(p_v;m_v)
+```
+
+# DESCRIPTION 
+
